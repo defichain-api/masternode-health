@@ -9,6 +9,9 @@ All functions can be used with an rest API. Docu can be found here in wiki as so
 
 This service is based on the PHP framework Laravel. For local development, you can use the included docker setup 
 (`docker-compose up -d`).
+
+Then copy the `.env` using `cp .env.example .env`
+
 After that you need to install the composer dependencies (`composer install`) and run the database migrations (`php 
 artisan migrate`).
 
