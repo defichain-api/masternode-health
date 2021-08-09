@@ -1,5 +1,6 @@
 <?php
 
+use App\Api\v1\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])
+    ->name('home');
+
+Route::get('/', [HomeController::class, 'docs'])
+    ->domain(sprintf('docs.%s', config('app.domain')))
+    ->name('docs');
