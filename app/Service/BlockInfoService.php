@@ -10,29 +10,35 @@ class BlockInfoService
 {
     public function store(BlockInfoRequest $request): void
     {
+        $serverId = $request->getServer()->id;
         $data = collect([
             [
-                'server_id' => $request->getServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::CONNECTIONCOUNT,
                 'value'     => $request->connectioncount(),
             ],
             [
-                'server_id' => $request->getServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::BLOCK_DIFF,
                 'value'     => $request->blockDiff(),
             ],
             [
-                'server_id' => $request->getServer()->id,
+                'server_id' => $serverId,
+                'type'      => ServerStatTypes::NODE_UPTIME,
+                'value'     => $request->nodeUptime(),
+            ],
+            [
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::BLOCK_HEIGHT,
                 'value'     => $request->blockHeightLocal(),
             ],
             [
-                'server_id' => $request->getServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::LOCAL_HASH,
                 'value'     => $request->localHash(),
             ],
             [
-                'server_id' => $request->getServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::LOGSIZE,
                 'value'     => $request->logsize(),
             ],

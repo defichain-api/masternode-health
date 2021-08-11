@@ -10,38 +10,39 @@ class ServerStatService
 {
     public function store(ServerStatsRequest $request): void
     {
+        $serverId = $request->getServer()->id;
         $data = collect([
             [
-                'server_id' => $request->userServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::CPU,
                 'value'     => $request->cpu(),
             ],
             [
-                'server_id' => $request->userServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::HDD_TOTAL,
                 'value'     => $request->hddTotal(),
             ],
             [
-                'server_id' => $request->userServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::HDD_USED,
                 'value'     => $request->hddUsed(),
             ],
             [
-                'server_id' => $request->userServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::RAM_TOTAL,
                 'value'     => $request->ramTotal(),
             ],
             [
-                'server_id' => $request->userServer()->id,
+                'server_id' => $serverId,
                 'type'      => ServerStatTypes::RAM_USED,
                 'value'     => $request->ramUsed(),
             ],
         ]);
         $data->each(function (array $item) {
-            ray(ServerStat::updateOrCreate([
+            ServerStat::create([
                 'server_id' => $item['server_id'],
                 'type'      => $item['type'],
-            ], $item));
+            ], $item);
         });
     }
 }

@@ -10,6 +10,7 @@ class ServerStatTypes
     const HDD_USED = 'hdd_used';
     const HDD_TOTAL = 'hdd_total';
     const CONNECTIONCOUNT = 'connectioncount';
+    const NODE_UPTIME = 'node_uptime';
     const BLOCK_HEIGHT = 'block_height_local';
     const BLOCK_DIFF = 'block_diff';
     const LOCAL_HASH = 'local_hash';
@@ -20,6 +21,7 @@ class ServerStatTypes
         self::RAM_TOTAL,
         self::HDD_USED,
         self::HDD_TOTAL,
+        self::NODE_UPTIME,
         self::CONNECTIONCOUNT,
         self::BLOCK_HEIGHT,
         self::BLOCK_DIFF,
