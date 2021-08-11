@@ -92,14 +92,14 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --data "{
     \"connectioncount\": 0,
-    \"block_diff\": 2,
-    \"block_height_local\": 18,
-    \"main_net_block_height\": 17,
-    \"local_hash\": \"gnxagvjlahqacarhimbssmbhnzzeuugbnjtmdcxuffinmowwktkpyt\",
-    \"main_net_block_hash\": \"okbblkfaqvjirmjrrmfojdnfwwzbpkhjvqeddmjnwjnjlxmjsktfxld\",
+    \"block_diff\": 15,
+    \"block_height_local\": 20,
+    \"main_net_block_height\": 3,
+    \"local_hash\": \"duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns\",
+    \"main_net_block_hash\": \"ubsvm\",
     \"local_split_found\": false,
-    \"logsize\": 8,
-    \"node_uptime\": 7
+    \"logsize\": 12,
+    \"node_uptime\": 11
 }"
 </code></pre>
 
@@ -113,14 +113,14 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'connectioncount' =&gt; 0,
-            'block_diff' =&gt; 2,
-            'block_height_local' =&gt; 18,
-            'main_net_block_height' =&gt; 17,
-            'local_hash' =&gt; 'gnxagvjlahqacarhimbssmbhnzzeuugbnjtmdcxuffinmowwktkpyt',
-            'main_net_block_hash' =&gt; 'okbblkfaqvjirmjrrmfojdnfwwzbpkhjvqeddmjnwjnjlxmjsktfxld',
+            'block_diff' =&gt; 15,
+            'block_height_local' =&gt; 20,
+            'main_net_block_height' =&gt; 3,
+            'local_hash' =&gt; 'duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns',
+            'main_net_block_hash' =&gt; 'ubsvm',
             'local_split_found' =&gt; false,
-            'logsize' =&gt; 8,
-            'node_uptime' =&gt; 7,
+            'logsize' =&gt; 12,
+            'node_uptime' =&gt; 11,
         ],
     ]
 );
@@ -139,14 +139,14 @@ const headers = {
 
 let body = {
     "connectioncount": 0,
-    "block_diff": 2,
-    "block_height_local": 18,
-    "main_net_block_height": 17,
-    "local_hash": "gnxagvjlahqacarhimbssmbhnzzeuugbnjtmdcxuffinmowwktkpyt",
-    "main_net_block_hash": "okbblkfaqvjirmjrrmfojdnfwwzbpkhjvqeddmjnwjnjlxmjsktfxld",
+    "block_diff": 15,
+    "block_height_local": 20,
+    "main_net_block_height": 3,
+    "local_hash": "duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns",
+    "main_net_block_hash": "ubsvm",
     "local_split_found": false,
-    "logsize": 8,
-    "node_uptime": 7
+    "logsize": 12,
+    "node_uptime": 11
 }
 
 fetch(url, {
@@ -161,14 +161,14 @@ import json
 url = 'https://api.defichain-masternode-health.com/v1/block-info'
 payload = {
     "connectioncount": 0,
-    "block_diff": 2,
-    "block_height_local": 18,
-    "main_net_block_height": 17,
-    "local_hash": "gnxagvjlahqacarhimbssmbhnzzeuugbnjtmdcxuffinmowwktkpyt",
-    "main_net_block_hash": "okbblkfaqvjirmjrrmfojdnfwwzbpkhjvqeddmjnwjnjlxmjsktfxld",
+    "block_diff": 15,
+    "block_height_local": 20,
+    "main_net_block_height": 3,
+    "local_hash": "duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns",
+    "main_net_block_hash": "ubsvm",
     "local_split_found": false,
-    "logsize": 8,
-    "node_uptime": 7
+    "logsize": 12,
+    "node_uptime": 11
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -255,7 +255,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-block-info"
                data-component="body" required  hidden>
     <br>
-<p>Must be at least 60 characters.</p>        </p>
+<p>Must be at least 64 characters.</p>        </p>
                 <p>
             <b><code>main_net_block_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
@@ -263,7 +263,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-block-info"
                data-component="body" required  hidden>
     <br>
-<p>Must be at least 60 characters.</p>        </p>
+<p>Must be at least 64 characters.</p>        </p>
                 <p>
             <b><code>local_split_found</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
                 <label data-endpoint="POSTv1-block-info" hidden>
@@ -319,11 +319,11 @@ response.json()</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"cpu\": \"et\",
-    \"hdd_used\": \"aut\",
-    \"hdd_total\": \"odit\",
-    \"ram_used\": \"sed\",
-    \"ram_total\": \"ut\"
+    \"cpu\": \"id\",
+    \"hdd_used\": \"fugit\",
+    \"hdd_total\": \"ut\",
+    \"ram_used\": \"eveniet\",
+    \"ram_total\": \"illo\"
 }"
 </code></pre>
 
@@ -336,11 +336,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'cpu' =&gt; 'et',
-            'hdd_used' =&gt; 'aut',
-            'hdd_total' =&gt; 'odit',
-            'ram_used' =&gt; 'sed',
-            'ram_total' =&gt; 'ut',
+            'cpu' =&gt; 'id',
+            'hdd_used' =&gt; 'fugit',
+            'hdd_total' =&gt; 'ut',
+            'ram_used' =&gt; 'eveniet',
+            'ram_total' =&gt; 'illo',
         ],
     ]
 );
@@ -358,11 +358,11 @@ const headers = {
 };
 
 let body = {
-    "cpu": "et",
-    "hdd_used": "aut",
-    "hdd_total": "odit",
-    "ram_used": "sed",
-    "ram_total": "ut"
+    "cpu": "id",
+    "hdd_used": "fugit",
+    "hdd_total": "ut",
+    "ram_used": "eveniet",
+    "ram_total": "illo"
 }
 
 fetch(url, {
@@ -376,11 +376,11 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/server-stats'
 payload = {
-    "cpu": "et",
-    "hdd_used": "aut",
-    "hdd_total": "odit",
-    "ram_used": "sed",
-    "ram_total": "ut"
+    "cpu": "id",
+    "hdd_used": "fugit",
+    "hdd_total": "ut",
+    "ram_used": "eveniet",
+    "ram_total": "illo"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1126,13 +1126,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
+x-ratelimit-remaining: 59
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-11T18:41:19.257838Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-11T19:40:03.143850Z&quot;
 }</code>
  </pre>
     </span>

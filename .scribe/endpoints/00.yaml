@@ -26,31 +26,31 @@ endpoints:
         name: block_diff
         description: ''
         required: true
-        example: 2
+        example: 15
         type: integer
       block_height_local:
         name: block_height_local
         description: ''
         required: true
-        example: 18
+        example: 20
         type: integer
       main_net_block_height:
         name: main_net_block_height
         description: ''
         required: true
-        example: 17
+        example: 3
         type: integer
       local_hash:
         name: local_hash
-        description: 'Must be at least 60 characters.'
+        description: 'Must be at least 64 characters.'
         required: true
-        example: gnxagvjlahqacarhimbssmbhnzzeuugbnjtmdcxuffinmowwktkpyt
+        example: duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns
         type: string
       main_net_block_hash:
         name: main_net_block_hash
-        description: 'Must be at least 60 characters.'
+        description: 'Must be at least 64 characters.'
         required: true
-        example: okbblkfaqvjirmjrrmfojdnfwwzbpkhjvqeddmjnwjnjlxmjsktfxld
+        example: ubsvm
         type: string
       local_split_found:
         name: local_split_found
@@ -62,13 +62,13 @@ endpoints:
         name: logsize
         description: ''
         required: true
-        example: 8
+        example: 12
         type: integer
       node_uptime:
         name: node_uptime
         description: ''
         required: true
-        example: 7
+        example: 11
         type: integer
     responses: []
     responseFields: []
@@ -91,31 +91,31 @@ endpoints:
         name: cpu
         description: ''
         required: true
-        example: et
+        example: id
         type: string
       hdd_used:
         name: hdd_used
         description: ''
         required: true
-        example: aut
+        example: fugit
         type: string
       hdd_total:
         name: hdd_total
         description: ''
         required: true
-        example: odit
+        example: ut
         type: string
       ram_used:
         name: ram_used
         description: ''
         required: true
-        example: sed
+        example: eveniet
         type: string
       ram_total:
         name: ram_total
         description: ''
         required: true
-        example: ut
+        example: illo
         type: string
     responses: []
     responseFields: []
