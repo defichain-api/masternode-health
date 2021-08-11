@@ -42,7 +42,8 @@ class ServerStatService
             ServerStat::create([
                 'server_id' => $item['server_id'],
                 'type'      => $item['type'],
-            ], $item);
+                'value'     => $item['value'],
+            ]);
         });
     }
 }
