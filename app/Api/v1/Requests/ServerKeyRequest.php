@@ -10,11 +10,17 @@ class ServerKeyRequest extends FormRequest
     {
         return [
             'api_key' => ['required', 'uuid', 'exists:api_keys,id'],
+            'name'    => ['string'],
         ];
     }
 
     public function apiKey(): string
     {
         return $this->input('api_key');
+    }
+
+    public function name(): ?string
+    {
+        return $this->input('name') ?? null;
     }
 }

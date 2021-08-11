@@ -13,6 +13,7 @@ use Kurozora\Cooldown\HasCooldowns;
  * @property string id
  * @property ApiKey apiKey
  * @property string api_key_id
+ * @property string name
  * @property Carbon created_at
  * @property Carbon updated_at
  */
@@ -22,6 +23,7 @@ class Server extends Model
 
     protected $fillable = [
         'api_key_id',
+        'name',
     ];
     protected $hidden = [
         'created_at',

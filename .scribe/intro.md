@@ -1,6 +1,6 @@
 # Introduction
 
-The following endpoints are used for setup a server and how to fetch the information for it. You need to use the bash script installed as cron on your server.
+The following endpoints are used for setup a server and to fetch the information for it. You need to use the bash script installed as cron on your server - you'll find it on https://github.com/defichain-api/masternode-health-server.
 
 This documentation aims to provide all the information you need to work with our API.
 
@@ -10,5 +10,5 @@ You can switch the language used with the tabs at the top right (or from the nav
 > Base URL
 
 ```yaml
-https://defichain-masternode-health.com
+https://api.defichain-masternode-health.com
 ```

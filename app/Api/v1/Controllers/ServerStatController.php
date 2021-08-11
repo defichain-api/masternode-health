@@ -3,13 +3,29 @@
 namespace App\Api\v1\Controllers;
 
 use App\Enum\Cooldown;
-use App\Http\Requests\BlockInfoRequest;
-use App\Http\Requests\ServerStatsRequest;
+use App\Api\v1\Requests\BlockInfoRequest;
+use App\Api\v1\Requests\ServerStatsRequest;
 use App\Service\BlockInfoService;
+use App\Service\ServerStatService;
 use Illuminate\Http\JsonResponse;
 
 class ServerStatController
 {
+    /**
+     * @hideFromAPIDocumentation
+     */
+    public function index(): void
+    {
+        return;
+    }
+
+    /**
+     * Ping
+     *
+     * Test the availability of this API.
+     * @unauthenticated
+     * @group Setup
+     */
     public function ping(): JsonResponse
     {
         return response()->json([
@@ -22,13 +38,13 @@ class ServerStatController
     {
         $service->store($request);
 
-        if ($request->splitFound() &&
-            $request->userServer()->cooldown(Cooldown::LOCAL_SPLIT_NOTIFICATION)->passed()) {
+        if ($request->localSplitFound() &&
+            $request->getServer()->cooldown(Cooldown::LOCAL_SPLIT_NOTIFICATION)->passed()) {
             $service->sendLocalSplitNotification($request);
         }
 
         if ($request->blockHeightLocal() > $request->mainNetBlockHeight() &&
-            $request->userServer()->cooldown(Cooldown::REMOTE_SPLIT_NOTIFICATION)->passed()) {
+            $request->getServer()->cooldown(Cooldown::REMOTE_SPLIT_NOTIFICATION)->passed()) {
             $service->sendRemoteSplitNotification($request);
         }
 

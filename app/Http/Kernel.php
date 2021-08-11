@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Api\v1\Middleware\ApiAccess;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
@@ -30,14 +31,13 @@ class Kernel extends HttpKernel
 {
     protected $middleware = [
 //        TrustHosts::class,
-        TrustProxies::class,
-        HandleCors::class,
-        PreventRequestsDuringMaintenance::class,
-        ValidatePostSize::class,
-        TrimStrings::class,
-        ConvertEmptyStringsToNull::class
+TrustProxies::class,
+HandleCors::class,
+PreventRequestsDuringMaintenance::class,
+ValidatePostSize::class,
+TrimStrings::class,
+ConvertEmptyStringsToNull::class,
     ];
-
     protected $middlewareGroups = [
         'web' => [
             EncryptCookies::class,
@@ -54,17 +54,17 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
         ],
     ];
-
     protected $routeMiddleware = [
-        'auth'             => Authenticate::class,
-        'auth.basic'       => AuthenticateWithBasicAuth::class,
-        'cache.headers'    => SetCacheHeaders::class,
-        'can'              => Authorize::class,
-        'guest'            => RedirectIfAuthenticated::class,
-        'password.confirm' => RequirePassword::class,
-        'signed'           => ValidateSignature::class,
-        'throttle'         => ThrottleRequests::class,
-        'verified'         => EnsureEmailIsVerified::class,
-        'api_access'       => ServerApiAccess::class,
+        'auth'              => Authenticate::class,
+        'auth.basic'        => AuthenticateWithBasicAuth::class,
+        'cache.headers'     => SetCacheHeaders::class,
+        'can'               => Authorize::class,
+        'guest'             => RedirectIfAuthenticated::class,
+        'password.confirm'  => RequirePassword::class,
+        'signed'            => ValidateSignature::class,
+        'throttle'          => ThrottleRequests::class,
+        'verified'          => EnsureEmailIsVerified::class,
+        'api_server_access' => ServerApiAccess::class,
+        'api_access'        => ApiAccess::class,
     ];
 }

@@ -14,17 +14,18 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kurozora/laravel-cooldown": "^1.0",
         "laravel/framework": "^8.40",
-        "laravel/tinker": "^2.5",
-        "knuckleswtf/scribe": "^3.6"
+        "laravel/tinker": "^2.5"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
+        "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "knuckleswtf/scribe": "^3.8",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ray": "^1.23"
     },
     "autoload": {
@@ -49,6 +50,11 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
         ]
     },
     "extra": {

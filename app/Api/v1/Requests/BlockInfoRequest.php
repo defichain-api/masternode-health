@@ -14,10 +14,11 @@ class BlockInfoRequest extends FormRequest
             'block_diff'            => ['required', 'integer'],
             'block_height_local'    => ['required', 'integer'],
             'main_net_block_height' => ['required', 'integer'],
-            'local_hash'            => ['required', 'string', 'min:60'],
-            'main_net_block_hash'   => ['required', 'string', 'min:60'],
-            'split_found'           => ['required', 'boolean'],
+            'local_hash'            => ['required', 'string', 'min:64'],
+            'main_net_block_hash'   => ['required', 'string', 'min:64'],
+            'local_split_found'     => ['required', 'boolean'],
             'logsize'               => ['required', 'integer'],
+            'node_uptime'           => ['required', 'integer'],
         ];
     }
 
@@ -26,9 +27,9 @@ class BlockInfoRequest extends FormRequest
         return true;
     }
 
-    public function userServer(): Server
+    public function getServer(): Server
     {
-        return $this->masternode_server;
+        return $this->get('server');
     }
 
     public function connectioncount(): string
@@ -61,9 +62,17 @@ class BlockInfoRequest extends FormRequest
         return $this->input('main_net_block_hash');
     }
 
-    public function splitFound(): string
+    /**
+     * uptime in seconds
+     */
+    public function nodeUptime(): int
     {
-        return $this->input('split_found');
+        return $this->input('node_uptime');
+    }
+
+    public function localSplitFound(): string
+    {
+        return $this->input('local_split_found');
     }
 
     public function logsize(): string

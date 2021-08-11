@@ -2,12 +2,12 @@
 
 namespace App\Api\v1\Middleware;
 
-use App\Models\Server;
+use App\Models\ApiKey;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ServerApiAccess
+class ApiAccess
 {
     /**
      * @param \Illuminate\Http\Request $request
@@ -17,21 +17,17 @@ class ServerApiAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        $serverId = $request->header('x-server-key', null);
         $apiKey = $request->header('x-api-key', null);
-        $server = Server::where('id', $serverId)
-            ->whereHas('apiKey', function ($query) use ($apiKey) {
-                $query->where('id', $apiKey);
-            })->first();
-ray($serverId, $apiKey);
-        if (is_null($server)) {
+        $apiKey = ApiKey::where('id', $apiKey)
+            ->first();
+
+        if (is_null($apiKey)) {
             return response()->json([
                 'state'  => 'error',
                 'reason' => 'not authorized',
             ], JsonResponse::HTTP_UNAUTHORIZED);
         }
         $request->merge([
-            'server'  => $server,
             'api_key' => $apiKey,
         ]);
 

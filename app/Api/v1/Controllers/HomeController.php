@@ -10,8 +10,8 @@ class HomeController
     public function home(): JsonResponse
     {
         return response()->json([
-            'api' => '',
-            'docs' => '',
+            'api'  => route('api.ping'),
+            'docs' => route('docs.index'),
         ], JsonResponse::HTTP_OK);
     }
 
