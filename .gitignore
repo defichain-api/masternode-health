@@ -14,3 +14,6 @@ yarn-error.log
 /.idea
 /.vscode
 /.config/psysh/psysh_history
+/.scribe/*
+/_ide_helper_models.php
+/.phpstorm.meta.php
