@@ -31,7 +31,7 @@ Route::prefix('setup')->name('setup.')->group(function () {
 /** routes require x-api-key header */
 Route::middleware('api_access')
     ->group(function () {
-        Route::post('servers', [ServerController::class, 'listServers'])
+        Route::get('servers', [ServerController::class, 'listServers'])
             ->name('v1.server.list')
             ->prefix('v1');
     });

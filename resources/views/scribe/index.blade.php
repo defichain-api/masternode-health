@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 11 2021</li>
+            <li>Last updated: August 13 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>Additionally you need to add the <code>x-server-key</code> header for a valid authentication.<br></br>For &quot;how to create these credentials&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -92,14 +92,14 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --data "{
     \"connectioncount\": 0,
-    \"block_diff\": 15,
-    \"block_height_local\": 20,
-    \"main_net_block_height\": 3,
-    \"local_hash\": \"duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns\",
-    \"main_net_block_hash\": \"ubsvm\",
+    \"block_diff\": 14,
+    \"block_height_local\": 10,
+    \"main_net_block_height\": 13,
+    \"local_hash\": \"vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp\",
+    \"main_net_block_hash\": \"ermtokfbaqvqnfohhwzhavjtrog\",
     \"local_split_found\": false,
-    \"logsize\": 12,
-    \"node_uptime\": 11
+    \"logsize\": 3,
+    \"node_uptime\": 14
 }"
 </code></pre>
 
@@ -113,14 +113,14 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'connectioncount' =&gt; 0,
-            'block_diff' =&gt; 15,
-            'block_height_local' =&gt; 20,
-            'main_net_block_height' =&gt; 3,
-            'local_hash' =&gt; 'duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns',
-            'main_net_block_hash' =&gt; 'ubsvm',
+            'block_diff' =&gt; 14,
+            'block_height_local' =&gt; 10,
+            'main_net_block_height' =&gt; 13,
+            'local_hash' =&gt; 'vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp',
+            'main_net_block_hash' =&gt; 'ermtokfbaqvqnfohhwzhavjtrog',
             'local_split_found' =&gt; false,
-            'logsize' =&gt; 12,
-            'node_uptime' =&gt; 11,
+            'logsize' =&gt; 3,
+            'node_uptime' =&gt; 14,
         ],
     ]
 );
@@ -139,14 +139,14 @@ const headers = {
 
 let body = {
     "connectioncount": 0,
-    "block_diff": 15,
-    "block_height_local": 20,
-    "main_net_block_height": 3,
-    "local_hash": "duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns",
-    "main_net_block_hash": "ubsvm",
+    "block_diff": 14,
+    "block_height_local": 10,
+    "main_net_block_height": 13,
+    "local_hash": "vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp",
+    "main_net_block_hash": "ermtokfbaqvqnfohhwzhavjtrog",
     "local_split_found": false,
-    "logsize": 12,
-    "node_uptime": 11
+    "logsize": 3,
+    "node_uptime": 14
 }
 
 fetch(url, {
@@ -161,14 +161,14 @@ import json
 url = 'https://api.defichain-masternode-health.com/v1/block-info'
 payload = {
     "connectioncount": 0,
-    "block_diff": 15,
-    "block_height_local": 20,
-    "main_net_block_height": 3,
-    "local_hash": "duhpehsquaazjsutysvzfcgmkbmolhrfbivltuzjeytocuns",
-    "main_net_block_hash": "ubsvm",
+    "block_diff": 14,
+    "block_height_local": 10,
+    "main_net_block_height": 13,
+    "local_hash": "vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp",
+    "main_net_block_hash": "ermtokfbaqvqnfohhwzhavjtrog",
     "local_split_found": false,
-    "logsize": 12,
-    "node_uptime": 11
+    "logsize": 3,
+    "node_uptime": 14
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -319,11 +319,11 @@ response.json()</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"cpu\": \"id\",
-    \"hdd_used\": \"fugit\",
-    \"hdd_total\": \"ut\",
-    \"ram_used\": \"eveniet\",
-    \"ram_total\": \"illo\"
+    \"cpu\": \"ullam\",
+    \"hdd_used\": \"ab\",
+    \"hdd_total\": \"impedit\",
+    \"ram_used\": \"quam\",
+    \"ram_total\": \"sint\"
 }"
 </code></pre>
 
@@ -336,11 +336,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'cpu' =&gt; 'id',
-            'hdd_used' =&gt; 'fugit',
-            'hdd_total' =&gt; 'ut',
-            'ram_used' =&gt; 'eveniet',
-            'ram_total' =&gt; 'illo',
+            'cpu' =&gt; 'ullam',
+            'hdd_used' =&gt; 'ab',
+            'hdd_total' =&gt; 'impedit',
+            'ram_used' =&gt; 'quam',
+            'ram_total' =&gt; 'sint',
         ],
     ]
 );
@@ -358,11 +358,11 @@ const headers = {
 };
 
 let body = {
-    "cpu": "id",
-    "hdd_used": "fugit",
-    "hdd_total": "ut",
-    "ram_used": "eveniet",
-    "ram_total": "illo"
+    "cpu": "ullam",
+    "hdd_used": "ab",
+    "hdd_total": "impedit",
+    "ram_used": "quam",
+    "ram_total": "sint"
 }
 
 fetch(url, {
@@ -376,11 +376,11 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/server-stats'
 payload = {
-    "cpu": "id",
-    "hdd_used": "fugit",
-    "hdd_total": "ut",
-    "ram_used": "eveniet",
-    "ram_total": "illo"
+    "cpu": "ullam",
+    "hdd_used": "ab",
+    "hdd_total": "impedit",
+    "ram_used": "quam",
+    "ram_total": "sint"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -474,126 +474,6 @@ response.json()</code></pre>
         <h1 id="server">Server</h1>
 
     
-
-            <h2 id="server-POSTv1-servers">List servers</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>Show all servers connected with your API key. Only requires the <code>x-api-key</code> header data.</p>
-
-<span id="example-requests-POSTv1-servers">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/v1/servers" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/v1/servers',
-    [
-        'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/v1/servers"
-);
-
-const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/v1/servers'
-headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-POSTv1-servers">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;data&quot;: [
-        {
-            &quot;name&quot;: &quot;Party server&quot;,
-            &quot;server_id&quot;: &quot;00ebd742-8c6b-4a64-af43-c8942530c444&quot;,
-            &quot;created_at&quot;: &quot;2021-07-18T19:23:31.000000Z&quot;
-        },
-        {
-            &quot;name&quot;: &quot;My awesome 2nd server&quot;,
-            &quot;server_id&quot;: &quot;063e8f8b-1eba-4741-82ec-608319c92705&quot;,
-            &quot;created_at&quot;: &quot;2021-08-11T05:44:45.000000Z&quot;
-        }
-    ],
-    &quot;info&quot;: {
-        &quot;count&quot;: 2
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTv1-servers" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTv1-servers"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTv1-servers"></code></pre>
-</span>
-<span id="execution-error-POSTv1-servers" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTv1-servers"></code></pre>
-</span>
-<form id="form-POSTv1-servers" data-method="POST"
-      data-path="v1/servers"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTv1-servers', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>v1/servers</code></b>
-        </p>
-                <p>
-            <label id="auth-POSTv1-servers" hidden>x-api-key header:
-                <b><code></code></b><input type="text"
-                                                                name="x-api-key"
-                                                                data-prefix=""
-                                                                data-endpoint="POSTv1-servers"
-                                                                data-component="header"></label>
-        </p>
-                </form>
 
             <h2 id="server-POSTv1-server-rename">Rename server</h2>
 
@@ -827,6 +707,126 @@ response.json()</code></pre>
                                                                 name="x-api-key"
                                                                 data-prefix=""
                                                                 data-endpoint="DELETEv1-server-delete"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="server-GETv1-servers">List servers</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Show all servers connected with your API key. Only requires the <code>x-api-key</code> header data.</p>
+
+<span id="example-requests-GETv1-servers">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/v1/servers" \
+    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/v1/servers',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/servers"
+);
+
+const headers = {
+    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/servers'
+headers = {
+  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+</span>
+
+<span id="example-responses-GETv1-servers">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;name&quot;: &quot;Party server&quot;,
+            &quot;server_id&quot;: &quot;00ebd742-8c6b-4a64-af43-c8942530c444&quot;,
+            &quot;created_at&quot;: &quot;2021-07-18T19:23:31.000000Z&quot;
+        },
+        {
+            &quot;name&quot;: &quot;My awesome 2nd server&quot;,
+            &quot;server_id&quot;: &quot;063e8f8b-1eba-4741-82ec-608319c92705&quot;,
+            &quot;created_at&quot;: &quot;2021-08-11T05:44:45.000000Z&quot;
+        }
+    ],
+    &quot;info&quot;: {
+        &quot;count&quot;: 2
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-servers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-servers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-servers"></code></pre>
+</span>
+<span id="execution-error-GETv1-servers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-servers"></code></pre>
+</span>
+<form id="form-GETv1-servers" data-method="GET"
+      data-path="v1/servers"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-servers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/servers</code></b>
+        </p>
+                <p>
+            <label id="auth-GETv1-servers" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="GETv1-servers"
                                                                 data-component="header"></label>
         </p>
                 </form>
@@ -1132,7 +1132,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-11T19:40:03.143850Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-13T14:38:57.832208Z&quot;
 }</code>
  </pre>
     </span>
