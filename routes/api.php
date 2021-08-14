@@ -46,8 +46,8 @@ Route::middleware('api_server_access')
         Route::delete('server/delete', [ServerController::class, 'deleteServer'])
             ->name('server.delete');
 
-        Route::post('block-info', [ServerStatController::class, 'blockInfo'])
-            ->name('block-info');
+        Route::post('node-info', [ServerStatController::class, 'nodeInfo'])
+            ->name('node-info');
         Route::post('server-stats', [ServerStatController::class, 'serverStats'])
             ->name('server-stats');
     });

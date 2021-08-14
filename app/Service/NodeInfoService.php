@@ -2,45 +2,47 @@
 
 namespace App\Service;
 
+use App\Api\v1\Transformer\NodeInfoTransformer;
 use App\Enum\ServerStatTypes;
-use App\Api\v1\Requests\BlockInfoRequest;
+use App\Api\v1\Requests\NodeInfoRequest;
 use App\Models\ServerStat;
 
-class BlockInfoService
+class NodeInfoService
 {
-    public function store(BlockInfoRequest $request): void
+    public function store(NodeInfoRequest $request): void
     {
-        $serverId = $request->getServer()->id;
+        $transformer = new NodeInfoTransformer($request);
+        $serverId = $transformer->server()->id;
         $data = collect([
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::CONNECTIONCOUNT,
-                'value'     => $request->connectioncount(),
+                'value'     => $transformer->connectioncount(),
             ],
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::BLOCK_DIFF,
-                'value'     => $request->blockDiff(),
+                'value'     => $transformer->blockDiff(),
             ],
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::NODE_UPTIME,
-                'value'     => $request->nodeUptime(),
+                'value'     => $transformer->nodeUptime(),
             ],
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::BLOCK_HEIGHT,
-                'value'     => $request->blockHeightLocal(),
+                'value'     => $transformer->blockHeightLocal(),
             ],
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::LOCAL_HASH,
-                'value'     => $request->localHash(),
+                'value'     => $transformer->localHash(),
             ],
             [
                 'server_id' => $serverId,
                 'type'      => ServerStatTypes::LOGSIZE,
-                'value'     => $request->logsize(),
+                'value'     => $transformer->logsize(),
             ],
         ]);
         $data->each(function (array $item) {
@@ -52,14 +54,14 @@ class BlockInfoService
         });
     }
 
-    public function sendLocalSplitNotification(BlockInfoRequest $request): void
+    public function sendLocalSplitNotification(NodeInfoRequest $request): void
     {
 //        $conversation = new LocalChainSplitConversation($request);
 //
 //        app(TelegramMessageService::class)->startConversation($request->getServer()->user, $conversation);
     }
 
-    public function sendRemoteSplitNotification(BlockInfoRequest $request): void
+    public function sendRemoteSplitNotification(NodeInfoRequest $request): void
     {
 //        $conversation = new RemoteChainSplitConversation($request);
 //

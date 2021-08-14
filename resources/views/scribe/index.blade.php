@@ -69,17 +69,19 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>Additionally you need to add the <code>x-server-key</code> header for a valid authentication.<br></br>For &quot;how to create these credentials&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="server-script">Server-Script</h1>
 
     
 
-            <h2 id="endpoints-POSTv1-block-info">POST v1/block-info</h2>
+            <h2 id="server-script-POSTv1-block-info">Fullnode Info</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>This endpoint collects information from your running fullnode.</p>
+<aside class="notice">You don't need to implement this endpoint. It's used by the server script and
+documented here for a transparent look inside this tool.</aside>
 
 <span id="example-requests-POSTv1-block-info">
 <blockquote>Example request:</blockquote>
@@ -87,19 +89,20 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <pre><code class="language-bash">curl --request POST \
     "https://api.defichain-masternode-health.com/v1/block-info" \
-    --header "x-api-key: YOUR_API_KEY" \
+    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
+    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369" \
     --data "{
-    \"connectioncount\": 0,
-    \"block_diff\": 14,
-    \"block_height_local\": 10,
-    \"main_net_block_height\": 13,
-    \"local_hash\": \"vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp\",
-    \"main_net_block_hash\": \"ermtokfbaqvqnfohhwzhavjtrog\",
+    \"connectioncount\": 20,
+    \"block_diff\": 13,
+    \"block_height_local\": 7,
+    \"main_net_block_height\": 7,
+    \"local_hash\": \"culpa\",
+    \"main_net_block_hash\": \"rerum\",
     \"local_split_found\": false,
-    \"logsize\": 3,
-    \"node_uptime\": 14
+    \"logsize\": 20,
+    \"node_uptime\": 1343121
 }"
 </code></pre>
 
@@ -108,19 +111,20 @@ $response = $client-&gt;post(
     'https://api.defichain-masternode-health.com/v1/block-info',
     [
         'headers' =&gt; [
-            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
             'Accept' =&gt; 'application/json',
+            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
         ],
         'json' =&gt; [
-            'connectioncount' =&gt; 0,
-            'block_diff' =&gt; 14,
-            'block_height_local' =&gt; 10,
-            'main_net_block_height' =&gt; 13,
-            'local_hash' =&gt; 'vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp',
-            'main_net_block_hash' =&gt; 'ermtokfbaqvqnfohhwzhavjtrog',
+            'connectioncount' =&gt; 20,
+            'block_diff' =&gt; 13,
+            'block_height_local' =&gt; 7,
+            'main_net_block_height' =&gt; 7,
+            'local_hash' =&gt; 'culpa',
+            'main_net_block_hash' =&gt; 'rerum',
             'local_split_found' =&gt; false,
-            'logsize' =&gt; 3,
-            'node_uptime' =&gt; 14,
+            'logsize' =&gt; 20,
+            'node_uptime' =&gt; 1343121,
         ],
     ]
 );
@@ -132,21 +136,22 @@ print_r(json_decode((string) $body));</code></pre>
 );
 
 const headers = {
-    "x-api-key": "YOUR_API_KEY",
+    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
 };
 
 let body = {
-    "connectioncount": 0,
-    "block_diff": 14,
-    "block_height_local": 10,
-    "main_net_block_height": 13,
-    "local_hash": "vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp",
-    "main_net_block_hash": "ermtokfbaqvqnfohhwzhavjtrog",
+    "connectioncount": 20,
+    "block_diff": 13,
+    "block_height_local": 7,
+    "main_net_block_height": 7,
+    "local_hash": "culpa",
+    "main_net_block_hash": "rerum",
     "local_split_found": false,
-    "logsize": 3,
-    "node_uptime": 14
+    "logsize": 20,
+    "node_uptime": 1343121
 }
 
 fetch(url, {
@@ -160,20 +165,21 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/block-info'
 payload = {
-    "connectioncount": 0,
-    "block_diff": 14,
-    "block_height_local": 10,
-    "main_net_block_height": 13,
-    "local_hash": "vcgayeyhriwjgyxcjrtgfhtsxhpovaiuujxosehilumszttjp",
-    "main_net_block_hash": "ermtokfbaqvqnfohhwzhavjtrog",
+    "connectioncount": 20,
+    "block_diff": 13,
+    "block_height_local": 7,
+    "main_net_block_height": 7,
+    "local_hash": "culpa",
+    "main_net_block_hash": "rerum",
     "local_split_found": false,
-    "logsize": 3,
-    "node_uptime": 14
+    "logsize": 20,
+    "node_uptime": 1343121
 }
 headers = {
-  'x-api-key': 'YOUR_API_KEY',
+  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -181,7 +187,16 @@ response.json()</code></pre>
 </span>
 
 <span id="example-responses-POSTv1-block-info">
-</span>
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;ok&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTv1-block-info" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTv1-block-info"></span>:
@@ -197,7 +212,7 @@ response.json()</code></pre>
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTv1-block-info', this);">
     <h3>
@@ -217,13 +232,13 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>connectioncount</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>connectioncount</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="connectioncount"
                data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-<p>Must be at least 0.</p>        </p>
+        </p>
                 <p>
             <b><code>block_diff</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
@@ -255,7 +270,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-block-info"
                data-component="body" required  hidden>
     <br>
-<p>Must be at least 64 characters.</p>        </p>
+        </p>
                 <p>
             <b><code>main_net_block_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
@@ -263,7 +278,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-block-info"
                data-component="body" required  hidden>
     <br>
-<p>Must be at least 64 characters.</p>        </p>
+        </p>
                 <p>
             <b><code>local_split_found</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
                 <label data-endpoint="POSTv1-block-info" hidden>
@@ -291,23 +306,25 @@ response.json()</code></pre>
     <br>
         </p>
                 <p>
-            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="node_uptime"
                data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Uptime of the fullnode in seconds.</p>        </p>
     
     </form>
 
-            <h2 id="endpoints-POSTv1-server-stats">POST v1/server-stats</h2>
+            <h2 id="server-script-POSTv1-server-stats">Server Stats</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>This endpoint collects (hardware) information from your server.</p>
+<aside class="notice">You don't need to implement this endpoint. It's used by the server script and
+documented here for a transparent look inside this tool.</aside>
 
 <span id="example-requests-POSTv1-server-stats">
 <blockquote>Example request:</blockquote>
@@ -315,15 +332,16 @@ response.json()</code></pre>
 
 <pre><code class="language-bash">curl --request POST \
     "https://api.defichain-masternode-health.com/v1/server-stats" \
-    --header "x-api-key: YOUR_API_KEY" \
+    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
+    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369" \
     --data "{
-    \"cpu\": \"ullam\",
-    \"hdd_used\": \"ab\",
-    \"hdd_total\": \"impedit\",
-    \"ram_used\": \"quam\",
-    \"ram_total\": \"sint\"
+    \"cpu\": \"0.23,0.55,0.98\",
+    \"hdd_used\": \"152\",
+    \"hdd_total\": \"512\",
+    \"ram_used\": \"1.5\",
+    \"ram_total\": \"16\"
 }"
 </code></pre>
 
@@ -332,15 +350,16 @@ $response = $client-&gt;post(
     'https://api.defichain-masternode-health.com/v1/server-stats',
     [
         'headers' =&gt; [
-            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
             'Accept' =&gt; 'application/json',
+            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
         ],
         'json' =&gt; [
-            'cpu' =&gt; 'ullam',
-            'hdd_used' =&gt; 'ab',
-            'hdd_total' =&gt; 'impedit',
-            'ram_used' =&gt; 'quam',
-            'ram_total' =&gt; 'sint',
+            'cpu' =&gt; '0.23,0.55,0.98',
+            'hdd_used' =&gt; '152',
+            'hdd_total' =&gt; '512',
+            'ram_used' =&gt; '1.5',
+            'ram_total' =&gt; '16',
         ],
     ]
 );
@@ -352,17 +371,18 @@ print_r(json_decode((string) $body));</code></pre>
 );
 
 const headers = {
-    "x-api-key": "YOUR_API_KEY",
+    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
 };
 
 let body = {
-    "cpu": "ullam",
-    "hdd_used": "ab",
-    "hdd_total": "impedit",
-    "ram_used": "quam",
-    "ram_total": "sint"
+    "cpu": "0.23,0.55,0.98",
+    "hdd_used": "152",
+    "hdd_total": "512",
+    "ram_used": "1.5",
+    "ram_total": "16"
 }
 
 fetch(url, {
@@ -376,16 +396,17 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/server-stats'
 payload = {
-    "cpu": "ullam",
-    "hdd_used": "ab",
-    "hdd_total": "impedit",
-    "ram_used": "quam",
-    "ram_total": "sint"
+    "cpu": "0.23,0.55,0.98",
+    "hdd_used": "152",
+    "hdd_total": "512",
+    "ram_used": "1.5",
+    "ram_total": "16"
 }
 headers = {
-  'x-api-key': 'YOUR_API_KEY',
+  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
@@ -393,7 +414,16 @@ response.json()</code></pre>
 </span>
 
 <span id="example-responses-POSTv1-server-stats">
-</span>
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;ok&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTv1-server-stats" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTv1-server-stats"></span>:
@@ -409,7 +439,7 @@ response.json()</code></pre>
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTv1-server-stats', this);">
     <h3>
@@ -429,45 +459,45 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>cpu</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>cpu</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="cpu"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Current average load.</p>        </p>
                 <p>
-            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="hdd_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Used HDD memory.</p>        </p>
                 <p>
-            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="hdd_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Total available HDD memory.</p>        </p>
                 <p>
-            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="ram_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Used RAM in GB.</p>        </p>
                 <p>
-            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="ram_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
-        </p>
+<p>Total available RAM in GB.</p>        </p>
     
     </form>
 
@@ -1132,7 +1162,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-13T14:38:57.832208Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-13T18:10:09.197456Z&quot;
 }</code>
  </pre>
     </span>
