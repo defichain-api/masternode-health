@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -233,13 +233,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 58
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-24T07:25:47.785187Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-24T16:03:28.182894Z&quot;
 }</code>
  </pre>
     </span>
@@ -297,11 +297,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'cpu' =&gt; '0.23,0.55,0.98',
-            'hdd_used' =&gt; '152',
-            'hdd_total' =&gt; '512',
-            'ram_used' =&gt; '1.5',
-            'ram_total' =&gt; '16',
+            'cpu' =&gt; 0.23,
+            'hdd_used' =&gt; 152.0,
+            'hdd_total' =&gt; 508.76,
+            'ram_used' =&gt; 1.5,
+            'ram_total' =&gt; 16.23,
         ],
     ]
 );
@@ -319,11 +319,11 @@ const headers = {
 };
 
 let body = {
-    "cpu": "0.23,0.55,0.98",
-    "hdd_used": "152",
-    "hdd_total": "512",
-    "ram_used": "1.5",
-    "ram_total": "16"
+    "cpu": 0.23,
+    "hdd_used": 152,
+    "hdd_total": 508.76,
+    "ram_used": 1.5,
+    "ram_total": 16.23
 }
 
 fetch(url, {
@@ -337,11 +337,11 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/server-stats'
 payload = {
-    "cpu": "0.23,0.55,0.98",
-    "hdd_used": "152",
-    "hdd_total": "512",
-    "ram_used": "1.5",
-    "ram_total": "16"
+    "cpu": 0.23,
+    "hdd_used": 152,
+    "hdd_total": 508.76,
+    "ram_used": 1.5,
+    "ram_total": 16.23
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -358,11 +358,11 @@ response.json()</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"cpu\": \"0.23,0.55,0.98\",
-    \"hdd_used\": \"152\",
-    \"hdd_total\": \"512\",
-    \"ram_used\": \"1.5\",
-    \"ram_total\": \"16\"
+    \"cpu\": 0.23,
+    \"hdd_used\": 152,
+    \"hdd_total\": 508.76,
+    \"ram_used\": 1.5,
+    \"ram_total\": 16.23
 }"
 </code></pre>
 </span>
@@ -413,45 +413,45 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>cpu</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
+            <b><code>cpu</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
                name="cpu"
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Current average load.</p>        </p>
+<p>Current average load as float.</p>        </p>
                 <p>
-            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
+            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
                name="hdd_used"
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Used HDD memory.</p>        </p>
+<p>Used HDD memory as float.</p>        </p>
                 <p>
-            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
+            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
                name="hdd_total"
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Total available HDD memory.</p>        </p>
+<p>Total available HDD memory as float.</p>        </p>
                 <p>
-            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
+            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
                name="ram_used"
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Used RAM in GB.</p>        </p>
+<p>Used RAM in GB as float.</p>        </p>
                 <p>
-            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
+            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
                name="ram_total"
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Total available RAM in GB.</p>        </p>
+<p>Total available RAM in GB as float.</p>        </p>
     
     </form>
 
@@ -478,14 +478,14 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'connectioncount' =&gt; 12,
-            'block_diff' =&gt; 6,
-            'block_height_local' =&gt; 11,
-            'main_net_block_height' =&gt; 13,
-            'local_hash' =&gt; 'facere',
-            'main_net_block_hash' =&gt; 'quis',
+            'connectioncount' =&gt; 2,
+            'block_diff' =&gt; 14,
+            'block_height_local' =&gt; 17,
+            'main_net_block_height' =&gt; 6,
+            'local_hash' =&gt; 'aperiam',
+            'main_net_block_hash' =&gt; 'atque',
             'local_split_found' =&gt; false,
-            'logsize' =&gt; 1,
+            'logsize' =&gt; 7,
             'node_uptime' =&gt; 1343121,
         ],
     ]
@@ -504,14 +504,14 @@ const headers = {
 };
 
 let body = {
-    "connectioncount": 12,
-    "block_diff": 6,
-    "block_height_local": 11,
-    "main_net_block_height": 13,
-    "local_hash": "facere",
-    "main_net_block_hash": "quis",
+    "connectioncount": 2,
+    "block_diff": 14,
+    "block_height_local": 17,
+    "main_net_block_height": 6,
+    "local_hash": "aperiam",
+    "main_net_block_hash": "atque",
     "local_split_found": false,
-    "logsize": 1,
+    "logsize": 7,
     "node_uptime": 1343121
 }
 
@@ -526,14 +526,14 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/node-info'
 payload = {
-    "connectioncount": 12,
-    "block_diff": 6,
-    "block_height_local": 11,
-    "main_net_block_height": 13,
-    "local_hash": "facere",
-    "main_net_block_hash": "quis",
+    "connectioncount": 2,
+    "block_diff": 14,
+    "block_height_local": 17,
+    "main_net_block_height": 6,
+    "local_hash": "aperiam",
+    "main_net_block_hash": "atque",
     "local_split_found": false,
-    "logsize": 1,
+    "logsize": 7,
     "node_uptime": 1343121
 }
 headers = {
@@ -551,14 +551,14 @@ response.json()</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"connectioncount\": 12,
-    \"block_diff\": 6,
-    \"block_height_local\": 11,
-    \"main_net_block_height\": 13,
-    \"local_hash\": \"facere\",
-    \"main_net_block_hash\": \"quis\",
+    \"connectioncount\": 2,
+    \"block_diff\": 14,
+    \"block_height_local\": 17,
+    \"main_net_block_height\": 6,
+    \"local_hash\": \"aperiam\",
+    \"main_net_block_hash\": \"atque\",
     \"local_split_found\": false,
-    \"logsize\": 1,
+    \"logsize\": 7,
     \"node_uptime\": 1343121
 }"
 </code></pre>

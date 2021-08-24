@@ -20,36 +20,38 @@ class ServerStatTransformer
         return $this->request->get('api_key');
     }
 
-    public function cpu(): string
+    public function cpu(): ?float
     {
-        return $this->request->input('cpu');
+        $value = (float) $this->request->input('cpu');
+
+        return is_float($value) ? round($value, 4) : null;
     }
 
-    public function hddUsed(): string
+    public function hddUsed(): ?float
     {
-        return $this->request->input('hdd_used');
+        $value = (float) $this->request->input('hdd_used');
+
+        return is_float($value) ? round($value, 4) : null;
     }
 
-    public function hddTotal(): string
+    public function hddTotal(): ?float
     {
-        return $this->request->input('hdd_total');
+        $value = (float) $this->request->input('hdd_total');
+
+        return is_float($value) ? round($value, 4) : null;
     }
 
-    public function ramUsed(): string
+    public function ramUsed(): ?float
     {
-        return $this->normalizeRam($this->request->input('ram_used'));
+        $value = (float) $this->request->input('ram_used');
+
+        return is_float($value) ? round($value, 4) : null;
     }
 
-    public function ramTotal(): string
+    public function ramTotal(): ?float
     {
-        return $this->normalizeRam($this->request->input('ram_total'));
-    }
+        $value = (float) $this->request->input('ram_total');
 
-    protected function normalizeRam(string $value): float
-    {
-        return (float)Str::replace(
-            ',',
-            '.',
-            Str::replace('G', '', $value));
+        return is_float($value) ? round($value, 4) : null;
     }
 }

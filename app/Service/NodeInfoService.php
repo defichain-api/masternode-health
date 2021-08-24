@@ -46,6 +46,9 @@ class NodeInfoService
             ],
         ]);
         $data->each(function (array $item) {
+            if (is_null($item['value'])){
+                return;
+            }
             ServerStat::create([
                 'api_key_id' => $item['api_key_id'],
                 'type'       => $item['type'],

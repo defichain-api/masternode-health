@@ -2,7 +2,9 @@
 
 namespace App\Api\v1\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class NodeInfoRequest extends FormRequest
 {
@@ -24,5 +26,13 @@ class NodeInfoRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'validation failed',
+            'errors'  => $validator->errors(),
+        ], 422));
     }
 }

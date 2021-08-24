@@ -78,11 +78,11 @@ class ServerStatController
      * This endpoint collects (hardware) information from your server.
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
-     * @bodyParam cpu  string Current average load. Example: 0.23,0.55,0.98
-     * @bodyParam hdd_used  string Used HDD memory. Example: 152
-     * @bodyParam hdd_total  string Total available HDD memory. Example: 512
-     * @bodyParam ram_used  string Used RAM in GB. Example: 1.5
-     * @bodyParam ram_total  string Total available RAM in GB. Example: 16
+     * @bodyParam cpu  float Current average load as float. Example: 0.23
+     * @bodyParam hdd_used  float Used HDD memory as float. Example: 152
+     * @bodyParam hdd_total  float Total available HDD memory as float. Example: 508.76
+     * @bodyParam ram_used  float Used RAM in GB as float. Example: 1.5
+     * @bodyParam ram_total  float Total available RAM in GB as float. Example: 16.23
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      * @authenticated

@@ -16,7 +16,8 @@ class NodeInfoTransformer
 
     public function apiKey(): ApiKey
     {
-        return $this->request->get('api_key');
+        ray('request', $this->request->get('api_key'));
+        return ApiKey::whereId($this->request->get('api_key'))->first();
     }
 
     public function connectioncount(): string

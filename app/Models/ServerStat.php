@@ -21,7 +21,7 @@ class ServerStat extends Model
     use UsesUuidPrimary;
 
     protected $fillable = [
-        'server_id',
+        'api_key_id',
         'type',
         'value',
     ];
