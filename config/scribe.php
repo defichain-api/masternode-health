@@ -14,7 +14,7 @@ return [
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => 'The following endpoints are used for setup a server and to fetch the information for it. You need to use the bash script installed as cron on your server - you\'ll find it on https://github.com/defichain-api/masternode-health-server.',
+    'description' => 'The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you\'ll find it on https://github.com/defichain-api/masternode-health-server.',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
@@ -230,14 +230,14 @@ return [
          * Any extra authentication-related info for your users. For instance, you can describe how to find or generate their auth credentials.
          * Markdown and HTML are supported.
          */
-        'extra_info'  => 'Additionally you need to add the <code>x-server-key</code> header for a valid authentication.<br></br>For "how to create these credentials" take a look at the <b>Setup</b> section of this documentation.',
+        'extra_info'  => 'For "how to create this credential" take a look at the <b>Setup</b> section of this documentation.',
     ],
 
     /*
      * Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
      */
     'intro_text'        => <<<INTRO
-This documentation aims to provide all the information you need to work with our API.
+This documentation aims to provide all the information you need to work with this API.
 
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
@@ -251,10 +251,10 @@ INTRO
      *
      */
     'example_languages' => [
-        'bash',
         'php',
         'javascript',
         'python',
+        'bash',
     ],
 
     /*

@@ -49,8 +49,6 @@ class ServerStatController
      * @bodyParam local_split_found boolean required
      * @bodyParam logsize integer required
      * @bodyParam node_uptime integer Uptime of the fullnode in seconds. Example: 1343121
-     * @header    x-api-key bffd1dfd-63b8-48f2-afe6-f4318cce86ef
-     * @header    x-server-key 05dbded5-0084-40e1-ab4d-064859440369
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      * @authenticated
@@ -85,8 +83,6 @@ class ServerStatController
      * @bodyParam hdd_total  string Total available HDD memory. Example: 512
      * @bodyParam ram_used  string Used RAM in GB. Example: 1.5
      * @bodyParam ram_total  string Total available RAM in GB. Example: 16
-     * @header    x-api-key bffd1dfd-63b8-48f2-afe6-f4318cce86ef
-     * @header    x-server-key 05dbded5-0084-40e1-ab4d-064859440369
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      * @authenticated

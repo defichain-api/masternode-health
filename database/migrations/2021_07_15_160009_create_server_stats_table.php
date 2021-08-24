@@ -10,10 +10,10 @@ class CreateServerStatsTable extends Migration
 	{
         Schema::create('server_stats', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('server_id');
-            $table->foreign('server_id')
+            $table->uuid('api_key_id');
+            $table->foreign('api_key_id')
                 ->references('id')
-                ->on('servers')
+                ->on('api_keys')
                 ->onDelete('cascade');
             $table->string('type')->index();
             $table->string('value');

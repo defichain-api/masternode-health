@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @mixin \Eloquent
  * @property string id
- * @property Server server
- * @property string server_id
+ * @property ApiKey apiKey
+ * @property string api_key_id
  * @property string type
  * @property string value
  * @property Carbon created_at

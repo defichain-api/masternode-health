@@ -6,7 +6,6 @@ use App\Models\Concerns\UsesUuidPrimary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @mixin \Eloquent
@@ -28,11 +27,6 @@ class ApiKey extends Model
         'created_at',
         'updated_at',
     ];
-
-    public function servers(): HasMany
-    {
-        return $this->hasMany(Server::class);
-    }
 
     public function key(): string
     {

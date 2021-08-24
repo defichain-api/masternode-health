@@ -12,39 +12,39 @@ class ServerStatService
     public function store(ServerStatsRequest $request): void
     {
         $transformer = new ServerStatTransformer($request);
-        $serverId = $transformer->server()->id;
+        $apiKeyId = $transformer->api_key()->id;
         $data = collect([
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::CPU,
-                'value'     => $transformer->cpu(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::CPU,
+                'value'      => $transformer->cpu(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::HDD_TOTAL,
-                'value'     => $transformer->hddTotal(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::HDD_TOTAL,
+                'value'      => $transformer->hddTotal(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::HDD_USED,
-                'value'     => $transformer->hddUsed(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::HDD_USED,
+                'value'      => $transformer->hddUsed(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::RAM_TOTAL,
-                'value'     => $transformer->ramTotal(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::RAM_TOTAL,
+                'value'      => $transformer->ramTotal(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::RAM_USED,
-                'value'     => $transformer->ramUsed(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::RAM_USED,
+                'value'      => $transformer->ramUsed(),
             ],
         ]);
         $data->each(function (array $item) {
             ServerStat::create([
-                'server_id' => $item['server_id'],
-                'type'      => $item['type'],
-                'value'     => $item['value'],
+                'api_key_id' => $item['api_key_id'],
+                'type'       => $item['type'],
+                'value'      => $item['value'],
             ]);
         });
     }

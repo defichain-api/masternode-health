@@ -12,44 +12,44 @@ class NodeInfoService
     public function store(NodeInfoRequest $request): void
     {
         $transformer = new NodeInfoTransformer($request);
-        $serverId = $transformer->server()->id;
+        $apiKeyId = $transformer->apiKey()->id;
         $data = collect([
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::CONNECTIONCOUNT,
-                'value'     => $transformer->connectioncount(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::CONNECTIONCOUNT,
+                'value'      => $transformer->connectioncount(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::BLOCK_DIFF,
-                'value'     => $transformer->blockDiff(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::BLOCK_DIFF,
+                'value'      => $transformer->blockDiff(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::NODE_UPTIME,
-                'value'     => $transformer->nodeUptime(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::NODE_UPTIME,
+                'value'      => $transformer->nodeUptime(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::BLOCK_HEIGHT,
-                'value'     => $transformer->blockHeightLocal(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::BLOCK_HEIGHT,
+                'value'      => $transformer->blockHeightLocal(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::LOCAL_HASH,
-                'value'     => $transformer->localHash(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::LOCAL_HASH,
+                'value'      => $transformer->localHash(),
             ],
             [
-                'server_id' => $serverId,
-                'type'      => ServerStatTypes::LOGSIZE,
-                'value'     => $transformer->logsize(),
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::LOGSIZE,
+                'value'      => $transformer->logsize(),
             ],
         ]);
         $data->each(function (array $item) {
             ServerStat::create([
-                'server_id' => $item['server_id'],
-                'type'      => $item['type'],
-                'value'     => $item['value'],
+                'api_key_id' => $item['api_key_id'],
+                'type'       => $item['type'],
+                'value'      => $item['value'],
             ]);
         });
     }

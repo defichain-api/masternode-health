@@ -20,7 +20,7 @@
 
 </head>
 
-<body data-languages="[&quot;bash&quot;,&quot;php&quot;,&quot;javascript&quot;,&quot;python&quot;]">
+<body data-languages="[&quot;php&quot;,&quot;javascript&quot;,&quot;python&quot;,&quot;bash&quot;]">
 <a href="#" id="nav-button">
       <span>
         MENU
@@ -29,10 +29,10 @@
 </a>
 <div class="tocify-wrapper">
                 <div class="lang-selector">
-                            <a href="#" data-language-name="bash">bash</a>
                             <a href="#" data-language-name="php">php</a>
                             <a href="#" data-language-name="javascript">javascript</a>
                             <a href="#" data-language-name="python">python</a>
+                            <a href="#" data-language-name="bash">bash</a>
                     </div>
         <div class="search">
         <input type="text" class="search" id="input-search" placeholder="Search">
@@ -48,15 +48,15 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 13 2021</li>
+            <li>Last updated: August 24 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
     <div class="dark-box"></div>
     <div class="content">
         <h1>Introduction</h1>
-<p>The following endpoints are used for setup a server and to fetch the information for it. You need to use the bash script installed as cron on your server - you'll find it on <a href="https://github.com/defichain-api/masternode-health-server">https://github.com/defichain-api/masternode-health-server</a>.</p>
-<p>This documentation aims to provide all the information you need to work with our API.</p>
+<p>The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you'll find it on <a href="https://github.com/defichain-api/masternode-health-server">https://github.com/defichain-api/masternode-health-server</a>.</p>
+<p>This documentation aims to provide all the information you need to work with this API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
 <blockquote>
@@ -65,66 +65,31 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
-<p>Additionally you need to add the <code>x-server-key</code> header for a valid authentication.<br></br>For &quot;how to create these credentials&quot; take a look at the <b>Setup</b> section of this documentation.</p>
+<p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
-        <h1 id="server-script">Server-Script</h1>
+        <h1 id="setup">Setup</h1>
 
     
 
-            <h2 id="server-script-POSTv1-block-info">Fullnode Info</h2>
+            <h2 id="setup-POSTsetup-api_key">Get an API Key</h2>
 
 <p>
-<small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>This endpoint collects information from your running fullnode.</p>
-<aside class="notice">You don't need to implement this endpoint. It's used by the server script and
-documented here for a transparent look inside this tool.</aside>
+<p>create a new API key.</p>
 
-<span id="example-requests-POSTv1-block-info">
+<span id="example-requests-POSTsetup-api_key">
 <blockquote>Example request:</blockquote>
 
 
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/v1/block-info" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369" \
-    --data "{
-    \"connectioncount\": 20,
-    \"block_diff\": 13,
-    \"block_height_local\": 7,
-    \"main_net_block_height\": 7,
-    \"local_hash\": \"culpa\",
-    \"main_net_block_hash\": \"rerum\",
-    \"local_split_found\": false,
-    \"logsize\": 20,
-    \"node_uptime\": 1343121
-}"
-</code></pre>
-
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/v1/block-info',
+    'https://api.defichain-masternode-health.com/setup/api_key',
     [
         'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
             'Accept' =&gt; 'application/json',
-            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
-        ],
-        'json' =&gt; [
-            'connectioncount' =&gt; 20,
-            'block_diff' =&gt; 13,
-            'block_height_local' =&gt; 7,
-            'main_net_block_height' =&gt; 7,
-            'local_hash' =&gt; 'culpa',
-            'main_net_block_hash' =&gt; 'rerum',
-            'local_split_found' =&gt; false,
-            'logsize' =&gt; 20,
-            'node_uptime' =&gt; 1343121,
         ],
     ]
 );
@@ -132,189 +97,182 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/v1/block-info"
+    "https://api.defichain-masternode-health.com/setup/api_key"
 );
 
 const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
 };
-
-let body = {
-    "connectioncount": 20,
-    "block_diff": 13,
-    "block_height_local": 7,
-    "main_net_block_height": 7,
-    "local_hash": "culpa",
-    "main_net_block_hash": "rerum",
-    "local_split_found": false,
-    "logsize": 20,
-    "node_uptime": 1343121
-}
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
 
 <pre><code class="language-python">import requests
 import json
 
-url = 'https://api.defichain-masternode-health.com/v1/block-info'
-payload = {
-    "connectioncount": 20,
-    "block_diff": 13,
-    "block_height_local": 7,
-    "main_net_block_height": 7,
-    "local_hash": "culpa",
-    "main_net_block_hash": "rerum",
-    "local_split_found": false,
-    "logsize": 20,
-    "node_uptime": 1343121
-}
+url = 'https://api.defichain-masternode-health.com/setup/api_key'
 headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
   'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
+  'Accept': 'application/json'
 }
 
-response = requests.request('POST', url, headers=headers, json=payload)
+response = requests.request('POST', url, headers=headers)
 response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/setup/api_key" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
 </span>
 
-<span id="example-responses-POSTv1-block-info">
+<span id="example-responses-POSTsetup-api_key">
             <blockquote>
             <p>Example response (200, Success):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json">{
-    &quot;message&quot;: &quot;ok&quot;
+    &quot;message&quot;: &quot;API key generated&quot;,
+    &quot;api_key&quot;: &quot;c7654335-3e00-41ee-a879-3011c5399d89&quot;
 }</code>
  </pre>
     </span>
-<span id="execution-results-POSTv1-block-info" hidden>
+<span id="execution-results-POSTsetup-api_key" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTv1-block-info"></span>:
+                id="execution-response-status-POSTsetup-api_key"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTv1-block-info"></code></pre>
+    <pre class="json"><code id="execution-response-content-POSTsetup-api_key"></code></pre>
 </span>
-<span id="execution-error-POSTv1-block-info" hidden>
+<span id="execution-error-POSTsetup-api_key" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTv1-block-info"></code></pre>
+    <pre><code id="execution-error-message-POSTsetup-api_key"></code></pre>
 </span>
-<form id="form-POSTv1-block-info" data-method="POST"
-      data-path="v1/block-info"
-      data-authed="1"
+<form id="form-POSTsetup-api_key" data-method="POST"
+      data-path="setup/api_key"
+      data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTv1-block-info', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTsetup-api_key', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>v1/block-info</code></b>
+            <b><code>setup/api_key</code></b>
         </p>
-                <p>
-            <label id="auth-POSTv1-block-info" hidden>x-api-key header:
-                <b><code></code></b><input type="text"
-                                                                name="x-api-key"
-                                                                data-prefix=""
-                                                                data-endpoint="POSTv1-block-info"
-                                                                data-component="header"></label>
+                    </form>
+
+            <h2 id="setup-GETping">Ping</h2>
+
+<p>
+</p>
+
+<p>Test the availability of this API.</p>
+
+<span id="example-requests-GETping">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/ping',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/ping"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/ping'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/ping" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GETping">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;pong&quot;,
+    &quot;server_time&quot;: &quot;2021-08-24T07:25:47.785187Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETping" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETping"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETping"></code></pre>
+</span>
+<span id="execution-error-GETping" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETping"></code></pre>
+</span>
+<form id="form-GETping" data-method="GET"
+      data-path="ping"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETping', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>ping</code></b>
         </p>
-                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <p>
-            <b><code>connectioncount</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-                <input type="number"
-               name="connectioncount"
-               data-endpoint="POSTv1-block-info"
-               data-component="body"  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>block_diff</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="block_diff"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="block_height_local"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>main_net_block_height</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="main_net_block_height"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="local_hash"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>main_net_block_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="main_net_block_hash"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>local_split_found</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
-                <label data-endpoint="POSTv1-block-info" hidden>
-            <input type="radio" name="local_split_found"
-                   value="true"
-                   data-endpoint="POSTv1-block-info"
-                   data-component="body" required             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTv1-block-info" hidden>
-            <input type="radio" name="local_split_found"
-                   value="false"
-                   data-endpoint="POSTv1-block-info"
-                   data-component="body" required             >
-            <code>false</code>
-        </label>
-    <br>
-        </p>
-                <p>
-            <b><code>logsize</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="logsize"
-               data-endpoint="POSTv1-block-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-                <input type="number"
-               name="node_uptime"
-               data-endpoint="POSTv1-block-info"
-               data-component="body"  hidden>
-    <br>
-<p>Uptime of the fullnode in seconds.</p>        </p>
+                    </form>
+
+        <h1 id="server-script">Server-Script</h1>
+
     
-    </form>
 
             <h2 id="server-script-POSTv1-server-stats">Server Stats</h2>
 
@@ -330,29 +288,13 @@ documented here for a transparent look inside this tool.</aside>
 <blockquote>Example request:</blockquote>
 
 
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/v1/server-stats" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369" \
-    --data "{
-    \"cpu\": \"0.23,0.55,0.98\",
-    \"hdd_used\": \"152\",
-    \"hdd_total\": \"512\",
-    \"ram_used\": \"1.5\",
-    \"ram_total\": \"16\"
-}"
-</code></pre>
-
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
     'https://api.defichain-masternode-health.com/v1/server-stats',
     [
         'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+            'x-api-key' =&gt; 'YOUR_API_KEY',
             'Accept' =&gt; 'application/json',
-            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
         ],
         'json' =&gt; [
             'cpu' =&gt; '0.23,0.55,0.98',
@@ -371,10 +313,9 @@ print_r(json_decode((string) $body));</code></pre>
 );
 
 const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
+    "x-api-key": "YOUR_API_KEY",
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
 };
 
 let body = {
@@ -403,14 +344,27 @@ payload = {
     "ram_total": "16"
 }
 headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+  'x-api-key': 'YOUR_API_KEY',
   'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
+  'Accept': 'application/json'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
 response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/v1/server-stats" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"cpu\": \"0.23,0.55,0.98\",
+    \"hdd_used\": \"152\",
+    \"hdd_total\": \"512\",
+    \"ram_used\": \"1.5\",
+    \"ram_total\": \"16\"
+}"
+</code></pre>
 </span>
 
 <span id="example-responses-POSTv1-server-stats">
@@ -439,7 +393,7 @@ response.json()</code></pre>
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTv1-server-stats', this);">
     <h3>
@@ -501,44 +455,38 @@ response.json()</code></pre>
     
     </form>
 
-        <h1 id="server">Server</h1>
-
-    
-
-            <h2 id="server-POSTv1-server-rename">Rename server</h2>
+            <h2 id="server-script-POSTv1-node-info">Fullnode Info</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>Rename a already setup server key. Requires <code>x-api-key</code> and <code>x-server-key</code> header data.</p>
+<p>This endpoint collects information from your running fullnode.</p>
+<aside class="notice">You don't need to implement this endpoint. It's used by the server script and
+documented here for a transparent look inside this tool.</aside>
 
-<span id="example-requests-POSTv1-server-rename">
+<span id="example-requests-POSTv1-node-info">
 <blockquote>Example request:</blockquote>
 
 
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/v1/server/rename" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369" \
-    --data "{
-    \"name\": \"My Awesome Server\"
-}"
-</code></pre>
-
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/v1/server/rename',
+    'https://api.defichain-masternode-health.com/v1/node-info',
     [
         'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+            'x-api-key' =&gt; 'YOUR_API_KEY',
             'Accept' =&gt; 'application/json',
-            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
         ],
         'json' =&gt; [
-            'name' =&gt; 'My Awesome Server',
+            'connectioncount' =&gt; 12,
+            'block_diff' =&gt; 6,
+            'block_height_local' =&gt; 11,
+            'main_net_block_height' =&gt; 13,
+            'local_hash' =&gt; 'facere',
+            'main_net_block_hash' =&gt; 'quis',
+            'local_split_found' =&gt; false,
+            'logsize' =&gt; 1,
+            'node_uptime' =&gt; 1343121,
         ],
     ]
 );
@@ -546,18 +494,25 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/v1/server/rename"
+    "https://api.defichain-masternode-health.com/v1/node-info"
 );
 
 const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
+    "x-api-key": "YOUR_API_KEY",
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
 };
 
 let body = {
-    "name": "My Awesome Server"
+    "connectioncount": 12,
+    "block_diff": 6,
+    "block_height_local": 11,
+    "main_net_block_height": 13,
+    "local_hash": "facere",
+    "main_net_block_hash": "quis",
+    "local_split_found": false,
+    "logsize": 1,
+    "node_uptime": 1343121
 }
 
 fetch(url, {
@@ -569,629 +524,175 @@ fetch(url, {
 <pre><code class="language-python">import requests
 import json
 
-url = 'https://api.defichain-masternode-health.com/v1/server/rename'
+url = 'https://api.defichain-masternode-health.com/v1/node-info'
 payload = {
-    "name": "My Awesome Server"
+    "connectioncount": 12,
+    "block_diff": 6,
+    "block_height_local": 11,
+    "main_net_block_height": 13,
+    "local_hash": "facere",
+    "main_net_block_hash": "quis",
+    "local_split_found": false,
+    "logsize": 1,
+    "node_uptime": 1343121
 }
 headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
+  'x-api-key': 'YOUR_API_KEY',
   'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
+  'Accept': 'application/json'
 }
 
 response = requests.request('POST', url, headers=headers, json=payload)
 response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/v1/node-info" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"connectioncount\": 12,
+    \"block_diff\": 6,
+    \"block_height_local\": 11,
+    \"main_net_block_height\": 13,
+    \"local_hash\": \"facere\",
+    \"main_net_block_hash\": \"quis\",
+    \"local_split_found\": false,
+    \"logsize\": 1,
+    \"node_uptime\": 1343121
+}"
+</code></pre>
 </span>
 
-<span id="example-responses-POSTv1-server-rename">
+<span id="example-responses-POSTv1-node-info">
             <blockquote>
             <p>Example response (200, Success):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json">{
-    &quot;message&quot;: &quot;server \&quot;05dbded5-0084-40e1-ab4d-064859440369\&quot; renamed&quot;
+    &quot;message&quot;: &quot;ok&quot;
 }</code>
  </pre>
     </span>
-<span id="execution-results-POSTv1-server-rename" hidden>
+<span id="execution-results-POSTv1-node-info" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTv1-server-rename"></span>:
+                id="execution-response-status-POSTv1-node-info"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTv1-server-rename"></code></pre>
+    <pre class="json"><code id="execution-response-content-POSTv1-node-info"></code></pre>
 </span>
-<span id="execution-error-POSTv1-server-rename" hidden>
+<span id="execution-error-POSTv1-node-info" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTv1-server-rename"></code></pre>
+    <pre><code id="execution-error-message-POSTv1-node-info"></code></pre>
 </span>
-<form id="form-POSTv1-server-rename" data-method="POST"
-      data-path="v1/server/rename"
+<form id="form-POSTv1-node-info" data-method="POST"
+      data-path="v1/node-info"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTv1-server-rename', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-node-info', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>v1/server/rename</code></b>
+            <b><code>v1/node-info</code></b>
         </p>
                 <p>
-            <label id="auth-POSTv1-server-rename" hidden>x-api-key header:
+            <label id="auth-POSTv1-node-info" hidden>x-api-key header:
                 <b><code></code></b><input type="text"
                                                                 name="x-api-key"
                                                                 data-prefix=""
-                                                                data-endpoint="POSTv1-server-rename"
+                                                                data-endpoint="POSTv1-node-info"
                                                                 data-component="header"></label>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>name</code></b>&nbsp;&nbsp;<small>sring</small>  &nbsp;
-                <input type="text"
-               name="name"
-               data-endpoint="POSTv1-server-rename"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-    
-    </form>
-
-            <h2 id="server-DELETEv1-server-delete">Delete Server</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>Delete and remove all data for the server given with the <code>x-server-key</code> inside the header data</p>
-
-<span id="example-requests-DELETEv1-server-delete">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request DELETE \
-    "https://api.defichain-masternode-health.com/v1/server/delete" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "x-server-key: 05dbded5-0084-40e1-ab4d-064859440369"</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;delete(
-    'https://api.defichain-masternode-health.com/v1/server/delete',
-    [
-        'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-            'Accept' =&gt; 'application/json',
-            'x-server-key' =&gt; '05dbded5-0084-40e1-ab4d-064859440369',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/v1/server/delete"
-);
-
-const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "x-server-key": "05dbded5-0084-40e1-ab4d-064859440369",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/v1/server/delete'
-headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'x-server-key': '05dbded5-0084-40e1-ab4d-064859440369'
-}
-
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-DELETEv1-server-delete">
-</span>
-<span id="execution-results-DELETEv1-server-delete" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEv1-server-delete"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEv1-server-delete"></code></pre>
-</span>
-<span id="execution-error-DELETEv1-server-delete" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEv1-server-delete"></code></pre>
-</span>
-<form id="form-DELETEv1-server-delete" data-method="DELETE"
-      data-path="v1/server/delete"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json","x-server-key":"05dbded5-0084-40e1-ab4d-064859440369"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEv1-server-delete', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>v1/server/delete</code></b>
-        </p>
-                <p>
-            <label id="auth-DELETEv1-server-delete" hidden>x-api-key header:
-                <b><code></code></b><input type="text"
-                                                                name="x-api-key"
-                                                                data-prefix=""
-                                                                data-endpoint="DELETEv1-server-delete"
-                                                                data-component="header"></label>
-        </p>
-                </form>
-
-            <h2 id="server-GETv1-servers">List servers</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>Show all servers connected with your API key. Only requires the <code>x-api-key</code> header data.</p>
-
-<span id="example-requests-GETv1-servers">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "https://api.defichain-masternode-health.com/v1/servers" \
-    --header "x-api-key: bffd1dfd-63b8-48f2-afe6-f4318cce86ef" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'https://api.defichain-masternode-health.com/v1/servers',
-    [
-        'headers' =&gt; [
-            'x-api-key' =&gt; 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/v1/servers"
-);
-
-const headers = {
-    "x-api-key": "bffd1dfd-63b8-48f2-afe6-f4318cce86ef",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/v1/servers'
-headers = {
-  'x-api-key': 'bffd1dfd-63b8-48f2-afe6-f4318cce86ef',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-GETv1-servers">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;data&quot;: [
-        {
-            &quot;name&quot;: &quot;Party server&quot;,
-            &quot;server_id&quot;: &quot;00ebd742-8c6b-4a64-af43-c8942530c444&quot;,
-            &quot;created_at&quot;: &quot;2021-07-18T19:23:31.000000Z&quot;
-        },
-        {
-            &quot;name&quot;: &quot;My awesome 2nd server&quot;,
-            &quot;server_id&quot;: &quot;063e8f8b-1eba-4741-82ec-608319c92705&quot;,
-            &quot;created_at&quot;: &quot;2021-08-11T05:44:45.000000Z&quot;
-        }
-    ],
-    &quot;info&quot;: {
-        &quot;count&quot;: 2
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETv1-servers" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETv1-servers"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETv1-servers"></code></pre>
-</span>
-<span id="execution-error-GETv1-servers" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETv1-servers"></code></pre>
-</span>
-<form id="form-GETv1-servers" data-method="GET"
-      data-path="v1/servers"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"x-api-key":"bffd1dfd-63b8-48f2-afe6-f4318cce86ef","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETv1-servers', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>v1/servers</code></b>
-        </p>
-                <p>
-            <label id="auth-GETv1-servers" hidden>x-api-key header:
-                <b><code></code></b><input type="text"
-                                                                name="x-api-key"
-                                                                data-prefix=""
-                                                                data-endpoint="GETv1-servers"
-                                                                data-component="header"></label>
-        </p>
-                </form>
-
-        <h1 id="setup">Setup</h1>
-
-    
-
-            <h2 id="setup-POSTsetup-api_key">Get an API Key</h2>
-
-<p>
-</p>
-
-<p>create a new API key.</p>
-
-<span id="example-requests-POSTsetup-api_key">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/setup/api_key" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/setup/api_key',
-    [
-        'headers' =&gt; [
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/setup/api_key"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/setup/api_key'
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-POSTsetup-api_key">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;API key generated&quot;,
-    &quot;api_key&quot;: &quot;c7654335-3e00-41ee-a879-3011c5399d89&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTsetup-api_key" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTsetup-api_key"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTsetup-api_key"></code></pre>
-</span>
-<span id="execution-error-POSTsetup-api_key" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTsetup-api_key"></code></pre>
-</span>
-<form id="form-POSTsetup-api_key" data-method="POST"
-      data-path="setup/api_key"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTsetup-api_key', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>setup/api_key</code></b>
-        </p>
-                    </form>
-
-            <h2 id="setup-POSTsetup-server_key">Get a server key</h2>
-
-<p>
-</p>
-
-<p>Create a key for your fullnode / masternode server. You need to generate an API key before.</p>
-
-<span id="example-requests-POSTsetup-server_key">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/setup/server_key" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"api_key\": \"c7654335-3e00-41ee-a879-3011c5399d89\",
-    \"name\": \"My Masternode\"
-}"
-</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/setup/server_key',
-    [
-        'headers' =&gt; [
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'api_key' =&gt; 'c7654335-3e00-41ee-a879-3011c5399d89',
-            'name' =&gt; 'My Masternode',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/setup/server_key"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "api_key": "c7654335-3e00-41ee-a879-3011c5399d89",
-    "name": "My Masternode"
-}
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/setup/server_key'
-payload = {
-    "api_key": "c7654335-3e00-41ee-a879-3011c5399d89",
-    "name": "My Masternode"
-}
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-POSTsetup-server_key">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;server key generated&quot;,
-    &quot;server_key&quot;: &quot;136b4844-f7b3-4b02-8f32-2ade39264c83&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTsetup-server_key" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTsetup-server_key"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTsetup-server_key"></code></pre>
-</span>
-<span id="execution-error-POSTsetup-server_key" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTsetup-server_key"></code></pre>
-</span>
-<form id="form-POSTsetup-server_key" data-method="POST"
-      data-path="setup/server_key"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTsetup-server_key', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>setup/server_key</code></b>
-        </p>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <p>
-            <b><code>api_key</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="api_key"
-               data-endpoint="POSTsetup-server_key"
-               data-component="body" required  hidden>
-    <br>
-<p>Your API key</p>        </p>
-                <p>
-            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
-                <input type="text"
-               name="name"
-               data-endpoint="POSTsetup-server_key"
+            <b><code>connectioncount</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="connectioncount"
+               data-endpoint="POSTv1-node-info"
                data-component="body"  hidden>
     <br>
-<p>Name of this node server</p>        </p>
+        </p>
+                <p>
+            <b><code>block_diff</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="block_diff"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="block_height_local"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>main_net_block_height</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="main_net_block_height"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="local_hash"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>main_net_block_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="main_net_block_hash"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>local_split_found</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+                <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="local_split_found"
+                   value="true"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body" required             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="local_split_found"
+                   value="false"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body" required             >
+            <code>false</code>
+        </label>
+    <br>
+        </p>
+                <p>
+            <b><code>logsize</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="logsize"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="node_uptime"
+               data-endpoint="POSTv1-node-info"
+               data-component="body"  hidden>
+    <br>
+<p>Uptime of the fullnode in seconds.</p>        </p>
     
     </form>
-
-            <h2 id="setup-GETping">Ping</h2>
-
-<p>
-</p>
-
-<p>Test the availability of this API.</p>
-
-<span id="example-requests-GETping">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "https://api.defichain-masternode-health.com/ping" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'https://api.defichain-masternode-health.com/ping',
-    [
-        'headers' =&gt; [
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/ping"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/ping'
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre>
-</span>
-
-<span id="example-responses-GETping">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-13T18:10:09.197456Z&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETping" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETping"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETping"></code></pre>
-</span>
-<span id="execution-error-GETping" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETping"></code></pre>
-</span>
-<form id="form-GETping" data-method="GET"
-      data-path="ping"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETping', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>ping</code></b>
-        </p>
-                    </form>
 
     
 
@@ -1199,16 +700,16 @@ x-ratelimit-remaining: 59
     </div>
     <div class="dark-box">
                     <div class="lang-selector">
-                                    <a href="#" data-language-name="bash">bash</a>
                                     <a href="#" data-language-name="php">php</a>
                                     <a href="#" data-language-name="javascript">javascript</a>
                                     <a href="#" data-language-name="python">python</a>
+                                    <a href="#" data-language-name="bash">bash</a>
                             </div>
             </div>
 </div>
 <script>
     $(function () {
-        var exampleLanguages = ["bash","php","javascript","python"];
+        var exampleLanguages = ["php","javascript","python","bash"];
         setupLanguages(exampleLanguages);
     });
 </script>

@@ -7,7 +7,6 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
-use App\Api\v1\Middleware\ServerApiAccess;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -64,7 +63,6 @@ ConvertEmptyStringsToNull::class,
         'signed'            => ValidateSignature::class,
         'throttle'          => ThrottleRequests::class,
         'verified'          => EnsureEmailIsVerified::class,
-        'api_server_access' => ServerApiAccess::class,
         'api_access'        => ApiAccess::class,
     ];
 }

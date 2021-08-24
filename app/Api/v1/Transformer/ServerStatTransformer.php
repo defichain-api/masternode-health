@@ -3,7 +3,7 @@
 namespace App\Api\v1\Transformer;
 
 use App\Api\v1\Requests\ServerStatsRequest;
-use App\Models\Server;
+use App\Models\ApiKey;
 use Str;
 
 class ServerStatTransformer
@@ -15,9 +15,9 @@ class ServerStatTransformer
         $this->request = $request;
     }
 
-    public function server(): Server
+    public function api_key(): ApiKey
     {
-        return $this->request->get('server');
+        return $this->request->get('api_key');
     }
 
     public function cpu(): string

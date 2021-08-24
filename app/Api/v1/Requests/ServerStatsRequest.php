@@ -11,11 +11,11 @@ class ServerStatsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpu'       => ['required', 'string'],
-            'hdd_used'  => ['required', 'string'],
-            'hdd_total' => ['required', 'string'],
-            'ram_used'  => ['required', 'string'],
-            'ram_total' => ['required', 'string'],
+            'cpu'       => ['sometimes', 'numeric', 'min:0'],
+            'hdd_used'  => ['sometimes', 'numeric', 'min:0'],
+            'hdd_total' => ['sometimes', 'numeric', 'min:0'],
+            'ram_used'  => ['sometimes', 'numeric', 'min:0'],
+            'ram_total' => ['sometimes', 'numeric', 'min:0'],
         ];
     }
 

@@ -3,7 +3,7 @@
 namespace App\Api\v1\Transformer;
 
 use App\Api\v1\Requests\NodeInfoRequest;
-use App\Models\Server;
+use App\Models\ApiKey;
 
 class NodeInfoTransformer
 {
@@ -14,9 +14,9 @@ class NodeInfoTransformer
         $this->request = $request;
     }
 
-    public function server(): Server
+    public function apiKey(): ApiKey
     {
-        return $this->request->get('server');
+        return $this->request->get('api_key');
     }
 
     public function connectioncount(): string
