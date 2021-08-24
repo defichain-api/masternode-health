@@ -3,8 +3,7 @@ name: PR WorkFlow
 on:
   pull_request:
     branches:
-      - master
-      - staging
+      - '**'
 
 jobs:
   app-tests:
