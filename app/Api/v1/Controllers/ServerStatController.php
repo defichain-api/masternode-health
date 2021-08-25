@@ -3,15 +3,12 @@
 namespace App\Api\v1\Controllers;
 
 use App\Api\v1\Resources\ServerStatCollection;
-use App\Enum\Cooldown;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
-use App\Models\ServerStat;
 use App\Repository\ServerStatRepository;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
 use Illuminate\Http\JsonResponse;
-use Request;
 
 class ServerStatController
 {
@@ -92,7 +89,8 @@ class ServerStatController
      * Server Stats
      *
      * Pull the latest server stats posted to the health API by your server.
-     * @response scenario=Success {"data":[{"type":"ram_total","value":125.724},{"type":"hdd_total","value":933.3428},{"type":"hdd_used","value":53.6456},{"type":"ram_used","value":2.9764},{"type":"load_avg","value":0.22}],"latest_update":"2021-08-25T07:40:09.000000Z"}
+     * @response scenario=Success
+     *           {"data":[{"type":"ram_total","value":125.724},{"type":"hdd_total","value":933.3428},{"type":"hdd_used","value":53.6456},{"type":"ram_used","value":2.9764},{"type":"load_avg","value":0.22}],"latest_update":"2021-08-25T07:40:09.000000Z"}
      */
     public function getServerStats(ServerStatRepository $repository): ServerStatCollection
     {
