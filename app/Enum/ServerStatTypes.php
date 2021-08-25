@@ -15,6 +15,15 @@ class ServerStatTypes
     const BLOCK_DIFF = 'block_diff';
     const LOCAL_HASH = 'local_hash';
     const LOGSIZE = 'logsize';
+
+    const SERVER_STATS = [
+        self::LOAD_AVG,
+        self::RAM_USED,
+        self::RAM_TOTAL,
+        self::HDD_USED,
+        self::HDD_TOTAL,
+    ];
+
     const FLOAT_VALUE = [
         self::LOAD_AVG,
         self::RAM_USED,

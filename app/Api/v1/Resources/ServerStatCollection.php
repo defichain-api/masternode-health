@@ -11,9 +11,13 @@ class ServerStatCollection extends ResourceCollection
 
     public function toArray($request): array
     {
+        $firstElement = $this->collection->first();
+
         return [
-            'data'          => $this->collection,
-            'latest_update' => $this->collection->first()->updated_at,
+            'data' => $this->collection,
+            $this->mergeWhen(isset($firstElement), function () use ($firstElement) {
+                return ['latest_update' => $firstElement->updated_at];
+            }),
         ];
     }
 }
