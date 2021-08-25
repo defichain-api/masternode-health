@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-class NodeInfoRequest extends FormRequest
+class NodeInfoRequest extends ApiRequest
 {
     public function rules(): array
     {
@@ -22,18 +22,5 @@ class NodeInfoRequest extends FormRequest
 //            'local_split_found'     => ['required', 'boolean'],
 //            'logsize'               => ['required', 'integer'],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'message' => 'validation failed',
-            'errors'  => $validator->errors(),
-        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

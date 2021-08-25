@@ -2,6 +2,7 @@
 
 use App\Api\v1\Controllers\ServerStatController;
 use App\Api\v1\Controllers\SetupController;
+use App\Api\v1\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +41,8 @@ Route::middleware('api_access')
         Route::get('server-stats', [ServerStatController::class, 'getServerStats'])
             ->name('get.server-stats');
 
+        Route::prefix('webhook')->name('webhook.')->group(function() {
+            Route::post('/', [WebhookController::class, 'create']);
+            Route::delete('/', [WebhookController::class, 'delete']);
+        });
     });

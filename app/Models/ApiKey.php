@@ -6,6 +6,7 @@ use App\Models\Concerns\UsesUuidPrimary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @mixin \Eloquent
@@ -31,5 +32,10 @@ class ApiKey extends Model
     public function key(): string
     {
         return $this->id;
+    }
+
+    public function webhook(): HasOne
+    {
+        return $this->hasOne(Webhook::class);
     }
 }

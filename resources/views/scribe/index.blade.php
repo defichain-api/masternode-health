@@ -69,6 +69,378 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+            <h2 id="endpoints-GETv1-webhook-list">GET v1/webhook/list</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETv1-webhook-list">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/v1/webhook/list',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/webhook/list"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/webhook/list'
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/v1/webhook/list" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GETv1-webhook-list">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;state&quot;: &quot;error&quot;,
+    &quot;reason&quot;: &quot;not authorized&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-webhook-list" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-webhook-list"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-webhook-list"></code></pre>
+</span>
+<span id="execution-error-GETv1-webhook-list" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-webhook-list"></code></pre>
+</span>
+<form id="form-GETv1-webhook-list" data-method="GET"
+      data-path="v1/webhook/list"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-webhook-list', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/webhook/list</code></b>
+        </p>
+                <p>
+            <label id="auth-GETv1-webhook-list" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="GETv1-webhook-list"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="endpoints-POSTv1-webhook-create">POST v1/webhook/create</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTv1-webhook-create">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'https://api.defichain-masternode-health.com/v1/webhook/create',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'url' =&gt; 'veniam',
+            'max_tries' =&gt; 2.0,
+            'timeout_in_seconds' =&gt; 1.0,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/webhook/create"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "url": "veniam",
+    "max_tries": 2,
+    "timeout_in_seconds": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/webhook/create'
+payload = {
+    "url": "veniam",
+    "max_tries": 2,
+    "timeout_in_seconds": 1
+}
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/v1/webhook/create" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"url\": \"veniam\",
+    \"max_tries\": 2,
+    \"timeout_in_seconds\": 1
+}"
+</code></pre>
+</span>
+
+<span id="example-responses-POSTv1-webhook-create">
+</span>
+<span id="execution-results-POSTv1-webhook-create" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-webhook-create"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-webhook-create"></code></pre>
+</span>
+<span id="execution-error-POSTv1-webhook-create" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-webhook-create"></code></pre>
+</span>
+<form id="form-POSTv1-webhook-create" data-method="POST"
+      data-path="v1/webhook/create"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-webhook-create', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/webhook/create</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTv1-webhook-create" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="POSTv1-webhook-create"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>url</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="url"
+               data-endpoint="POSTv1-webhook-create"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>max_tries</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="max_tries"
+               data-endpoint="POSTv1-webhook-create"
+               data-component="body"  hidden>
+    <br>
+<p>Must be at least 1. Must not be greater than 10.</p>        </p>
+                <p>
+            <b><code>timeout_in_seconds</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="timeout_in_seconds"
+               data-endpoint="POSTv1-webhook-create"
+               data-component="body"  hidden>
+    <br>
+<p>Must be at least 1. Must not be greater than 5.</p>        </p>
+    
+    </form>
+
+            <h2 id="endpoints-DELETEv1-webhook-delete--webhookId-">DELETE v1/webhook/delete/{webhookId}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEv1-webhook-delete--webhookId-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'https://api.defichain-masternode-health.com/v1/webhook/delete/et',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/webhook/delete/et"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/webhook/delete/et'
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request DELETE \
+    "https://api.defichain-masternode-health.com/v1/webhook/delete/et" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-DELETEv1-webhook-delete--webhookId-">
+</span>
+<span id="execution-results-DELETEv1-webhook-delete--webhookId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEv1-webhook-delete--webhookId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEv1-webhook-delete--webhookId-"></code></pre>
+</span>
+<span id="execution-error-DELETEv1-webhook-delete--webhookId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEv1-webhook-delete--webhookId-"></code></pre>
+</span>
+<form id="form-DELETEv1-webhook-delete--webhookId-" data-method="DELETE"
+      data-path="v1/webhook/delete/{webhookId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEv1-webhook-delete--webhookId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>v1/webhook/delete/{webhookId}</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEv1-webhook-delete--webhookId-" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="DELETEv1-webhook-delete--webhookId-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>webhookId</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="webhookId"
+               data-endpoint="DELETEv1-webhook-delete--webhookId-"
+               data-component="url" required  hidden>
+    <br>
+            </p>
+                    </form>
+
         <h1 id="setup">Setup</h1>
 
     
@@ -233,13 +605,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 57
+x-ratelimit-remaining: 59
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T15:29:21.718676Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-25T18:14:36.264874Z&quot;
 }</code>
  </pre>
     </span>
