@@ -34,6 +34,11 @@ class NodeInfoTransformer
         return $this->request->input('block_height_local');
     }
 
+    public function operatorStatus(): string
+    {
+        return $this->request->has('operator_status') ? json_encode($this->request->input('operator_status')) : '';
+    }
+
 //    public function mainNetBlockHeight(): string
 //    {
 //        return $this->request->input('main_net_block_height');
