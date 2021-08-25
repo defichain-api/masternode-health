@@ -65,9 +65,210 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
+
+        <h1 id="setup">Setup</h1>
+
+    
+
+            <h2 id="setup-POSTsetup-api_key">Get an API Key</h2>
+
+<p>
+</p>
+
+<p>create a new API key.</p>
+
+<span id="example-requests-POSTsetup-api_key">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'https://api.defichain-masternode-health.com/setup/api_key',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/setup/api_key"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/setup/api_key'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/setup/api_key" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-POSTsetup-api_key">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;API key generated&quot;,
+    &quot;api_key&quot;: &quot;c7654335-3e00-41ee-a879-3011c5399d89&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTsetup-api_key" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTsetup-api_key"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTsetup-api_key"></code></pre>
+</span>
+<span id="execution-error-POSTsetup-api_key" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTsetup-api_key"></code></pre>
+</span>
+<form id="form-POSTsetup-api_key" data-method="POST"
+      data-path="setup/api_key"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTsetup-api_key', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>setup/api_key</code></b>
+        </p>
+                    </form>
+
+            <h2 id="setup-GETping">Ping</h2>
+
+<p>
+</p>
+
+<p>Test the availability of this API.</p>
+
+<span id="example-requests-GETping">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/ping',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/ping"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/ping'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/ping" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GETping">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;pong&quot;,
+    &quot;server_time&quot;: &quot;2021-08-25T08:48:08.710949Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETping" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETping"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETping"></code></pre>
+</span>
+<span id="execution-error-GETping" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETping"></code></pre>
+</span>
+<form id="form-GETping" data-method="GET"
+      data-path="ping"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETping', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>ping</code></b>
+        </p>
+                    </form>
 
         <h1 id="endpoints">Endpoints</h1>
 
@@ -411,12 +612,12 @@ $response = $client-&gt;post(
         'json' =&gt; [
             'connectioncount' =&gt; 5,
             'block_diff' =&gt; 8,
-            'block_height_local' =&gt; 9,
-            'main_net_block_height' =&gt; 2,
-            'local_hash' =&gt; 'enim',
-            'main_net_block_hash' =&gt; 'tenetur',
+            'block_height_local' =&gt; 6,
+            'main_net_block_height' =&gt; 6,
+            'local_hash' =&gt; 'aliquam',
+            'main_net_block_hash' =&gt; 'facilis',
             'local_split_found' =&gt; true,
-            'logsize' =&gt; 4,
+            'logsize' =&gt; 6,
             'node_uptime' =&gt; 1343121,
         ],
     ]
@@ -437,12 +638,12 @@ const headers = {
 let body = {
     "connectioncount": 5,
     "block_diff": 8,
-    "block_height_local": 9,
-    "main_net_block_height": 2,
-    "local_hash": "enim",
-    "main_net_block_hash": "tenetur",
+    "block_height_local": 6,
+    "main_net_block_height": 6,
+    "local_hash": "aliquam",
+    "main_net_block_hash": "facilis",
     "local_split_found": true,
-    "logsize": 4,
+    "logsize": 6,
     "node_uptime": 1343121
 }
 
@@ -459,12 +660,12 @@ url = 'https://api.defichain-masternode-health.com/v1/node-info'
 payload = {
     "connectioncount": 5,
     "block_diff": 8,
-    "block_height_local": 9,
-    "main_net_block_height": 2,
-    "local_hash": "enim",
-    "main_net_block_hash": "tenetur",
+    "block_height_local": 6,
+    "main_net_block_height": 6,
+    "local_hash": "aliquam",
+    "main_net_block_hash": "facilis",
     "local_split_found": true,
-    "logsize": 4,
+    "logsize": 6,
     "node_uptime": 1343121
 }
 headers = {
@@ -484,12 +685,12 @@ response.json()</code></pre>
     --data "{
     \"connectioncount\": 5,
     \"block_diff\": 8,
-    \"block_height_local\": 9,
-    \"main_net_block_height\": 2,
-    \"local_hash\": \"enim\",
-    \"main_net_block_hash\": \"tenetur\",
+    \"block_height_local\": 6,
+    \"main_net_block_height\": 6,
+    \"local_hash\": \"aliquam\",
+    \"main_net_block_hash\": \"facilis\",
     \"local_split_found\": true,
-    \"logsize\": 4,
+    \"logsize\": 6,
     \"node_uptime\": 1343121
 }"
 </code></pre>
@@ -624,207 +825,6 @@ response.json()</code></pre>
 <p>Uptime of the fullnode in seconds.</p>        </p>
     
     </form>
-
-        <h1 id="setup">Setup</h1>
-
-    
-
-            <h2 id="setup-POSTsetup-api_key">Get an API Key</h2>
-
-<p>
-</p>
-
-<p>create a new API key.</p>
-
-<span id="example-requests-POSTsetup-api_key">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;post(
-    'https://api.defichain-masternode-health.com/setup/api_key',
-    [
-        'headers' =&gt; [
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/setup/api_key"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/setup/api_key'
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre>
-
-<pre><code class="language-bash">curl --request POST \
-    "https://api.defichain-masternode-health.com/setup/api_key" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-</span>
-
-<span id="example-responses-POSTsetup-api_key">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;API key generated&quot;,
-    &quot;api_key&quot;: &quot;c7654335-3e00-41ee-a879-3011c5399d89&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-POSTsetup-api_key" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTsetup-api_key"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTsetup-api_key"></code></pre>
-</span>
-<span id="execution-error-POSTsetup-api_key" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTsetup-api_key"></code></pre>
-</span>
-<form id="form-POSTsetup-api_key" data-method="POST"
-      data-path="setup/api_key"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTsetup-api_key', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>setup/api_key</code></b>
-        </p>
-                    </form>
-
-            <h2 id="setup-GETping">Ping</h2>
-
-<p>
-</p>
-
-<p>Test the availability of this API.</p>
-
-<span id="example-requests-GETping">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'https://api.defichain-masternode-health.com/ping',
-    [
-        'headers' =&gt; [
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "https://api.defichain-masternode-health.com/ping"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-python">import requests
-import json
-
-url = 'https://api.defichain-masternode-health.com/ping'
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre>
-
-<pre><code class="language-bash">curl --request GET \
-    --get "https://api.defichain-masternode-health.com/ping" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-</span>
-
-<span id="example-responses-GETping">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 56
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T08:31:10.180343Z&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETping" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETping"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETping"></code></pre>
-</span>
-<span id="execution-error-GETping" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETping"></code></pre>
-</span>
-<form id="form-GETping" data-method="GET"
-      data-path="ping"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETping', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>ping</code></b>
-        </p>
-                    </form>
 
     
 
