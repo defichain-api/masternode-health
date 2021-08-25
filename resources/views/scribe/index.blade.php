@@ -233,13 +233,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 57
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T08:48:08.710949Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-25T15:21:06.037543Z&quot;
 }</code>
  </pre>
     </span>
@@ -610,14 +610,8 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'connectioncount' =&gt; 5,
-            'block_diff' =&gt; 8,
-            'block_height_local' =&gt; 6,
-            'main_net_block_height' =&gt; 6,
-            'local_hash' =&gt; 'aliquam',
-            'main_net_block_hash' =&gt; 'facilis',
-            'local_split_found' =&gt; true,
-            'logsize' =&gt; 6,
+            'block_height_local' =&gt; 1131998,
+            'local_hash' =&gt; 'cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3',
             'node_uptime' =&gt; 1343121,
         ],
     ]
@@ -636,14 +630,8 @@ const headers = {
 };
 
 let body = {
-    "connectioncount": 5,
-    "block_diff": 8,
-    "block_height_local": 6,
-    "main_net_block_height": 6,
-    "local_hash": "aliquam",
-    "main_net_block_hash": "facilis",
-    "local_split_found": true,
-    "logsize": 6,
+    "block_height_local": 1131998,
+    "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
     "node_uptime": 1343121
 }
 
@@ -658,14 +646,8 @@ import json
 
 url = 'https://api.defichain-masternode-health.com/v1/node-info'
 payload = {
-    "connectioncount": 5,
-    "block_diff": 8,
-    "block_height_local": 6,
-    "main_net_block_height": 6,
-    "local_hash": "aliquam",
-    "main_net_block_hash": "facilis",
-    "local_split_found": true,
-    "logsize": 6,
+    "block_height_local": 1131998,
+    "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
     "node_uptime": 1343121
 }
 headers = {
@@ -683,14 +665,8 @@ response.json()</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"connectioncount\": 5,
-    \"block_diff\": 8,
-    \"block_height_local\": 6,
-    \"main_net_block_height\": 6,
-    \"local_hash\": \"aliquam\",
-    \"main_net_block_hash\": \"facilis\",
-    \"local_split_found\": true,
-    \"logsize\": 6,
+    \"block_height_local\": 1131998,
+    \"local_hash\": \"cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3\",
     \"node_uptime\": 1343121
 }"
 </code></pre>
@@ -742,37 +718,13 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>connectioncount</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-                <input type="number"
-               name="connectioncount"
-               data-endpoint="POSTv1-node-info"
-               data-component="body"  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>block_diff</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="block_diff"
-               data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
             <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
                name="block_height_local"
                data-endpoint="POSTv1-node-info"
                data-component="body" required  hidden>
     <br>
-        </p>
-                <p>
-            <b><code>main_net_block_height</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="main_net_block_height"
-               data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
+<p>The number of the current block.</p>        </p>
                 <p>
             <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
@@ -780,47 +732,13 @@ response.json()</code></pre>
                data-endpoint="POSTv1-node-info"
                data-component="body" required  hidden>
     <br>
-        </p>
+<p>Hash for the current block. Required length of 64 chars.</p>        </p>
                 <p>
-            <b><code>main_net_block_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="main_net_block_hash"
-               data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>local_split_found</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
-                <label data-endpoint="POSTv1-node-info" hidden>
-            <input type="radio" name="local_split_found"
-                   value="true"
-                   data-endpoint="POSTv1-node-info"
-                   data-component="body" required             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTv1-node-info" hidden>
-            <input type="radio" name="local_split_found"
-                   value="false"
-                   data-endpoint="POSTv1-node-info"
-                   data-component="body" required             >
-            <code>false</code>
-        </label>
-    <br>
-        </p>
-                <p>
-            <b><code>logsize</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="logsize"
-               data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
-    <br>
-        </p>
-                <p>
-            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
                 <input type="number"
                name="node_uptime"
                data-endpoint="POSTv1-node-info"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Uptime of the fullnode in seconds.</p>        </p>
     

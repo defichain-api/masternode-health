@@ -44,15 +44,10 @@ class ServerStatController
      * This endpoint collects information from your running fullnode.
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
-     * @bodyParam connectioncount integer
-     * @bodyParam block_diff integer required
-     * @bodyParam block_height_local integer required
-     * @bodyParam main_net_block_height integer required
-     * @bodyParam local_hash string required
-     * @bodyParam main_net_block_hash string required
-     * @bodyParam local_split_found boolean required
-     * @bodyParam logsize integer required
-     * @bodyParam node_uptime integer Uptime of the fullnode in seconds. Example: 1343121
+     * @bodyParam block_height_local integer required The number of the current block. Example: 1131998
+     * @bodyParam local_hash string required Hash for the current block. Required length of 64 chars. Example:
+     * cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3
+     * @bodyParam node_uptime integer required Uptime of the fullnode in seconds. Example: 1343121
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      * @authenticated
@@ -61,15 +56,7 @@ class ServerStatController
     {
         $service->store($request);
 
-        if ($request->localSplitFound() &&
-            $request->getServer()->cooldown(Cooldown::LOCAL_SPLIT_NOTIFICATION)->passed()) {
-            $service->sendLocalSplitNotification($request);
-        }
-
-        if ($request->blockHeightLocal() > $request->mainNetBlockHeight() &&
-            $request->getServer()->cooldown(Cooldown::REMOTE_SPLIT_NOTIFICATION)->passed()) {
-            $service->sendRemoteSplitNotification($request);
-        }
+        // @todo implement an analysation of the data
 
         return response()->json([
             'message' => 'ok',
@@ -93,6 +80,8 @@ class ServerStatController
     public function storeServerStats(ServerStatsRequest $request, ServerStatService $service): JsonResponse
     {
         $service->store($request);
+
+        // @todo implement an analysation of the data
 
         return response()->json([
             'message' => 'ok',

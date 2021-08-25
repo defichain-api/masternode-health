@@ -1,6 +1,5 @@
 <?php
 
-use App\Api\v1\Controllers\ServerController;
 use App\Api\v1\Controllers\ServerStatController;
 use App\Api\v1\Controllers\SetupController;
 use Illuminate\Support\Facades\Route;

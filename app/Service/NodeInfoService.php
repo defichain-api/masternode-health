@@ -14,16 +14,16 @@ class NodeInfoService
         $transformer = new NodeInfoTransformer($request);
         $apiKeyId = $transformer->apiKey()->id;
         $data = collect([
-            [
-                'api_key_id' => $apiKeyId,
-                'type'       => ServerStatTypes::CONNECTIONCOUNT,
-                'value'      => $transformer->connectioncount(),
-            ],
-            [
-                'api_key_id' => $apiKeyId,
-                'type'       => ServerStatTypes::BLOCK_DIFF,
-                'value'      => $transformer->blockDiff(),
-            ],
+//            [
+//                'api_key_id' => $apiKeyId,
+//                'type'       => ServerStatTypes::CONNECTIONCOUNT,
+//                'value'      => $transformer->connectioncount(),
+//            ],
+//            [
+//                'api_key_id' => $apiKeyId,
+//                'type'       => ServerStatTypes::BLOCK_DIFF,
+//                'value'      => $transformer->blockDiff(),
+//            ],
             [
                 'api_key_id' => $apiKeyId,
                 'type'       => ServerStatTypes::NODE_UPTIME,
@@ -39,11 +39,11 @@ class NodeInfoService
                 'type'       => ServerStatTypes::LOCAL_HASH,
                 'value'      => $transformer->localHash(),
             ],
-            [
-                'api_key_id' => $apiKeyId,
-                'type'       => ServerStatTypes::LOGSIZE,
-                'value'      => $transformer->logsize(),
-            ],
+//            [
+//                'api_key_id' => $apiKeyId,
+//                'type'       => ServerStatTypes::LOGSIZE,
+//                'value'      => $transformer->logsize(),
+//            ],
         ]);
         $data->each(function (array $item) {
             if (is_null($item['value'])){
@@ -55,19 +55,5 @@ class NodeInfoService
                 'value'      => $item['value'],
             ]);
         });
-    }
-
-    public function sendLocalSplitNotification(NodeInfoRequest $request): void
-    {
-//        $conversation = new LocalChainSplitConversation($request);
-//
-//        app(TelegramMessageService::class)->startConversation($request->getServer()->user, $conversation);
-    }
-
-    public function sendRemoteSplitNotification(NodeInfoRequest $request): void
-    {
-//        $conversation = new RemoteChainSplitConversation($request);
-//
-//        app(TelegramMessageService::class)->startConversation($request->getServer()->user, $conversation);
     }
 }
