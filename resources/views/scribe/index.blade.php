@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -233,13 +233,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 57
+x-ratelimit-remaining: 58
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T15:29:21.718676Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-25T17:35:38.882889Z&quot;
 }</code>
  </pre>
     </span>
@@ -733,6 +733,12 @@ $response = $client-&gt;post(
             'block_height_local' =&gt; 1131998,
             'local_hash' =&gt; 'cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3',
             'node_uptime' =&gt; 1343121,
+            'operator_status' =&gt; [
+                [
+                    'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
+                    'online' =&gt; true,
+                ],
+            ],
         ],
     ]
 );
@@ -752,7 +758,13 @@ const headers = {
 let body = {
     "block_height_local": 1131998,
     "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
-    "node_uptime": 1343121
+    "node_uptime": 1343121,
+    "operator_status": [
+        {
+            "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
+            "online": true
+        }
+    ]
 }
 
 fetch(url, {
@@ -768,7 +780,13 @@ url = 'https://api.defichain-masternode-health.com/v1/node-info'
 payload = {
     "block_height_local": 1131998,
     "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
-    "node_uptime": 1343121
+    "node_uptime": 1343121,
+    "operator_status": [
+        {
+            "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
+            "online": true
+        }
+    ]
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -787,7 +805,13 @@ response.json()</code></pre>
     --data "{
     \"block_height_local\": 1131998,
     \"local_hash\": \"cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3\",
-    \"node_uptime\": 1343121
+    \"node_uptime\": 1343121,
+    \"operator_status\": [
+        {
+            \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
+            \"online\": true
+        }
+    ]
 }"
 </code></pre>
 </span>
@@ -861,6 +885,41 @@ response.json()</code></pre>
                data-component="body" required  hidden>
     <br>
 <p>Uptime of the fullnode in seconds.</p>        </p>
+                <p>
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b><code>operator_status</code></b>&nbsp;&nbsp;<small>object[]</small>  &nbsp;
+<br>
+<p>Online/Offline information for all masternodes registered on the
+fullnode.</p>            </summary>
+                                                <p>
+                        <b><code>operator_status[].id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="operator_status.0.id"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+<p>Masternode ID</p>                    </p>
+                                                                <p>
+                        <b><code>operator_status[].online</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+                <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="operator_status.0.online"
+                   value="true"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body" required             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="operator_status.0.online"
+                   value="false"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body" required             >
+            <code>false</code>
+        </label>
+    <br>
+                    </p>
+                                    </details>
+        </p>
     
     </form>
 

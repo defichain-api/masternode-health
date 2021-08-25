@@ -15,7 +15,8 @@
         "kurozora/laravel-cooldown": "^1.0",
         "laravel/framework": "^8.40",
         "knuckleswtf/scribe": "^3.8",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
