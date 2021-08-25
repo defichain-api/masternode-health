@@ -26,13 +26,21 @@ class ServerStatResource extends JsonResource
         return (int) $this->value;
 	}
 
+	protected function arrayValue(): array
+    {
+        return json_decode($this->value);
+    }
+
     protected function getValue()
     {
         if (in_array($this->type, ServerStatTypes::FLOAT_VALUE)) {
-            return (float) $this->value;
+            return $this->floatValue();
         }
         if (in_array($this->type, ServerStatTypes::INT_VALUE)) {
-            return (int) $this->value;
+            return $this->intValue();
+        }
+        if (in_array($this->type, ServerStatTypes::ARRAY_VALUE)) {
+            return $this->arrayValue();
         }
 
         return $this->value;

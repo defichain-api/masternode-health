@@ -39,6 +39,11 @@ class NodeInfoService
                 'type'       => ServerStatTypes::LOCAL_HASH,
                 'value'      => $transformer->localHash(),
             ],
+            [
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::OPERATOR_STATUS,
+                'value'      => $transformer->operatorStatus(),
+            ],
 //            [
 //                'api_key_id' => $apiKeyId,
 //                'type'       => ServerStatTypes::LOGSIZE,
@@ -46,7 +51,7 @@ class NodeInfoService
 //            ],
         ]);
         $data->each(function (array $item) {
-            if (is_null($item['value'])){
+            if (is_null($item['value']) || $item['value'] === ''){
                 return;
             }
             ServerStat::create([
