@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Api\v1\Requests\ServerStatsRequest;
-use App\Api\v1\Transformer\ServerStatTransformer;
+use App\Api\v1\RequestTransformer\ServerStatTransformer;
 use App\Enum\ServerStatTypes;
 use App\Models\ServerStat;
 
@@ -16,8 +16,8 @@ class ServerStatService
         $data = collect([
             [
                 'api_key_id' => $apiKeyId,
-                'type'       => ServerStatTypes::CPU,
-                'value'      => $transformer->cpu(),
+                'type'       => ServerStatTypes::LOAD_AVG,
+                'value'      => $transformer->loadAvg(),
             ],
             [
                 'api_key_id' => $apiKeyId,

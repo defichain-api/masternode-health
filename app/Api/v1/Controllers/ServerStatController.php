@@ -2,12 +2,15 @@
 
 namespace App\Api\v1\Controllers;
 
+use App\Api\v1\Resources\ServerStatCollection;
 use App\Enum\Cooldown;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
+use App\Models\ServerStat;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
 use Illuminate\Http\JsonResponse;
+use Request;
 
 class ServerStatController
 {
@@ -78,7 +81,7 @@ class ServerStatController
      * This endpoint collects (hardware) information from your server.
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
-     * @bodyParam cpu  float Current average load as float. Example: 0.23
+     * @bodyParam load_avg  float Current average load as float. Example: 0.23
      * @bodyParam hdd_used  float Used HDD memory as float. Example: 152
      * @bodyParam hdd_total  float Total available HDD memory as float. Example: 508.76
      * @bodyParam ram_used  float Used RAM in GB as float. Example: 1.5
@@ -87,12 +90,17 @@ class ServerStatController
      * @response  scenario=Success {"message":"ok"}
      * @authenticated
      */
-    public function serverStats(ServerStatsRequest $request, ServerStatService $service): JsonResponse
+    public function storeServerStats(ServerStatsRequest $request, ServerStatService $service): JsonResponse
     {
         $service->store($request);
 
         return response()->json([
             'message' => 'ok',
         ], JsonResponse::HTTP_OK);
+    }
+
+    public function getServerStats(): ServerStatCollection
+    {
+        return new ServerStatCollection(ServerStat::all());
     }
 }

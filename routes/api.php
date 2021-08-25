@@ -32,7 +32,11 @@ Route::middleware('api_access')
     ->prefix('v1')
     ->group(function () {
         Route::post('node-info', [ServerStatController::class, 'nodeInfo'])
-            ->name('node-info');
-        Route::post('server-stats', [ServerStatController::class, 'serverStats'])
-            ->name('server-stats');
+            ->name('post.node-info');
+
+        Route::post('server-stats', [ServerStatController::class, 'storeServerStats'])
+            ->name('post.server-stats');
+        Route::get('server-stats', [ServerStatController::class, 'getServerStats'])
+            ->name('get.server-stats');
+
     });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\v1\Transformer;
+namespace App\Api\v1\RequestTransformer;
 
 use App\Api\v1\Requests\ServerStatsRequest;
 use App\Models\ApiKey;
@@ -20,9 +20,9 @@ class ServerStatTransformer
         return $this->request->get('api_key');
     }
 
-    public function cpu(): ?float
+    public function loadAvg(): ?float
     {
-        $value = (float) $this->request->input('cpu');
+        $value = (float) $this->request->input('load_avg');
 
         return is_float($value) ? round($value, 4) : null;
     }

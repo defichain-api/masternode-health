@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\v1\Transformer;
+namespace App\Api\v1\RequestTransformer;
 
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Models\ApiKey;

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Api\v1\Transformer\NodeInfoTransformer;
+use App\Api\v1\RequestTransformer\NodeInfoTransformer;
 use App\Enum\ServerStatTypes;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Models\ServerStat;

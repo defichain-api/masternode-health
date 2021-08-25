@@ -4,7 +4,7 @@ namespace App\Enum;
 
 class ServerStatTypes
 {
-    const CPU = 'cpu';
+    const LOAD_AVG = 'load_avg';
     const RAM_USED = 'ram_used';
     const RAM_TOTAL = 'ram_total';
     const HDD_USED = 'hdd_used';
@@ -16,7 +16,7 @@ class ServerStatTypes
     const LOCAL_HASH = 'local_hash';
     const LOGSIZE = 'logsize';
     const GENERIC_TYPES = [
-        self::CPU,
+        self::LOAD_AVG,
         self::RAM_USED,
         self::RAM_TOTAL,
         self::HDD_USED,
