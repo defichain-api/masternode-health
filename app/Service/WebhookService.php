@@ -25,6 +25,7 @@ class WebhookService
     public function deleteWebhook(Request $request): bool
     {
         $webhook = Webhook::whereApiKeyId($request->get('api_key')->id)->first();
+
         return isset($webhook) ? $webhook->delete() : false;
     }
 }
