@@ -8,6 +8,7 @@ use App\Api\v1\Requests\ServerStatsRequest;
 use App\Repository\ServerStatRepository;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
+use App\Service\WebhookService;
 use Illuminate\Http\JsonResponse;
 
 class ServerStatController
@@ -54,6 +55,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
+        $apiKey = $request->get('api_key');
+        if ($apiKey->webhook && $apiKey->cooldown('node_info')->passed()) {
+            app(WebhookService::class)->sendWebhook($apiKey, false, true);
+            $apiKey->cooldown('node_info')->until(now()->addMinutes(5));
+        }
 
         return response()->json([
             'message' => 'ok',
@@ -65,7 +71,7 @@ class ServerStatController
      *
      * Pull the latest fullnode info posted to the health API by your server.
      * @group     Pull Information
-     * @response scenario=Success
+     * @response  scenario=Success
      *           {"data":[{"type":"local_hash","value":"cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3"},{"type":"block_height_local","value":"1131998"},{"type":"node_uptime","value":"3123123123"}],"latest_update":"2021-08-25T15:18:23.000000Z"}
      */
     public function getNodeInfo(ServerStatRepository $repository): ServerStatCollection
@@ -92,6 +98,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
+        $apiKey = $request->get('api_key');
+        if ($apiKey->webhook && $apiKey->cooldown('server_stats')->passed()) {
+            app(WebhookService::class)->sendWebhook($apiKey, true, false);
+            $apiKey->cooldown('server_stats')->until(now()->addMinutes(5));
+        }
 
         return response()->json([
             'message' => 'ok',
@@ -103,7 +114,7 @@ class ServerStatController
      *
      * Pull the latest server stats posted to the health API by your server.
      * @group     Pull Information
-     * @response scenario=Success
+     * @response  scenario=Success
      *           {"data":[{"type":"ram_total","value":125.724},{"type":"hdd_total","value":933.3428},{"type":"hdd_used","value":53.6456},{"type":"ram_used","value":2.9764},{"type":"load_avg","value":0.22}],"latest_update":"2021-08-25T07:40:09.000000Z"}
      */
     public function getServerStats(ServerStatRepository $repository): ServerStatCollection

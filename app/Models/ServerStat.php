@@ -27,6 +27,7 @@ class ServerStat extends Model
     ];
     protected $hidden = [
         'id',
+        'api_key_id',
         'created_at',
         'updated_at',
     ];
