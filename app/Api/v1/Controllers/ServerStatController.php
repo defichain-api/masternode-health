@@ -49,7 +49,7 @@ class ServerStatController
      * @response  scenario=Success {"message":"ok"}
      * @authenticated
      */
-    public function nodeInfo(NodeInfoRequest $request, NodeInfoService $service): JsonResponse
+    public function storeNodeInfo(NodeInfoRequest $request, NodeInfoService $service): JsonResponse
     {
         $service->store($request);
 
@@ -58,6 +58,19 @@ class ServerStatController
         return response()->json([
             'message' => 'ok',
         ], JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * Fullnode Info
+     *
+     * Pull the latest fullnode info posted to the health API by your server.
+     * @group     Pull Information
+     * @response scenario=Success
+     *           {"data":[{"type":"local_hash","value":"cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3"},{"type":"block_height_local","value":"1131998"},{"type":"node_uptime","value":"3123123123"}],"latest_update":"2021-08-25T15:18:23.000000Z"}
+     */
+    public function getNodeInfo(ServerStatRepository $repository): ServerStatCollection
+    {
+        return new ServerStatCollection($repository->getLatestNodeInfoForApiKey(request('api_key')));
     }
 
     /**
@@ -89,6 +102,7 @@ class ServerStatController
      * Server Stats
      *
      * Pull the latest server stats posted to the health API by your server.
+     * @group     Pull Information
      * @response scenario=Success
      *           {"data":[{"type":"ram_total","value":125.724},{"type":"hdd_total","value":933.3428},{"type":"hdd_used","value":53.6456},{"type":"ram_used","value":2.9764},{"type":"load_avg","value":0.22}],"latest_update":"2021-08-25T07:40:09.000000Z"}
      */

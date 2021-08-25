@@ -24,11 +24,22 @@ class ServerStatTypes
         self::HDD_TOTAL,
     ];
 
+    const NODE_INFO = [
+        self::NODE_UPTIME,
+        self::BLOCK_HEIGHT,
+        self::LOCAL_HASH,
+    ];
+
     const FLOAT_VALUE = [
         self::LOAD_AVG,
         self::RAM_USED,
         self::RAM_TOTAL,
         self::HDD_USED,
         self::HDD_TOTAL,
+    ];
+
+    const INT_VALUE = [
+        self::NODE_UPTIME,
+        self::BLOCK_HEIGHT,
     ];
 }

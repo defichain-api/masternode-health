@@ -18,4 +18,14 @@ class ServerStatRepository
             ->unique('type')
             ->flatten();
     }
+
+    public function getLatestNodeInfoForApiKey(ApiKey $apiKey): Collection
+    {
+        return ServerStat::where('api_key_id', $apiKey->id)
+            ->orderByDesc('created_at')
+            ->whereIn('type', ServerStatTypes::NODE_INFO)
+            ->get()
+            ->unique('type')
+            ->flatten();
+    }
 }

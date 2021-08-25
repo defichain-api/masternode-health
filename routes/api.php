@@ -30,8 +30,10 @@ Route::middleware('api_access')
     ->name('v1.')
     ->prefix('v1')
     ->group(function () {
-        Route::post('node-info', [ServerStatController::class, 'nodeInfo'])
+        Route::post('node-info', [ServerStatController::class, 'storeNodeInfo'])
             ->name('post.node-info');
+        Route::get('node-info', [ServerStatController::class, 'getNodeInfo'])
+            ->name('get.node-info');
 
         Route::post('server-stats', [ServerStatController::class, 'storeServerStats'])
             ->name('post.server-stats');

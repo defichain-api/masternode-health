@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -239,7 +239,7 @@ x-ratelimit-remaining: 57
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T15:21:06.037543Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-25T15:29:21.718676Z&quot;
 }</code>
  </pre>
     </span>
@@ -270,11 +270,131 @@ x-ratelimit-remaining: 57
         </p>
                     </form>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="pull-information">Pull Information</h1>
 
     
 
-            <h2 id="endpoints-GETv1-server-stats">Server Stats</h2>
+            <h2 id="pull-information-GETv1-node-info">Fullnode Info</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Pull the latest fullnode info posted to the health API by your server.</p>
+
+<span id="example-requests-GETv1-node-info">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/v1/node-info',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/node-info"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/node-info'
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/v1/node-info" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GETv1-node-info">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;type&quot;: &quot;local_hash&quot;,
+            &quot;value&quot;: &quot;cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3&quot;
+        },
+        {
+            &quot;type&quot;: &quot;block_height_local&quot;,
+            &quot;value&quot;: &quot;1131998&quot;
+        },
+        {
+            &quot;type&quot;: &quot;node_uptime&quot;,
+            &quot;value&quot;: &quot;3123123123&quot;
+        }
+    ],
+    &quot;latest_update&quot;: &quot;2021-08-25T15:18:23.000000Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-node-info" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-node-info"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-node-info"></code></pre>
+</span>
+<span id="execution-error-GETv1-node-info" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-node-info"></code></pre>
+</span>
+<form id="form-GETv1-node-info" data-method="GET"
+      data-path="v1/node-info"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-node-info', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/node-info</code></b>
+        </p>
+                <p>
+            <label id="auth-GETv1-node-info" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="GETv1-node-info"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="pull-information-GETv1-server-stats">Server Stats</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>

@@ -21,10 +21,18 @@ class ServerStatResource extends JsonResource
         return (float) $this->value;
 	}
 
+	protected function intValue(): float
+    {
+        return (int) $this->value;
+	}
+
     protected function getValue()
     {
         if (in_array($this->type, ServerStatTypes::FLOAT_VALUE)) {
             return (float) $this->value;
+        }
+        if (in_array($this->type, ServerStatTypes::INT_VALUE)) {
+            return (int) $this->value;
         }
 
         return $this->value;
