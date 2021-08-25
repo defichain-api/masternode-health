@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Api\v1\Requests;
+
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+
+class NodeInfoRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'block_height_local'    => ['required', 'integer'],
+            'local_hash'            => ['required', 'string', 'min:64'],
+            'node_uptime'           => ['required', 'integer'],
+//            'connectioncount'       => ['required', 'integer', 'min:0'],
+//            'block_diff'            => ['required', 'integer'],
+//            'main_net_block_height' => ['required', 'integer'],
+//            'main_net_block_hash'   => ['required', 'string', 'min:64'],
+//            'local_split_found'     => ['required', 'boolean'],
+//            'logsize'               => ['required', 'integer'],
+        ];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'validation failed',
+            'errors'  => $validator->errors(),
+        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+    }
+}
