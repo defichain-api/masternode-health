@@ -3,7 +3,7 @@
 Masternode Health is a microservice to collect, analyse and optionally inform about the server and masternode stats 
 / health.
 
-All functions can be used with an rest API. Docu can be found here in wiki as soon as it's released.
+All functions can be used with an rest API. [Docu can be here](http://docs.defichain-masternode-health.com/).
 
 ## setup Masternode Health by yourself
 
