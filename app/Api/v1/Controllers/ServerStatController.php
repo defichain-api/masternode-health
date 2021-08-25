@@ -5,6 +5,7 @@ namespace App\Api\v1\Controllers;
 use App\Api\v1\Resources\ServerStatCollection;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
+use App\Enum\Cooldown;
 use App\Repository\ServerStatRepository;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
@@ -56,9 +57,9 @@ class ServerStatController
 
         // @todo implement an analysation of the data
         $apiKey = $request->get('api_key');
-        if ($apiKey->webhook && $apiKey->cooldown('node_info')->passed()) {
+        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->passed()) {
             app(WebhookService::class)->sendWebhook($apiKey, false, true);
-            $apiKey->cooldown('node_info')->until(now()->addMinutes(5));
+            $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_NODE_INFO]));
         }
 
         return response()->json([
@@ -99,9 +100,9 @@ class ServerStatController
 
         // @todo implement an analysation of the data
         $apiKey = $request->get('api_key');
-        if ($apiKey->webhook && $apiKey->cooldown('server_stats')->passed()) {
+        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->passed()) {
             app(WebhookService::class)->sendWebhook($apiKey, true, false);
-            $apiKey->cooldown('server_stats')->until(now()->addMinutes(5));
+            $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_SERVER_STATS]));
         }
 
         return response()->json([
