@@ -23,6 +23,7 @@ class WebhookService
             'url'                => $request->input('url'),
             'max_tries'          => $request->input('max_tries') ?? self::DEFAULT_MAX_TRIES,
             'timeout_in_seconds' => $request->input('timeout_in_seconds') ?? self::DEFAULT_TIMEOUT,
+            'reference'          => $request->input('reference') ?? null,
         ]) ? true : false;
     }
 

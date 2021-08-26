@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -234,13 +234,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
+x-ratelimit-remaining: 59
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-26T11:57:58.290022Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-26T15:30:44.539832Z&quot;
 }</code>
  </pre>
     </span>
@@ -549,8 +549,9 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
-            'max_tries' =&gt; 5.0,
-            'timeout_in_seconds' =&gt; 0.0,
+            'max_tries' =&gt; 3,
+            'timeout_in_seconds' =&gt; 3,
+            'reference' =&gt; 'veniam',
         ],
     ]
 );
@@ -569,8 +570,9 @@ const headers = {
 
 let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
-    "max_tries": 5,
-    "timeout_in_seconds": 0
+    "max_tries": 3,
+    "timeout_in_seconds": 3,
+    "reference": "veniam"
 }
 
 fetch(url, {
@@ -585,8 +587,9 @@ import json
 url = 'https://api.defichain-masternode-health.com/v1/webhook'
 payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
-    "max_tries": 5,
-    "timeout_in_seconds": 0
+    "max_tries": 3,
+    "timeout_in_seconds": 3,
+    "reference": "veniam"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -604,8 +607,9 @@ response.json()</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
-    \"max_tries\": 5,
-    \"timeout_in_seconds\": 0
+    \"max_tries\": 3,
+    \"timeout_in_seconds\": 3,
+    \"reference\": \"veniam\"
 }"
 </code></pre>
 </span>
@@ -647,29 +651,37 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>url</code></b>&nbsp;&nbsp;<small>required</small>     <i>optional</i> &nbsp;
+            <b><code>url</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="url"
                data-endpoint="POSTv1-webhook"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>URL receiving the webhooks. Has to be public reachable.</p>        </p>
                 <p>
-            <b><code>max_tries</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>max_tries</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="max_tries"
                data-endpoint="POSTv1-webhook"
                data-component="body"  hidden>
     <br>
-<p>Must be at least 1. Must not be greater than 10.</p>        </p>
+<p>The max tries to send the webhook to your url. (between 1..10). Default: 3</p>        </p>
                 <p>
-            <b><code>timeout_in_seconds</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>timeout_in_seconds</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="timeout_in_seconds"
                data-endpoint="POSTv1-webhook"
                data-component="body"  hidden>
     <br>
-<p>Must be at least 1. Must not be greater than 5.</p>        </p>
+<p>The timeout in seconds (between 1..5) Default: 3</p>        </p>
+                <p>
+            <b><code>reference</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="reference"
+               data-endpoint="POSTv1-webhook"
+               data-component="body"  hidden>
+    <br>
+<p>To assign a webhook to a specific API key, you can set an optional reference.</p>        </p>
     
     </form>
 

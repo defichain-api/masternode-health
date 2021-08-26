@@ -15,6 +15,7 @@ class WebhookCreateRequest extends ApiRequest
             'url'                => ['required', 'active_url'],
             'max_tries'          => ['sometimes', 'numeric', 'min:1', 'max:10'],
             'timeout_in_seconds' => ['sometimes', 'numeric', 'min:1', 'max:5'],
+            'reference'          => ['nullable', 'string'],
         ];
     }
 }
