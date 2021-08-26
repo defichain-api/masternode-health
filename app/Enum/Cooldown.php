@@ -9,8 +9,6 @@ class Cooldown
 {
     const WEBHOOK_SERVER_STATS = 'webhook_server_stats';
     const WEBHOOK_NODE_INFO = 'webhook_node_info';
-    const INBOUND_SERVER_STATS = 'inbound_server_stats';
-    const INBOUND_NODE_INFO = 'inbound_node_info';
 
     const LOCAL_SPLIT_NOTIFICATION = 'local_chain_split_notification';
     const REMOTE_SPLIT_NOTIFICATION = 'remote_chain_split_notification';

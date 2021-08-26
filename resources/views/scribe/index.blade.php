@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 25 2021</li>
+            <li>Last updated: August 26 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -79,6 +79,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 </p>
 
 <p>create a new API key.</p>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTsetup-api_key">
 <blockquote>Example request:</blockquote>
@@ -233,13 +234,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 58
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T17:35:38.882889Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-26T11:57:58.290022Z&quot;
 }</code>
  </pre>
     </span>
@@ -548,8 +549,8 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
-            'max_tries' =&gt; 9.0,
-            'timeout_in_seconds' =&gt; 4.0,
+            'max_tries' =&gt; 5.0,
+            'timeout_in_seconds' =&gt; 0.0,
         ],
     ]
 );
@@ -568,8 +569,8 @@ const headers = {
 
 let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
-    "max_tries": 9,
-    "timeout_in_seconds": 4
+    "max_tries": 5,
+    "timeout_in_seconds": 0
 }
 
 fetch(url, {
@@ -584,8 +585,8 @@ import json
 url = 'https://api.defichain-masternode-health.com/v1/webhook'
 payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
-    "max_tries": 9,
-    "timeout_in_seconds": 4
+    "max_tries": 5,
+    "timeout_in_seconds": 0
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -603,8 +604,8 @@ response.json()</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
-    \"max_tries\": 9,
-    \"timeout_in_seconds\": 4
+    \"max_tries\": 5,
+    \"timeout_in_seconds\": 0
 }"
 </code></pre>
 </span>
@@ -782,6 +783,7 @@ response.json()</code></pre>
 <p>This endpoint collects (hardware) information from your server.</p>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTv1-server-stats">
 <blockquote>Example request:</blockquote>
@@ -963,6 +965,7 @@ response.json()</code></pre>
 <p>This endpoint collects information from your running fullnode.</p>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTv1-node-info">
 <blockquote>Example request:</blockquote>
@@ -983,7 +986,7 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; true,
+                    'online' =&gt; false,
                 ],
             ],
         ],
@@ -1009,7 +1012,7 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -1031,7 +1034,7 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -1056,7 +1059,7 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": true
+            \"online\": false
         }
     ]
 }"
