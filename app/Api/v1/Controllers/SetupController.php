@@ -11,7 +11,7 @@ class SetupController
      * Get an API Key
      *
      * create a new API key.
-     * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
+     * <aside class="warning">Throttle: 1 request every 60 sec.</aside>
      * @group    Setup
      * @response scenario=Success {"message": "API key generated", "api_key": "c7654335-3e00-41ee-a879-3011c5399d89"}
      * @unauthenticated
