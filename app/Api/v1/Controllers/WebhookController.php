@@ -20,8 +20,11 @@ class WebhookController
      * Create Webhook
      *
      * Get informed by webhooks with the current data of your server. You'll receive webhooks only every 5 minutes.
-     * @bodyParam url required URL receiving the webhooks. Has to be public reachable. Example:
+     * @bodyParam url string required URL receiving the webhooks. Has to be public reachable. Example:
      *            https://your-domain.com/defichain-masternode-health/webhook
+     * @bodyParam max_tries integer The max tries to send the webhook to your url. (between 1..10). Default: 3 Example: 3
+     * @bodyParam timeout_in_seconds integer The timeout in seconds (between 1..5) Default: 3 Example: 3
+     * @bodyParam reference string To assign a webhook to a specific API key, you can set an optional reference.
      * @group     Webhooks
      */
     public function create(WebhookCreateRequest $request): JsonResponse

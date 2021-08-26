@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer max_tries
  * @property integer timeout_in_seconds
  * @property string  url
+ * @property string  reference
  */
 class Webhook extends Model
 {
@@ -20,6 +21,7 @@ class Webhook extends Model
         'max_tries',
         'timeout_in_seconds',
         'url',
+        'reference',
     ];
 
     protected $hidden = [
