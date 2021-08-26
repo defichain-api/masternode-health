@@ -12,7 +12,6 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     public function handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1, $prefix = '')
     {
         $key = $this->resolveRequestSignature($request);
-        ray($key);
         if ($this->limiter->tooManyAttempts($key, $maxAttempts)) {
             return $this->buildJsonResponse($key, $maxAttempts, $decayMinutes);
         }
@@ -29,7 +28,6 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
 
     protected function buildJsonResponse(string $key, int $maxAttempts, int $decayMinutes)
     {
-        ray($key);
         $retryAfter = $this->limiter->availableIn($key);
         $response = new JsonResponse([
             'error' => [
@@ -54,8 +52,6 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     protected function resolveRequestSignature($request)
     {
         if ($route = $request->route()) {
-            ray($route->uri);
-
             return sha1(sprintf('%s|%s', $route->uri, $request->ip()));
         }
 
