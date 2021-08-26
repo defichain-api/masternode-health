@@ -23,7 +23,8 @@ Route::get('ping', [ServerStatController::class, 'ping'])
 
 Route::prefix('setup')->name('setup.')->group(function () {
     Route::post('api_key', [SetupController::class, 'setupApiKey'])
-        ->name('setup.api_key');
+        ->name('setup.api_key')
+        ->middleware('api_throttle:1,300');
 });
 
 /** routes require x-api-key header */
