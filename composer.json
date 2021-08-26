@@ -12,10 +12,11 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "knuckleswtf/scribe": "^3.8",
         "kurozora/laravel-cooldown": "^1.0",
         "laravel/framework": "^8.40",
-        "knuckleswtf/scribe": "^3.8",
         "laravel/tinker": "^2.5",
+        "spatie/laravel-webhook-server": "^2.0",
         "ext-json": "*"
     },
     "require-dev": {

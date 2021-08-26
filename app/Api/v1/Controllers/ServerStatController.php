@@ -5,9 +5,11 @@ namespace App\Api\v1\Controllers;
 use App\Api\v1\Resources\ServerStatCollection;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
+use App\Enum\Cooldown;
 use App\Repository\ServerStatRepository;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
+use App\Service\WebhookService;
 use Illuminate\Http\JsonResponse;
 
 class ServerStatController
@@ -41,6 +43,7 @@ class ServerStatController
      * This endpoint collects information from your running fullnode.
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
+     * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
      * @bodyParam block_height_local integer required The number of the current block. Example: 1131998
      * @bodyParam local_hash string required Hash for the current block. Required length of 64 chars. Example:
      * cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3
@@ -59,6 +62,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
+        $apiKey = $request->get('api_key');
+        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->passed()) {
+            app(WebhookService::class)->sendWebhook($apiKey, false, true);
+            $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_NODE_INFO]));
+        }
 
         return response()->json([
             'message' => 'ok',
@@ -84,6 +92,7 @@ class ServerStatController
      * This endpoint collects (hardware) information from your server.
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
+     * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
      * @bodyParam load_avg  float Current average load as float. Example: 0.23
      * @bodyParam hdd_used  float Used HDD memory as float. Example: 152
      * @bodyParam hdd_total  float Total available HDD memory as float. Example: 508.76
@@ -97,6 +106,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
+        $apiKey = $request->get('api_key');
+        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->passed()) {
+            app(WebhookService::class)->sendWebhook($apiKey, true, false);
+            $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_SERVER_STATS]));
+        }
 
         return response()->json([
             'message' => 'ok',

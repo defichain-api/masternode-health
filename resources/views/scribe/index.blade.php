@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 25 2021</li>
+            <li>Last updated: August 26 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -79,6 +79,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 </p>
 
 <p>create a new API key.</p>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTsetup-api_key">
 <blockquote>Example request:</blockquote>
@@ -239,7 +240,7 @@ x-ratelimit-remaining: 58
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-25T17:35:38.882889Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-26T11:57:58.290022Z&quot;
 }</code>
  </pre>
     </span>
@@ -522,6 +523,253 @@ response.json()</code></pre>
         </p>
                 </form>
 
+        <h1 id="webhooks">Webhooks</h1>
+
+    
+
+            <h2 id="webhooks-POSTv1-webhook">Create Webhook</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get informed by webhooks with the current data of your server. You'll receive webhooks only every 5 minutes.</p>
+
+<span id="example-requests-POSTv1-webhook">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'https://api.defichain-masternode-health.com/v1/webhook',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
+            'max_tries' =&gt; 5.0,
+            'timeout_in_seconds' =&gt; 0.0,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/webhook"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
+    "max_tries": 5,
+    "timeout_in_seconds": 0
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/webhook'
+payload = {
+    "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
+    "max_tries": 5,
+    "timeout_in_seconds": 0
+}
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request POST \
+    "https://api.defichain-masternode-health.com/v1/webhook" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
+    \"max_tries\": 5,
+    \"timeout_in_seconds\": 0
+}"
+</code></pre>
+</span>
+
+<span id="example-responses-POSTv1-webhook">
+</span>
+<span id="execution-results-POSTv1-webhook" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-webhook"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-webhook"></code></pre>
+</span>
+<span id="execution-error-POSTv1-webhook" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-webhook"></code></pre>
+</span>
+<form id="form-POSTv1-webhook" data-method="POST"
+      data-path="v1/webhook"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-webhook', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/webhook</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTv1-webhook" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="POSTv1-webhook"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>url</code></b>&nbsp;&nbsp;<small>required</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="url"
+               data-endpoint="POSTv1-webhook"
+               data-component="body"  hidden>
+    <br>
+<p>URL receiving the webhooks. Has to be public reachable.</p>        </p>
+                <p>
+            <b><code>max_tries</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="max_tries"
+               data-endpoint="POSTv1-webhook"
+               data-component="body"  hidden>
+    <br>
+<p>Must be at least 1. Must not be greater than 10.</p>        </p>
+                <p>
+            <b><code>timeout_in_seconds</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="timeout_in_seconds"
+               data-endpoint="POSTv1-webhook"
+               data-component="body"  hidden>
+    <br>
+<p>Must be at least 1. Must not be greater than 5.</p>        </p>
+    
+    </form>
+
+            <h2 id="webhooks-DELETEv1-webhook">Delete Webhook</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>To delete your already setup webhook just call this <code>DELETE</code> endpoint.</p>
+
+<span id="example-requests-DELETEv1-webhook">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'https://api.defichain-masternode-health.com/v1/webhook',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/webhook"
+);
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/webhook'
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request DELETE \
+    "https://api.defichain-masternode-health.com/v1/webhook" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-DELETEv1-webhook">
+</span>
+<span id="execution-results-DELETEv1-webhook" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEv1-webhook"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEv1-webhook"></code></pre>
+</span>
+<span id="execution-error-DELETEv1-webhook" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEv1-webhook"></code></pre>
+</span>
+<form id="form-DELETEv1-webhook" data-method="DELETE"
+      data-path="v1/webhook"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEv1-webhook', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>v1/webhook</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEv1-webhook" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="DELETEv1-webhook"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
         <h1 id="server-script">Server-Script</h1>
 
     
@@ -535,6 +783,7 @@ response.json()</code></pre>
 <p>This endpoint collects (hardware) information from your server.</p>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTv1-server-stats">
 <blockquote>Example request:</blockquote>
@@ -716,6 +965,7 @@ response.json()</code></pre>
 <p>This endpoint collects information from your running fullnode.</p>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
+<aside class="warning">Throttle: 1 request every 300 sec.</aside>
 
 <span id="example-requests-POSTv1-node-info">
 <blockquote>Example request:</blockquote>
@@ -736,7 +986,7 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; true,
+                    'online' =&gt; false,
                 ],
             ],
         ],
@@ -762,7 +1012,7 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -784,7 +1034,7 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -809,7 +1059,7 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": true
+            \"online\": false
         }
     ]
 }"

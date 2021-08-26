@@ -7,7 +7,7 @@ use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-class ServerStatsRequest extends FormRequest
+class ServerStatsRequest extends ApiRequest
 {
     public function rules(): array
     {
@@ -18,18 +18,5 @@ class ServerStatsRequest extends FormRequest
             'ram_used'  => ['sometimes', 'numeric', 'min:0'],
             'ram_total' => ['sometimes', 'numeric', 'min:0'],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'message' => 'validation failed',
-            'errors'  => $validator->errors(),
-        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

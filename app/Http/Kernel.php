@@ -21,6 +21,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use App\Http\Middleware\ApiThrottleRequests;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
@@ -54,15 +55,16 @@ ConvertEmptyStringsToNull::class,
         ],
     ];
     protected $routeMiddleware = [
-        'auth'              => Authenticate::class,
-        'auth.basic'        => AuthenticateWithBasicAuth::class,
-        'cache.headers'     => SetCacheHeaders::class,
-        'can'               => Authorize::class,
-        'guest'             => RedirectIfAuthenticated::class,
-        'password.confirm'  => RequirePassword::class,
-        'signed'            => ValidateSignature::class,
-        'throttle'          => ThrottleRequests::class,
-        'verified'          => EnsureEmailIsVerified::class,
-        'api_access'        => ApiAccess::class,
+        'auth'             => Authenticate::class,
+        'auth.basic'       => AuthenticateWithBasicAuth::class,
+        'cache.headers'    => SetCacheHeaders::class,
+        'can'              => Authorize::class,
+        'guest'            => RedirectIfAuthenticated::class,
+        'password.confirm' => RequirePassword::class,
+        'signed'           => ValidateSignature::class,
+        'throttle'         => ThrottleRequests::class,
+        'api_throttle'     => ApiThrottleRequests::class,
+        'verified'         => EnsureEmailIsVerified::class,
+        'api_access'       => ApiAccess::class,
     ];
 }

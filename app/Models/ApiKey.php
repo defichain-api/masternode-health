@@ -6,6 +6,8 @@ use App\Models\Concerns\UsesUuidPrimary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Kurozora\Cooldown\HasCooldowns;
 
 /**
  * @mixin \Eloquent
@@ -17,7 +19,7 @@ use Carbon\Carbon;
  */
 class ApiKey extends Model
 {
-    use HasFactory, UsesUuidPrimary;
+    use HasFactory, UsesUuidPrimary, HasCooldowns;
 
     protected $fillable = [
         'throttle',
@@ -31,5 +33,10 @@ class ApiKey extends Model
     public function key(): string
     {
         return $this->id;
+    }
+
+    public function webhook(): HasOne
+    {
+        return $this->hasOne(Webhook::class);
     }
 }
