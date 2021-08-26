@@ -13,7 +13,7 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     {
         $key = $this->resolveRequestSignature($request);
         ray($key);
-        if ($this->limiter->tooManyAttempts($key, $maxAttempts, $decayMinutes)) {
+        if ($this->limiter->tooManyAttempts($key, $maxAttempts)) {
             return $this->buildJsonResponse($key, $maxAttempts, $decayMinutes);
         }
 
@@ -54,7 +54,8 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     protected function resolveRequestSignature($request)
     {
         if ($route = $request->route()) {
-        ray($route->uri);
+            ray($route->uri);
+
             return sha1(sprintf('%s|%s', $route->uri, $request->ip()));
         }
 
