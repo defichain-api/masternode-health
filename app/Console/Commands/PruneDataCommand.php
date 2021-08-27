@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PruneDataCommand extends Command
 {
-    protected $signature = 'prune:api-key {--days=30}';
-    protected $description = 'Prune API keys not active for --days=. min value 14 days. Default: 60';
+    protected $signature = 'prune:api-key {--maxAge=30}';
+    protected $description = 'Prune API keys not active for --maxAge=. min value 14 days. Default: 60';
 
     public function handle(): int
     {
-        $maxAge = $this->option('days');
+        $maxAge = $this->option('maxAge');
 
         if ($maxAge < 14) {
             $this->error('can\'t delete data newer than 14 days.');

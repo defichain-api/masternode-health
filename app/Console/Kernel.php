@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(PruneDataCommand::class, ['--maxAge=14'])
+            ->dailyAt('1:00');
     }
 
     /**
