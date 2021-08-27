@@ -12,7 +12,10 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     public function handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1, $prefix = '')
     {
         $key = $this->resolveRequestSignature($request);
-        if ($this->limiter->tooManyAttempts($key, $maxAttempts)) {
+        /** @var \App\Models\ApiKey $apiKey */
+        $apiKey = $request->get('api_key');
+
+        if (!$apiKey->throttle_disabled && $this->limiter->tooManyAttempts($key, $maxAttempts)) {
             return $this->buildJsonResponse($key, $maxAttempts, $decayMinutes);
         }
 
