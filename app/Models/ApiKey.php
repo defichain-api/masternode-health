@@ -14,6 +14,7 @@ use Kurozora\Cooldown\HasCooldowns;
  * @property string  id
  * @property integer throttle
  * @property boolean is_active
+ * @property boolean throttle_disabled
  * @property Carbon  created_at
  * @property Carbon  updated_at
  */
