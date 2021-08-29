@@ -14,9 +14,9 @@ class ServerStatTypes
     const BLOCK_HEIGHT = 'block_height_local';
     const LOCAL_HASH = 'local_hash';
     const OPERATOR_STATUS = 'operator_status';
-    const CONNECTIONCOUNT = 'connectioncount';
-    const BLOCK_DIFF = 'block_diff';
+    const CONNECTION_COUNT = 'connection_count';
     const LOGSIZE = 'logsize';
+    const CONFIG_CHECKSUM = 'config_checksum';
 
     const SERVER_STATS = [
         self::LOAD_AVG,
@@ -31,6 +31,9 @@ class ServerStatTypes
         self::BLOCK_HEIGHT,
         self::LOCAL_HASH,
         self::OPERATOR_STATUS,
+        self::CONNECTION_COUNT,
+        self::LOGSIZE,
+        self::CONFIG_CHECKSUM,
     ];
 
     const FLOAT_VALUE = [
@@ -39,11 +42,13 @@ class ServerStatTypes
         self::RAM_TOTAL,
         self::HDD_USED,
         self::HDD_TOTAL,
+        self::LOGSIZE,
     ];
 
     const INT_VALUE = [
         self::NODE_UPTIME,
         self::BLOCK_HEIGHT,
+        self::CONNECTION_COUNT,
     ];
 
     const ARRAY_VALUE = [
