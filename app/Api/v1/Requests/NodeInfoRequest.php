@@ -15,10 +15,10 @@ class NodeInfoRequest extends ApiRequest
             'block_height_local' => ['required', 'integer'],
             'local_hash'         => ['required', 'string', 'min:64'],
             'node_uptime'        => ['required', 'integer'],
-            'connection_count'   => ['required', 'integer', 'min:0'],
-            'logsize'            => ['required', 'numeric'],
-            'config_checksum'    => ['required', 'string', 'min:32', 'max:32'],
-            'operator_status'    => ['sometimes', 'array'],
+            'connection_count'   => ['sometimes', 'integer', 'min:0'],
+            'logsize'            => ['sometimes', 'numeric'],
+            'config_checksum'    => ['sometimes', 'string', 'min:32', 'max:32'],
+            'operator_status'    => ['required', 'array'],
         ];
     }
 }

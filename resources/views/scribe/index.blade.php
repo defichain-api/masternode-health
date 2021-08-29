@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -145,7 +145,7 @@ x-ratelimit-remaining: 58
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-29T16:40:51.083802Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-29T16:49:57.256531Z&quot;
 }</code>
  </pre>
     </span>
@@ -578,7 +578,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'et',
+            'reference' =&gt; 'provident',
         ],
     ]
 );
@@ -599,7 +599,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "et"
+    "reference": "provident"
 }
 
 fetch(url, {
@@ -616,7 +616,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "et"
+    "reference": "provident"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -636,7 +636,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"et\"
+    \"reference\": \"provident\"
 }"
 </code></pre>
 </span>
@@ -1187,27 +1187,27 @@ response.json()</code></pre>
     <br>
 <p>Uptime of the fullnode in seconds.</p>        </p>
                 <p>
-            <b><code>connection_count</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>connection_count</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="connection_count"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Count of the current fullnode connections.</p>        </p>
                 <p>
-            <b><code>logsize</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>logsize</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="logsize"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Size of the debug.log file in MB.</p>        </p>
                 <p>
-            <b><code>config_checksum</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>config_checksum</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="config_checksum"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>MD5 Hash of the defi.conf file.</p>        </p>
                 <p>
