@@ -19,15 +19,10 @@ class NodeInfoTransformer
         return $this->request->get('api_key');
     }
 
-//    public function connectioncount(): string
-//    {
-//        return $this->request->input('connectioncount');
-//    }
-
-//    public function blockDiff(): string
-//    {
-//        return $this->request->input('block_diff');
-//    }
+    public function connectioncount(): string
+    {
+        return $this->request->input('connection_count');
+    }
 
     public function blockHeightLocal(): string
     {
@@ -39,20 +34,10 @@ class NodeInfoTransformer
         return $this->request->has('operator_status') ? json_encode($this->request->input('operator_status')) : '';
     }
 
-//    public function mainNetBlockHeight(): string
-//    {
-//        return $this->request->input('main_net_block_height');
-//    }
-
     public function localHash(): string
     {
         return $this->request->input('local_hash');
     }
-
-//    public function mainNetBlockHash(): string
-//    {
-//        return $this->request->input('main_net_block_hash');
-//    }
 
     /**
      * uptime in seconds
@@ -62,13 +47,16 @@ class NodeInfoTransformer
         return $this->request->input('node_uptime');
     }
 
-//    public function localSplitFound(): bool
-//    {
-//        return $this->request->input('local_split_found');
-//    }
-//
-//    public function logsize(): string
-//    {
-//        return $this->request->input('logsize');
-//    }
+    /**
+     * logsize in MB
+     */
+    public function logsize(): string
+    {
+        return $this->request->input('logsize');
+    }
+
+    public function configChecksum(): string
+    {
+        return $this->request->input('config_checksum');
+    }
 }

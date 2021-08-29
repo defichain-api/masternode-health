@@ -14,16 +14,11 @@ class NodeInfoService
         $transformer = new NodeInfoTransformer($request);
         $apiKeyId = $transformer->apiKey()->id;
         $data = collect([
-//            [
-//                'api_key_id' => $apiKeyId,
-//                'type'       => ServerStatTypes::CONNECTIONCOUNT,
-//                'value'      => $transformer->connectioncount(),
-//            ],
-//            [
-//                'api_key_id' => $apiKeyId,
-//                'type'       => ServerStatTypes::BLOCK_DIFF,
-//                'value'      => $transformer->blockDiff(),
-//            ],
+            [
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::CONNECTION_COUNT,
+                'value'      => $transformer->connectioncount(),
+            ],
             [
                 'api_key_id' => $apiKeyId,
                 'type'       => ServerStatTypes::NODE_UPTIME,
@@ -44,11 +39,16 @@ class NodeInfoService
                 'type'       => ServerStatTypes::OPERATOR_STATUS,
                 'value'      => $transformer->operatorStatus(),
             ],
-//            [
-//                'api_key_id' => $apiKeyId,
-//                'type'       => ServerStatTypes::LOGSIZE,
-//                'value'      => $transformer->logsize(),
-//            ],
+            [
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::LOGSIZE,
+                'value'      => $transformer->logsize(),
+            ],
+            [
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::CONFIG_CHECKSUM,
+                'value'      => $transformer->configChecksum(),
+            ],
         ]);
         $data->each(function (array $item) {
             if (is_null($item['value']) || $item['value'] === ''){

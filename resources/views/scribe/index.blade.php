@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 26 2021</li>
+            <li>Last updated: August 29 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -145,7 +145,7 @@ x-ratelimit-remaining: 58
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-26T18:58:37.500537Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-29T16:49:57.256531Z&quot;
 }</code>
  </pre>
     </span>
@@ -282,6 +282,8 @@ response.json()</code></pre>
 </p>
 
 <p>Pull the latest fullnode info posted to the health API by your server.</p>
+<p>Node Uptime in seconds.
+Log Size in MB.</p>
 
 <span id="example-requests-GETv1-node-info">
 <blockquote>Example request:</blockquote>
@@ -344,19 +346,44 @@ response.json()</code></pre>
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;type&quot;: &quot;local_hash&quot;,
-            &quot;value&quot;: &quot;cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3&quot;
+            &quot;type&quot;: &quot;block_height_local&quot;,
+            &quot;value&quot;: 1132261
         },
         {
-            &quot;type&quot;: &quot;block_height_local&quot;,
-            &quot;value&quot;: &quot;1131998&quot;
+            &quot;type&quot;: &quot;operator_status&quot;,
+            &quot;value&quot;: [
+                {
+                    &quot;id&quot;: &quot;8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87&quot;,
+                    &quot;online&quot;: true
+                },
+                {
+                    &quot;id&quot;: &quot;2ceb7c9c3bea0bd0e5e4199eca5d0b797d79a0077a9108951faecf715e1e1a57&quot;,
+                    &quot;online&quot;: true
+                }
+            ]
         },
         {
             &quot;type&quot;: &quot;node_uptime&quot;,
-            &quot;value&quot;: &quot;3123123123&quot;
+            &quot;value&quot;: 261124
+        },
+        {
+            &quot;type&quot;: &quot;config_checksum&quot;,
+            &quot;value&quot;: &quot;a3cca2b2aa1e3b5b3b5aad99a8529074&quot;
+        },
+        {
+            &quot;type&quot;: &quot;local_hash&quot;,
+            &quot;value&quot;: &quot;0d82efc6638c91279e5f493053075226619080515d2f9b583f8cfc42a4f08885&quot;
+        },
+        {
+            &quot;type&quot;: &quot;connection_count&quot;,
+            &quot;value&quot;: 91
+        },
+        {
+            &quot;type&quot;: &quot;logsize&quot;,
+            &quot;value&quot;: 13.21
         }
     ],
-    &quot;latest_update&quot;: &quot;2021-08-25T15:18:23.000000Z&quot;
+    &quot;latest_update&quot;: &quot;2021-08-29T16:37:38.000000Z&quot;
 }</code>
  </pre>
     </span>
@@ -401,7 +428,7 @@ response.json()</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>Pull the latest server stats posted to the health API by your server.</p>
+<p>Pull the latest server stats posted to the health API by your server. All data (except load_avg) are in GB.</p>
 
 <span id="example-requests-GETv1-server-stats">
 <blockquote>Example request:</blockquote>
@@ -551,7 +578,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'dolores',
+            'reference' =&gt; 'provident',
         ],
     ]
 );
@@ -572,7 +599,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "dolores"
+    "reference": "provident"
 }
 
 fetch(url, {
@@ -589,7 +616,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "dolores"
+    "reference": "provident"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -609,7 +636,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"dolores\"
+    \"reference\": \"provident\"
 }"
 </code></pre>
 </span>
@@ -932,7 +959,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Current average load as float.</p>        </p>
+<p>Current average load in GB as float.</p>        </p>
                 <p>
             <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
@@ -940,7 +967,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Used HDD memory as float.</p>        </p>
+<p>Used HDD memory in GB as float.</p>        </p>
                 <p>
             <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
@@ -948,7 +975,7 @@ response.json()</code></pre>
                data-endpoint="POSTv1-server-stats"
                data-component="body"  hidden>
     <br>
-<p>Total available HDD memory as float.</p>        </p>
+<p>Total available HDD in GB memory as float.</p>        </p>
                 <p>
             <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
@@ -995,6 +1022,9 @@ $response = $client-&gt;post(
             'block_height_local' =&gt; 1131998,
             'local_hash' =&gt; 'cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3',
             'node_uptime' =&gt; 1343121,
+            'connection_count' =&gt; 91,
+            'logsize' =&gt; 13.21,
+            'config_checksum' =&gt; 'a3cca2b2aa1e3b5b3b5aad99a8529074',
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
@@ -1021,6 +1051,9 @@ let body = {
     "block_height_local": 1131998,
     "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
     "node_uptime": 1343121,
+    "connection_count": 91,
+    "logsize": 13.21,
+    "config_checksum": "a3cca2b2aa1e3b5b3b5aad99a8529074",
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
@@ -1043,6 +1076,9 @@ payload = {
     "block_height_local": 1131998,
     "local_hash": "cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3",
     "node_uptime": 1343121,
+    "connection_count": 91,
+    "logsize": 13.21,
+    "config_checksum": "a3cca2b2aa1e3b5b3b5aad99a8529074",
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
@@ -1068,6 +1104,9 @@ response.json()</code></pre>
     \"block_height_local\": 1131998,
     \"local_hash\": \"cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3\",
     \"node_uptime\": 1343121,
+    \"connection_count\": 91,
+    \"logsize\": 13.21,
+    \"config_checksum\": \"a3cca2b2aa1e3b5b3b5aad99a8529074\",
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
@@ -1147,6 +1186,30 @@ response.json()</code></pre>
                data-component="body" required  hidden>
     <br>
 <p>Uptime of the fullnode in seconds.</p>        </p>
+                <p>
+            <b><code>connection_count</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="connection_count"
+               data-endpoint="POSTv1-node-info"
+               data-component="body"  hidden>
+    <br>
+<p>Count of the current fullnode connections.</p>        </p>
+                <p>
+            <b><code>logsize</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="logsize"
+               data-endpoint="POSTv1-node-info"
+               data-component="body"  hidden>
+    <br>
+<p>Size of the debug.log file in MB.</p>        </p>
+                <p>
+            <b><code>config_checksum</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="config_checksum"
+               data-endpoint="POSTv1-node-info"
+               data-component="body"  hidden>
+    <br>
+<p>MD5 Hash of the defi.conf file.</p>        </p>
                 <p>
         <details>
             <summary style="padding-bottom: 10px;">
