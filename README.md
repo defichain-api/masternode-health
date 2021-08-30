@@ -11,13 +11,17 @@ the [companion python app](https://github.com/defichain-api/masternode-health-se
 
 # setup Masternode Health by yourself
 
-This service is based on the PHP framework Laravel. For local development, you can use the included docker setup
-(`docker-compose up -d`).
+This service is based on the PHP framework Laravel.
 
 Then copy the `.env` using `cp .env.example .env` and then generate a new application key `php artisan key:generate`.
+In this file you need to add your own DB and Redis configuration.
 
 After that you need to install the composer dependencies (`composer install`) and run the database
 migrations (`php artisan migrate`).
+
+## local testing & development
+For local development, you can use the included docker setup
+(`docker-compose up -d`). The `.env.example` is preconfigured for this setup.
 
 # Bugs or suggestions?
 Open issue or submit a pull request to
