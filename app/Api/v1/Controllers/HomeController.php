@@ -12,6 +12,7 @@ class HomeController
         return response()->json([
             'api'  => route('api.ping'),
             'docs' => route('docs.index'),
+            'github' => 'https://github.com/defichain-api/masternode-health',
         ], JsonResponse::HTTP_OK);
     }
 
