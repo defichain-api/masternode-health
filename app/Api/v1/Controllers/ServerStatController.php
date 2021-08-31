@@ -81,12 +81,17 @@ class ServerStatController
      * Fullnode Info
      *
      * Pull the latest fullnode info posted to the health API by your server.
-     *
-     * Node Uptime in seconds.
-     * Log Size in MB.
      * @group     Pull Information
      * @response  scenario=Success
-     *           {"data":[{"type":"block_height_local","value":1132261},{"type":"operator_status","value":[{"id":"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87","online":true},{"id":"2ceb7c9c3bea0bd0e5e4199eca5d0b797d79a0077a9108951faecf715e1e1a57","online":true}]},{"type":"node_uptime","value":261124},{"type":"config_checksum","value":"a3cca2b2aa1e3b5b3b5aad99a8529074"},{"type":"local_hash","value":"0d82efc6638c91279e5f493053075226619080515d2f9b583f8cfc42a4f08885"},{"type":"connection_count","value":91},{"type":"logsize","value":13.21}],"latest_update":"2021-08-29T16:37:38.000000Z"}
+     *           {"data":[{"type":"config_checksum","value":"a3cca2b2aa1e3b5b3b5aad99a8529074"},{"type":"operator_status","value":[{"id":"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87","online":true},{"id":"2ceb7c9c3bea0bd0e5e4199eca5d0b797d79a0077a9108951faecf715e1e1a57","online":true}]},{"type":"node_uptime","value":261124},{"type":"local_hash","value":"0d82efc6638c91279e5f493053075226619080515d2f9b583f8cfc42a4f08885"},{"type":"block_height_local","value":1132261},{"type":"connection_count","value":91},{"type":"logsize","value":13.21},{"type":"node_version","value":"1.6.3"}],"latest_update":"2021-08-31T14:14:12.000000Z"}
+     * @responseField block_height_local integer Local Block height
+     * @responseField operator_status object Lists the masternode id and it's online status
+     * @responseField node_uptime integer Uptime of the node in seconds
+     * @responseField node_version string Current version of the node
+     * @responseField config_checksum string MD5 hash of the defi.conf file
+     * @responseField local_hash string block hash of the current block
+     * @responseField connection_count integer Number of current connections to the node
+     * @responseField logsize numeric Size of the debug.log in MB
      */
     public function getNodeInfo(ServerStatRepository $repository): ServerStatCollection
     {
@@ -100,12 +105,12 @@ class ServerStatController
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
      * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
-     * @bodyParam load_avg  float Current average load in GB as float. Example: 0.23
-     * @bodyParam num_cores  integer Number of cores of the system. Example: 8
-     * @bodyParam hdd_used  float Used HDD memory in GB as float. Example: 152
-     * @bodyParam hdd_total  float Total available HDD in GB memory as float. Example: 508.76
-     * @bodyParam ram_used  float Used RAM in GB as float. Example: 1.5
-     * @bodyParam ram_total  float Total available RAM in GB as float. Example: 16.23
+     * @bodyParam load_avg float required Current average load in GB as float. Example: 0.23
+     * @bodyParam num_cores integer required Number of cores of the system. Example: 8
+     * @bodyParam hdd_used float required Used HDD memory in GB as float. Example: 152
+     * @bodyParam hdd_total float required Total available HDD in GB memory as float. Example: 508.76
+     * @bodyParam ram_used float required Used RAM in GB as float. Example: 1.5
+     * @bodyParam ram_total float required Total available RAM in GB as float. Example: 16.23
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      */
@@ -131,7 +136,13 @@ class ServerStatController
      * Pull the latest server stats posted to the health API by your server. All data (except load_avg) are in GB.
      * @group     Pull Information
      * @response  scenario=Success
-     *           {"data":[{"type":"ram_total","value":125.724},{"type":"hdd_total","value":933.3428},{"type":"hdd_used","value":53.6456},{"type":"ram_used","value":2.9764},{"type":"load_avg","value":0.22}],"latest_update":"2021-08-25T07:40:09.000000Z"}
+     *           {"data":[{"type":"hdd_total","value":933.22},{"type":"num_cores","value":8},{"type":"hdd_used","value":53.22},{"type":"ram_total","value":125.22},{"type":"load_avg","value":0.22},{"type":"ram_used","value":2.22}],"latest_update":"2021-08-31T14:14:15.000000Z"}
+     * @responseField ram_total float Available RAM in GB
+     * @responseField ram_used float Used RAM in GB
+     * @responseField hdd_used float Available hdd memory in GB
+     * @responseField hdd_total float Used hdd memory in GB
+     * @responseField load_avg float Current load avg over the last 5min
+     * @responseField num_cores integer Number of cpu cores
      */
     public function getServerStats(ServerStatRepository $repository): ServerStatCollection
     {
