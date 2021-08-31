@@ -18,6 +18,7 @@ class NodeInfoRequest extends ApiRequest
             'connection_count'   => ['sometimes', 'integer', 'min:0'],
             'logsize'            => ['sometimes', 'numeric'],
             'config_checksum'    => ['sometimes', 'string', 'min:32', 'max:32'],
+            'node_version'       => ['sometimes', 'string'],
             'operator_status'    => ['required', 'array'],
         ];
     }

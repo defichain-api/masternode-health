@@ -48,6 +48,7 @@ class ServerStatController
      * @bodyParam local_hash string required Hash for the current block. Required length of 64 chars. Example:
      * cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3
      * @bodyParam node_uptime integer required Uptime of the fullnode in seconds. Example: 1343121
+     * @bodyParam node_version string required DeFiChain Node Version. Example: 1.6.3
      * @bodyParam connection_count integer Count of the current fullnode connections. Example: 91
      * @bodyParam logsize float Size of the debug.log file in MB. Example: 13.21
      * @bodyParam config_checksum string MD5 Hash of the defi.conf file. Example: a3cca2b2aa1e3b5b3b5aad99a8529074

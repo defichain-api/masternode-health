@@ -11,6 +11,7 @@ class ServerStatTypes
     const HDD_TOTAL = 'hdd_total';
 
     const NODE_UPTIME = 'node_uptime';
+    const NODE_VERSION = 'node_version';
     const BLOCK_HEIGHT = 'block_height_local';
     const LOCAL_HASH = 'local_hash';
     const OPERATOR_STATUS = 'operator_status';
@@ -28,6 +29,7 @@ class ServerStatTypes
 
     const NODE_INFO = [
         self::NODE_UPTIME,
+        self::NODE_VERSION,
         self::BLOCK_HEIGHT,
         self::LOCAL_HASH,
         self::OPERATOR_STATUS,
