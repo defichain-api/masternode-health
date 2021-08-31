@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 29 2021</li>
+            <li>Last updated: August 31 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -139,13 +139,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
+x-ratelimit-remaining: 57
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-29T16:49:57.256531Z&quot;
+    &quot;server_time&quot;: &quot;2021-08-31T14:31:13.878194Z&quot;
 }</code>
  </pre>
     </span>
@@ -282,8 +282,6 @@ response.json()</code></pre>
 </p>
 
 <p>Pull the latest fullnode info posted to the health API by your server.</p>
-<p>Node Uptime in seconds.
-Log Size in MB.</p>
 
 <span id="example-requests-GETv1-node-info">
 <blockquote>Example request:</blockquote>
@@ -346,8 +344,8 @@ response.json()</code></pre>
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;type&quot;: &quot;block_height_local&quot;,
-            &quot;value&quot;: 1132261
+            &quot;type&quot;: &quot;config_checksum&quot;,
+            &quot;value&quot;: &quot;a3cca2b2aa1e3b5b3b5aad99a8529074&quot;
         },
         {
             &quot;type&quot;: &quot;operator_status&quot;,
@@ -367,12 +365,12 @@ response.json()</code></pre>
             &quot;value&quot;: 261124
         },
         {
-            &quot;type&quot;: &quot;config_checksum&quot;,
-            &quot;value&quot;: &quot;a3cca2b2aa1e3b5b3b5aad99a8529074&quot;
-        },
-        {
             &quot;type&quot;: &quot;local_hash&quot;,
             &quot;value&quot;: &quot;0d82efc6638c91279e5f493053075226619080515d2f9b583f8cfc42a4f08885&quot;
+        },
+        {
+            &quot;type&quot;: &quot;block_height_local&quot;,
+            &quot;value&quot;: 1132261
         },
         {
             &quot;type&quot;: &quot;connection_count&quot;,
@@ -381,9 +379,13 @@ response.json()</code></pre>
         {
             &quot;type&quot;: &quot;logsize&quot;,
             &quot;value&quot;: 13.21
+        },
+        {
+            &quot;type&quot;: &quot;node_version&quot;,
+            &quot;value&quot;: &quot;1.6.3&quot;
         }
     ],
-    &quot;latest_update&quot;: &quot;2021-08-29T16:37:38.000000Z&quot;
+    &quot;latest_update&quot;: &quot;2021-08-31T14:14:12.000000Z&quot;
 }</code>
  </pre>
     </span>
@@ -422,7 +424,41 @@ response.json()</code></pre>
         </p>
                 </form>
 
-            <h2 id="pull-information-GETv1-server-stats">Server Stats</h2>
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Local Block height</p>        </p>
+            <p>
+            <b><code>operator_status</code></b>&nbsp;&nbsp;<small>object</small>  &nbsp;
+<br>
+<p>Lists the masternode id and it's online status</p>        </p>
+            <p>
+            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Uptime of the node in seconds</p>        </p>
+            <p>
+            <b><code>node_version</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>Current version of the node</p>        </p>
+            <p>
+            <b><code>config_checksum</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>MD5 hash of the defi.conf file</p>        </p>
+            <p>
+            <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>block hash of the current block</p>        </p>
+            <p>
+            <b><code>connection_count</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Number of current connections to the node</p>        </p>
+            <p>
+            <b><code>logsize</code></b>&nbsp;&nbsp;  &nbsp;
+<br>
+<p>numeric Size of the debug.log in MB</p>        </p>
+                <h2 id="pull-information-GETv1-server-stats">Server Stats</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -491,27 +527,31 @@ response.json()</code></pre>
 <code class="language-json">{
     &quot;data&quot;: [
         {
-            &quot;type&quot;: &quot;ram_total&quot;,
-            &quot;value&quot;: 125.724
+            &quot;type&quot;: &quot;hdd_total&quot;,
+            &quot;value&quot;: 933.22
         },
         {
-            &quot;type&quot;: &quot;hdd_total&quot;,
-            &quot;value&quot;: 933.3428
+            &quot;type&quot;: &quot;num_cores&quot;,
+            &quot;value&quot;: 8
         },
         {
             &quot;type&quot;: &quot;hdd_used&quot;,
-            &quot;value&quot;: 53.6456
+            &quot;value&quot;: 53.22
         },
         {
-            &quot;type&quot;: &quot;ram_used&quot;,
-            &quot;value&quot;: 2.9764
+            &quot;type&quot;: &quot;ram_total&quot;,
+            &quot;value&quot;: 125.22
         },
         {
             &quot;type&quot;: &quot;load_avg&quot;,
             &quot;value&quot;: 0.22
+        },
+        {
+            &quot;type&quot;: &quot;ram_used&quot;,
+            &quot;value&quot;: 2.22
         }
     ],
-    &quot;latest_update&quot;: &quot;2021-08-25T07:40:09.000000Z&quot;
+    &quot;latest_update&quot;: &quot;2021-08-31T14:14:15.000000Z&quot;
 }</code>
  </pre>
     </span>
@@ -550,7 +590,33 @@ response.json()</code></pre>
         </p>
                 </form>
 
-        <h1 id="webhooks">Webhooks</h1>
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+<br>
+<p>Available RAM in GB</p>        </p>
+            <p>
+            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+<br>
+<p>Used RAM in GB</p>        </p>
+            <p>
+            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+<br>
+<p>Available hdd memory in GB</p>        </p>
+            <p>
+            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+<br>
+<p>Used hdd memory in GB</p>        </p>
+            <p>
+            <b><code>load_avg</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+<br>
+<p>Current load avg over the last 5min</p>        </p>
+            <p>
+            <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Number of cpu cores</p>        </p>
+            <h1 id="webhooks">Webhooks</h1>
 
     
 
@@ -578,7 +644,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'provident',
+            'reference' =&gt; 'et',
         ],
     ]
 );
@@ -599,7 +665,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "provident"
+    "reference": "et"
 }
 
 fetch(url, {
@@ -616,7 +682,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "provident"
+    "reference": "et"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -636,7 +702,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"provident\"
+    \"reference\": \"et\"
 }"
 </code></pre>
 </span>
@@ -838,6 +904,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'load_avg' =&gt; 0.23,
+            'num_cores' =&gt; 8,
             'hdd_used' =&gt; 152.0,
             'hdd_total' =&gt; 508.76,
             'ram_used' =&gt; 1.5,
@@ -860,6 +927,7 @@ const headers = {
 
 let body = {
     "load_avg": 0.23,
+    "num_cores": 8,
     "hdd_used": 152,
     "hdd_total": 508.76,
     "ram_used": 1.5,
@@ -878,6 +946,7 @@ import json
 url = 'https://api.defichain-masternode-health.com/v1/server-stats'
 payload = {
     "load_avg": 0.23,
+    "num_cores": 8,
     "hdd_used": 152,
     "hdd_total": 508.76,
     "ram_used": 1.5,
@@ -899,6 +968,7 @@ response.json()</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"load_avg\": 0.23,
+    \"num_cores\": 8,
     \"hdd_used\": 152,
     \"hdd_total\": 508.76,
     \"ram_used\": 1.5,
@@ -953,43 +1023,51 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>load_avg</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>load_avg</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
                 <input type="number"
                name="load_avg"
                data-endpoint="POSTv1-server-stats"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Current average load in GB as float.</p>        </p>
                 <p>
-            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="num_cores"
+               data-endpoint="POSTv1-server-stats"
+               data-component="body" required  hidden>
+    <br>
+<p>Number of cores of the system.</p>        </p>
+                <p>
+            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
                 <input type="number"
                name="hdd_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Used HDD memory in GB as float.</p>        </p>
                 <p>
-            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
                 <input type="number"
                name="hdd_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Total available HDD in GB memory as float.</p>        </p>
                 <p>
-            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
                 <input type="number"
                name="ram_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Used RAM in GB as float.</p>        </p>
                 <p>
-            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
                 <input type="number"
                name="ram_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body"  hidden>
+               data-component="body" required  hidden>
     <br>
 <p>Total available RAM in GB as float.</p>        </p>
     
@@ -1025,6 +1103,7 @@ $response = $client-&gt;post(
             'connection_count' =&gt; 91,
             'logsize' =&gt; 13.21,
             'config_checksum' =&gt; 'a3cca2b2aa1e3b5b3b5aad99a8529074',
+            'node_version' =&gt; '1.6.3',
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
@@ -1054,6 +1133,7 @@ let body = {
     "connection_count": 91,
     "logsize": 13.21,
     "config_checksum": "a3cca2b2aa1e3b5b3b5aad99a8529074",
+    "node_version": "1.6.3",
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
@@ -1079,6 +1159,7 @@ payload = {
     "connection_count": 91,
     "logsize": 13.21,
     "config_checksum": "a3cca2b2aa1e3b5b3b5aad99a8529074",
+    "node_version": "1.6.3",
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
@@ -1107,6 +1188,7 @@ response.json()</code></pre>
     \"connection_count\": 91,
     \"logsize\": 13.21,
     \"config_checksum\": \"a3cca2b2aa1e3b5b3b5aad99a8529074\",
+    \"node_version\": \"1.6.3\",
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
@@ -1210,6 +1292,14 @@ response.json()</code></pre>
                data-component="body"  hidden>
     <br>
 <p>MD5 Hash of the defi.conf file.</p>        </p>
+                <p>
+            <b><code>node_version</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="node_version"
+               data-endpoint="POSTv1-node-info"
+               data-component="body" required  hidden>
+    <br>
+<p>DeFiChain Node Version.</p>        </p>
                 <p>
         <details>
             <summary style="padding-bottom: 10px;">
