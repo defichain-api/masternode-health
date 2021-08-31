@@ -27,6 +27,11 @@ class ServerStatTransformer
         return is_float($value) ? round($value, 4) : null;
     }
 
+    public function numCores(): int
+    {
+        return (int) $this->request->input('num_cores');
+    }
+
     public function hddUsed(): ?float
     {
         $value = (float) $this->request->input('hdd_used');

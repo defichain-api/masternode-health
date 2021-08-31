@@ -21,6 +21,11 @@ class ServerStatService
             ],
             [
                 'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::NUM_CORES,
+                'value'      => $transformer->numCores(),
+            ],
+            [
+                'api_key_id' => $apiKeyId,
                 'type'       => ServerStatTypes::HDD_TOTAL,
                 'value'      => $transformer->hddTotal(),
             ],
