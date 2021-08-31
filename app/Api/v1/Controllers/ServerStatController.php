@@ -100,6 +100,7 @@ class ServerStatController
      * documented here for a transparent look inside this tool.</aside>
      * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
      * @bodyParam load_avg  float Current average load in GB as float. Example: 0.23
+     * @bodyParam num_cores  integer Number of cores of the system. Example: 8
      * @bodyParam hdd_used  float Used HDD memory in GB as float. Example: 152
      * @bodyParam hdd_total  float Total available HDD in GB memory as float. Example: 508.76
      * @bodyParam ram_used  float Used RAM in GB as float. Example: 1.5

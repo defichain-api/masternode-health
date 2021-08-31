@@ -5,6 +5,7 @@ namespace App\Enum;
 class ServerStatTypes
 {
     const LOAD_AVG = 'load_avg';
+    const NUM_CORES = 'num_cores';
     const RAM_USED = 'ram_used';
     const RAM_TOTAL = 'ram_total';
     const HDD_USED = 'hdd_used';
@@ -20,6 +21,7 @@ class ServerStatTypes
 
     const SERVER_STATS = [
         self::LOAD_AVG,
+        self::NUM_CORES,
         self::RAM_USED,
         self::RAM_TOTAL,
         self::HDD_USED,
@@ -46,6 +48,7 @@ class ServerStatTypes
     ];
 
     const INT_VALUE = [
+        self::NUM_CORES,
         self::NODE_UPTIME,
         self::BLOCK_HEIGHT,
         self::CONNECTION_COUNT,

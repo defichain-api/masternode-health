@@ -13,6 +13,7 @@ class ServerStatsRequest extends ApiRequest
     {
         return [
             'load_avg'  => ['sometimes', 'numeric', 'min:0'],
+            'num_cores' => ['sometimes', 'numeric', 'min:0'],
             'hdd_used'  => ['sometimes', 'numeric', 'min:0'],
             'hdd_total' => ['sometimes', 'numeric', 'min:0'],
             'ram_used'  => ['sometimes', 'numeric', 'min:0'],
