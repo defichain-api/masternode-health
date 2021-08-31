@@ -26,6 +26,11 @@ class NodeInfoService
             ],
             [
                 'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::NODE_VERSION,
+                'value'      => $transformer->nodeVersion(),
+            ],
+            [
+                'api_key_id' => $apiKeyId,
                 'type'       => ServerStatTypes::BLOCK_HEIGHT,
                 'value'      => $transformer->blockHeightLocal(),
             ],

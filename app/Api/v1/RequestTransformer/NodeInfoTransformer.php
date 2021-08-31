@@ -47,6 +47,11 @@ class NodeInfoTransformer
         return $this->request->input('node_uptime');
     }
 
+    public function nodeVersion(): string
+    {
+        return $this->request->input('node_version');
+    }
+
     /**
      * logsize in MB
      */
