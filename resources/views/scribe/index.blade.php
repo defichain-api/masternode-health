@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: August 31 2021</li>
+            <li>Last updated: September 6 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -65,7 +65,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -139,13 +139,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 57
+x-ratelimit-remaining: 59
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-08-31T14:31:13.878194Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-06T17:21:49.439956Z&quot;
 }</code>
  </pre>
     </span>
@@ -271,7 +271,155 @@ response.json()</code></pre>
         </p>
                     </form>
 
-        <h1 id="pull-information">Pull Information</h1>
+            <h2 id="setup-GEThealth">API Health Check</h2>
+
+<p>
+</p>
+
+<p>To check the availability of the API, you can setup a ping to this endpoint. It throws a HTTP 500 if a system
+is not running well - otherwise it's a HTTP 200.</p>
+
+<span id="example-requests-GEThealth">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/health',
+    [
+        'headers' =&gt; [
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'period'=&gt; '30',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/health"
+);
+
+const params = {
+    "period": "30",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/health'
+params = {
+  'period': '30',
+}
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/health?period=30" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GEThealth">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;redis_connection&quot;: true,
+    &quot;database_connection&quot;: true,
+    &quot;new_data_last_30min&quot;: true,
+    &quot;server_time&quot;: &quot;2021-09-06T15:46:24.731762Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (500, Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;redis_connection&quot;: false,
+    &quot;database_connection&quot;: true,
+    &quot;new_data_last_30min&quot;: true,
+    &quot;server_time&quot;: &quot;2021-09-06T15:46:24.731762Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GEThealth" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GEThealth"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GEThealth"></code></pre>
+</span>
+<span id="execution-error-GEThealth" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GEThealth"></code></pre>
+</span>
+<form id="form-GEThealth" data-method="GET"
+      data-path="health"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GEThealth', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>health</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>period</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="period"
+               data-endpoint="GEThealth"
+               data-component="query"  hidden>
+    <br>
+<p>Check the new data in the given period in minutes (min: 10). Default: 30</p>            </p>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>redis_connection</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>Check if the redis system is available.</p>        </p>
+            <p>
+            <b><code>database_connection</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>Check if the database is available.</p>        </p>
+            <p>
+            <b><code>new_data_in_period</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>Check if new data was pushed to the API in the last 30min.</p>        </p>
+            <p>
+            <b><code>server_time</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>Current server time</p>        </p>
+            <h1 id="pull-information">Pull Information</h1>
 
     
 
@@ -644,7 +792,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'et',
+            'reference' =&gt; 'nulla',
         ],
     ]
 );
@@ -665,7 +813,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "et"
+    "reference": "nulla"
 }
 
 fetch(url, {
@@ -682,7 +830,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "et"
+    "reference": "nulla"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -702,7 +850,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"et\"
+    \"reference\": \"nulla\"
 }"
 </code></pre>
 </span>
@@ -1107,7 +1255,7 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; false,
+                    'online' =&gt; true,
                 ],
             ],
         ],
@@ -1137,7 +1285,7 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": false
+            "online": true
         }
     ]
 }
@@ -1163,7 +1311,7 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": false
+            "online": true
         }
     ]
 }
@@ -1192,7 +1340,7 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": false
+            \"online\": true
         }
     ]
 }"

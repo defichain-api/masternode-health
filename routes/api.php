@@ -20,6 +20,8 @@ Route::get('/', [ServerStatController::class, 'index'])
 
 Route::get('ping', [ServerStatController::class, 'ping'])
     ->name('ping');
+Route::get('health', [ServerStatController::class, 'health'])
+    ->name('health');
 
 Route::prefix('setup')->name('setup.')->group(function () {
     Route::get('api_key', [SetupController::class, 'setupApiKey'])
