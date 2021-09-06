@@ -14,7 +14,19 @@ return [
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => 'The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you\'ll find it on https://github.com/defichain-api/masternode-health-server.',
+    'description' => 'This is an open source application to monitor the health status of a masternode server.
+
+Main requirement was to keep everything 100% anonymous for the users to protect their privacy.
+
+This application has two parts:
+
+- The python script has to be installed on the own server. It collects the information and pushes them (anonymously) to the API
+- This API receives the (anonymous) information and offers them via GET request (pull) or an optional webhook
+
+The server offers an API key (like `3a833079-9f2e-4336-a053-7a28808165a4`) - that\'s all you need for the usage.
+
+
+This API The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you\'ll find it on https://github.com/defichain-api/masternode-health-server.',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
