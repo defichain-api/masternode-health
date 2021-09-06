@@ -55,12 +55,12 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1>Introduction</h1>
-<p>is an open source application to monitor the health status of a masternode server.</p>
+<p>This is an open source application to monitor the health status of a masternode server.</p>
 <p>Main requirement was to keep everything 100% anonymous for the users to protect their privacy.</p>
 <p>This application has two parts:</p>
 <ul>
 <li>The python script has to be installed on the own server. It collects the information and pushes them (anonymously) to the API</li>
-<li>The API receives the (anonymous) information and offers them via GET request (pull) or an optional webhook</li>
+<li>This API receives the (anonymous) information and offers them via GET request (pull) or an optional webhook</li>
 </ul>
 <p>The server offers an API key (like <code>3a833079-9f2e-4336-a053-7a28808165a4</code>) - that's all you need for the usage.</p>
 <p>This API The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you'll find it on <a href="https://github.com/defichain-api/masternode-health-server">https://github.com/defichain-api/masternode-health-server</a>.</p>
@@ -73,7 +73,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -153,7 +153,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-06T17:27:34.092693Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-06T17:33:12.732364Z&quot;
 }</code>
  </pre>
     </span>
@@ -356,7 +356,7 @@ response.json()</code></pre>
 <code class="language-json">{
     &quot;redis_connection&quot;: true,
     &quot;database_connection&quot;: true,
-    &quot;new_data_last_30min&quot;: true,
+    &quot;new_data_in_period&quot;: true,
     &quot;server_time&quot;: &quot;2021-09-06T15:46:24.731762Z&quot;
 }</code>
  </pre>
@@ -368,7 +368,7 @@ response.json()</code></pre>
 <code class="language-json">{
     &quot;redis_connection&quot;: false,
     &quot;database_connection&quot;: true,
-    &quot;new_data_last_30min&quot;: true,
+    &quot;new_data_in_period&quot;: true,
     &quot;server_time&quot;: &quot;2021-09-06T15:46:24.731762Z&quot;
 }</code>
  </pre>
@@ -800,7 +800,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'voluptas',
+            'reference' =&gt; 'illo',
         ],
     ]
 );
@@ -821,7 +821,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "voluptas"
+    "reference": "illo"
 }
 
 fetch(url, {
@@ -838,7 +838,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "voluptas"
+    "reference": "illo"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -858,7 +858,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"voluptas\"
+    \"reference\": \"illo\"
 }"
 </code></pre>
 </span>
@@ -1263,7 +1263,7 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; true,
+                    'online' =&gt; false,
                 ],
             ],
         ],
@@ -1293,7 +1293,7 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -1319,7 +1319,7 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ]
 }
@@ -1348,7 +1348,7 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": true
+            \"online\": false
         }
     ]
 }"
