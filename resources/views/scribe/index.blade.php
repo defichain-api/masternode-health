@@ -55,7 +55,15 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1>Introduction</h1>
-<p>The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you'll find it on <a href="https://github.com/defichain-api/masternode-health-server">https://github.com/defichain-api/masternode-health-server</a>.</p>
+<p>is an open source application to monitor the health status of a masternode server.</p>
+<p>Main requirement was to keep everything 100% anonymous for the users to protect their privacy.</p>
+<p>This application has two parts:</p>
+<ul>
+<li>The python script has to be installed on the own server. It collects the information and pushes them (anonymously) to the API</li>
+<li>The API receives the (anonymous) information and offers them via GET request (pull) or an optional webhook</li>
+</ul>
+<p>The server offers an API key (like <code>3a833079-9f2e-4336-a053-7a28808165a4</code>) - that's all you need for the usage.</p>
+<p>This API The following endpoints are used for setup an API key and to fetch the information for it. You need to use the server script installed as cron on your server - you'll find it on <a href="https://github.com/defichain-api/masternode-health-server">https://github.com/defichain-api/masternode-health-server</a>.</p>
 <p>This documentation aims to provide all the information you need to work with this API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
@@ -65,7 +73,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -145,7 +153,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-06T17:21:49.439956Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-06T17:27:34.092693Z&quot;
 }</code>
  </pre>
     </span>
@@ -792,7 +800,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'nulla',
+            'reference' =&gt; 'voluptas',
         ],
     ]
 );
@@ -813,7 +821,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "nulla"
+    "reference": "voluptas"
 }
 
 fetch(url, {
@@ -830,7 +838,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "nulla"
+    "reference": "voluptas"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -850,7 +858,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"nulla\"
+    \"reference\": \"voluptas\"
 }"
 </code></pre>
 </span>
