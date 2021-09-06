@@ -55,9 +55,9 @@ class ServerStatController
      * Example: 30
      * @responseField server_time string Current server time
      * @response      scenario=Success
-     *                {"redis_connection":true,"database_connection":true,"new_data_last_30min":true,"server_time":"2021-09-06T15:46:24.731762Z"}
+     *                {"redis_connection":true,"database_connection":true,"new_data_in_period":true,"server_time":"2021-09-06T15:46:24.731762Z"}
      * @response      status=500 scenario=Error {"redis_connection":false,"database_connection":true,
-     * "new_data_last_30min":true,
+     * "new_data_in_period":true,
      * "server_time":"2021-09-06T15:46:24.731762Z"}
      */
     public function health(ConnectionChecker $connectionChecker): JsonResponse
