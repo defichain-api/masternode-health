@@ -6,7 +6,9 @@ use App\Api\v1\Resources\ServerStatCollection;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
 use App\Enum\Cooldown;
+use App\Models\ServerStat;
 use App\Repository\ServerStatRepository;
+use App\Service\ConnectionChecker;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
 use App\Service\WebhookService;
@@ -14,6 +16,8 @@ use Illuminate\Http\JsonResponse;
 
 class ServerStatController
 {
+    const DEFAULT_CHECK_PERIOD = 30;
+
     /**
      * @hideFromAPIDocumentation
      */
@@ -35,6 +39,48 @@ class ServerStatController
             'message'     => 'pong',
             'server_time' => now(),
         ], JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * API Health Check
+     *
+     * To check the availability of the API, you can setup a ping to this endpoint. It throws a HTTP 500 if a system
+     * is not running well - otherwise it's a HTTP 200.
+     * @unauthenticated
+     * @group         Setup
+     * @responseField redis_connection boolean Check if the redis system is available.
+     * @responseField database_connection boolean Check if the database is available.
+     * @responseField new_data_in_period boolean Check if new data was pushed to the API in the last 30min.
+     * @queryParam    period integer Check the new data in the given period in minutes (min: 10). Default: 30
+     * Example: 30
+     * @responseField server_time string Current server time
+     * @response      scenario=Success
+     *                {"redis_connection":true,"database_connection":true,"new_data_last_30min":true,"server_time":"2021-09-06T15:46:24.731762Z"}
+     * @response      status=500 scenario=Error {"redis_connection":false,"database_connection":true,
+     * "new_data_last_30min":true,
+     * "server_time":"2021-09-06T15:46:24.731762Z"}
+     */
+    public function health(ConnectionChecker $connectionChecker): JsonResponse
+    {
+        $requestedPeriod = request('period');
+        $periodInMinutes = is_numeric($requestedPeriod) && (int)$requestedPeriod >= 10
+            ? (int)$requestedPeriod
+            : self::DEFAULT_CHECK_PERIOD;
+
+        $data = [
+            'redis_connection'    => $connectionChecker::isRedisReady(),
+            'database_connection' => $connectionChecker::isDatabaseReady(),
+            'new_data_in_period'  => ServerStat::where('created_at', '>',
+                    now()->subMinutes($periodInMinutes))->count() > 0,
+            'server_time'         => now(),
+        ];
+
+        return response()->json(
+            $data,
+            in_array(false, $data)
+                ? JsonResponse::HTTP_INTERNAL_SERVER_ERROR
+                : JsonResponse::HTTP_OK
+        );
     }
 
     /**
@@ -81,8 +127,8 @@ class ServerStatController
      * Fullnode Info
      *
      * Pull the latest fullnode info posted to the health API by your server.
-     * @group     Pull Information
-     * @response  scenario=Success
+     * @group         Pull Information
+     * @response      scenario=Success
      *           {"data":[{"type":"config_checksum","value":"a3cca2b2aa1e3b5b3b5aad99a8529074"},{"type":"operator_status","value":[{"id":"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87","online":true},{"id":"2ceb7c9c3bea0bd0e5e4199eca5d0b797d79a0077a9108951faecf715e1e1a57","online":true}]},{"type":"node_uptime","value":261124},{"type":"local_hash","value":"0d82efc6638c91279e5f493053075226619080515d2f9b583f8cfc42a4f08885"},{"type":"block_height_local","value":1132261},{"type":"connection_count","value":91},{"type":"logsize","value":13.21},{"type":"node_version","value":"1.6.3"}],"latest_update":"2021-08-31T14:14:12.000000Z"}
      * @responseField block_height_local integer Local Block height
      * @responseField operator_status object Lists the masternode id and it's online status
@@ -134,8 +180,8 @@ class ServerStatController
      * Server Stats
      *
      * Pull the latest server stats posted to the health API by your server. All data (except load_avg) are in GB.
-     * @group     Pull Information
-     * @response  scenario=Success
+     * @group         Pull Information
+     * @response      scenario=Success
      *           {"data":[{"type":"hdd_total","value":933.22},{"type":"num_cores","value":8},{"type":"hdd_used","value":53.22},{"type":"ram_total","value":125.22},{"type":"load_avg","value":0.22},{"type":"ram_used","value":2.22}],"latest_update":"2021-08-31T14:14:15.000000Z"}
      * @responseField ram_total float Available RAM in GB
      * @responseField ram_used float Used RAM in GB
