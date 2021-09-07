@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 6 2021</li>
+            <li>Last updated: September 7 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -147,13 +147,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 58
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-06T17:33:12.732364Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-07T13:57:59.433653Z&quot;
 }</code>
  </pre>
     </span>
@@ -772,6 +772,174 @@ response.json()</code></pre>
             <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <br>
 <p>Number of cpu cores</p>        </p>
+                <h2 id="pull-information-GETv1-data-status">Data Status</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>You can check the latest state of your stored data. It throws a HTTP 500 if a system
+is not running well in the given period - otherwise it's a HTTP 200.</p>
+
+<span id="example-requests-GETv1-data-status">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://api.defichain-masternode-health.com/v1/data-status',
+    [
+        'headers' =&gt; [
+            'x-api-key' =&gt; 'YOUR_API_KEY',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'period'=&gt; '10',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "https://api.defichain-masternode-health.com/v1/data-status"
+);
+
+const params = {
+    "period": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-python">import requests
+import json
+
+url = 'https://api.defichain-masternode-health.com/v1/data-status'
+params = {
+  'period': '10',
+}
+headers = {
+  'x-api-key': 'YOUR_API_KEY',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre>
+
+<pre><code class="language-bash">curl --request GET \
+    --get "https://api.defichain-masternode-health.com/v1/data-status?period=10" \
+    --header "x-api-key: YOUR_API_KEY" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+</span>
+
+<span id="example-responses-GETv1-data-status">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;new_data_in_period&quot;: 6,
+    &quot;latest_data_sent_at&quot;: &quot;2021-09-06T22:16:40.000000Z&quot;,
+    &quot;latest_data_diff_minutes&quot;: 4,
+    &quot;possible_problem_detected&quot;: false,
+    &quot;server_time&quot;: &quot;2021-09-06T22:20:54.430225Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200, Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;new_data_in_period&quot;: null,
+    &quot;latest_data_sent_at&quot;: null,
+    &quot;latest_data_diff_minutes&quot;: null,
+    &quot;possible_problem_detected&quot;: true,
+    &quot;server_time&quot;: &quot;2021-09-06T22:20:54.430225Z&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-data-status" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-data-status"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-data-status"></code></pre>
+</span>
+<span id="execution-error-GETv1-data-status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-data-status"></code></pre>
+</span>
+<form id="form-GETv1-data-status" data-method="GET"
+      data-path="v1/data-status"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"x-api-key":"YOUR_API_KEY","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-data-status', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/data-status</code></b>
+        </p>
+                <p>
+            <label id="auth-GETv1-data-status" hidden>x-api-key header:
+                <b><code></code></b><input type="text"
+                                                                name="x-api-key"
+                                                                data-prefix=""
+                                                                data-endpoint="GETv1-data-status"
+                                                                data-component="header"></label>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>period</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="period"
+               data-endpoint="GETv1-data-status"
+               data-component="query"  hidden>
+    <br>
+<p>Check the data in the given period in minutes (min: 5). Default: 10</p>            </p>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>new_data_in_period</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Count of new data in the given period</p>        </p>
+            <p>
+            <b><code>latest_data_sent_at</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>Timestamp of the latest data.</p>        </p>
+            <p>
+            <b><code>latest_data_diff_minutes</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>Diff in minutes of the latest data.</p>        </p>
+            <p>
+            <b><code>possible_problem_detected</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>To check the response quickly, this flag indicates if a
+possible problem was found.</p>        </p>
+            <p>
+            <b><code>server_time</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>Current server time</p>        </p>
             <h1 id="webhooks">Webhooks</h1>
 
     
@@ -800,7 +968,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'illo',
+            'reference' =&gt; 'quibusdam',
         ],
     ]
 );
@@ -821,7 +989,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "illo"
+    "reference": "quibusdam"
 }
 
 fetch(url, {
@@ -838,7 +1006,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "illo"
+    "reference": "quibusdam"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -858,7 +1026,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"illo\"
+    \"reference\": \"quibusdam\"
 }"
 </code></pre>
 </span>

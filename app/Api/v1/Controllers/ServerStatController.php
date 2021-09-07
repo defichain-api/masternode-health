@@ -6,9 +6,7 @@ use App\Api\v1\Resources\ServerStatCollection;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
 use App\Enum\Cooldown;
-use App\Models\ServerStat;
 use App\Repository\ServerStatRepository;
-use App\Service\ConnectionChecker;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
 use App\Service\WebhookService;
@@ -16,73 +14,6 @@ use Illuminate\Http\JsonResponse;
 
 class ServerStatController
 {
-    const DEFAULT_CHECK_PERIOD = 30;
-
-    /**
-     * @hideFromAPIDocumentation
-     */
-    public function index(): void
-    {
-        return;
-    }
-
-    /**
-     * Ping
-     *
-     * Test the availability of this API.
-     * @unauthenticated
-     * @group Setup
-     */
-    public function ping(): JsonResponse
-    {
-        return response()->json([
-            'message'     => 'pong',
-            'server_time' => now(),
-        ], JsonResponse::HTTP_OK);
-    }
-
-    /**
-     * API Health Check
-     *
-     * To check the availability of the API, you can setup a ping to this endpoint. It throws a HTTP 500 if a system
-     * is not running well - otherwise it's a HTTP 200.
-     * @unauthenticated
-     * @group         Setup
-     * @responseField redis_connection boolean Check if the redis system is available.
-     * @responseField database_connection boolean Check if the database is available.
-     * @responseField new_data_in_period boolean Check if new data was pushed to the API in the last 30min.
-     * @queryParam    period integer Check the new data in the given period in minutes (min: 10). Default: 30
-     * Example: 30
-     * @responseField server_time string Current server time
-     * @response      scenario=Success
-     *                {"redis_connection":true,"database_connection":true,"new_data_in_period":true,"server_time":"2021-09-06T15:46:24.731762Z"}
-     * @response      status=500 scenario=Error {"redis_connection":false,"database_connection":true,
-     * "new_data_in_period":true,
-     * "server_time":"2021-09-06T15:46:24.731762Z"}
-     */
-    public function health(ConnectionChecker $connectionChecker): JsonResponse
-    {
-        $requestedPeriod = request('period');
-        $periodInMinutes = is_numeric($requestedPeriod) && (int)$requestedPeriod >= 10
-            ? (int)$requestedPeriod
-            : self::DEFAULT_CHECK_PERIOD;
-
-        $data = [
-            'redis_connection'    => $connectionChecker::isRedisReady(),
-            'database_connection' => $connectionChecker::isDatabaseReady(),
-            'new_data_in_period'  => ServerStat::where('created_at', '>',
-                    now()->subMinutes($periodInMinutes))->count() > 0,
-            'server_time'         => now(),
-        ];
-
-        return response()->json(
-            $data,
-            in_array(false, $data)
-                ? JsonResponse::HTTP_INTERNAL_SERVER_ERROR
-                : JsonResponse::HTTP_OK
-        );
-    }
-
     /**
      * Fullnode Info
      *
