@@ -39,16 +39,19 @@ Route::middleware('api_access')
             ->name('post.node-info')
             ->middleware('api_throttle:1,300');
         Route::get('node-info', [ServerStatController::class, 'getNodeInfo'])
-            ->name('get.node-info');
+            ->name('get.node-info')
+            ->middleware('api_throttle:60,60');
 
         Route::post('server-stats', [ServerStatController::class, 'storeServerStats'])
             ->name('post.server-stats')
             ->middleware('api_throttle:1,300');
         Route::get('server-stats', [ServerStatController::class, 'getServerStats'])
-            ->name('get.server-stats');
+            ->name('get.server-stats')
+            ->middleware('api_throttle:60,60');
 
         Route::get('data-status', [StatisticController::class, 'getDataStatus'])
-            ->name('get.data-status');
+            ->name('get.data-status')
+            ->middleware('api_throttle:60,60');
 
         Route::prefix('webhook')->name('webhook.')->group(function () {
             Route::post('/', [WebhookController::class, 'create']);

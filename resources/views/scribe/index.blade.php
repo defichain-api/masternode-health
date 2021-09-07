@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 6 2021</li>
+            <li>Last updated: September 7 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -73,7 +73,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -147,13 +147,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
+x-ratelimit-remaining: 58
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-06T22:28:02.531575Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-07T13:57:59.433653Z&quot;
 }</code>
  </pre>
     </span>
@@ -855,11 +855,12 @@ response.json()</code></pre>
     &quot;new_data_in_period&quot;: 6,
     &quot;latest_data_sent_at&quot;: &quot;2021-09-06T22:16:40.000000Z&quot;,
     &quot;latest_data_diff_minutes&quot;: 4,
+    &quot;possible_problem_detected&quot;: false,
     &quot;server_time&quot;: &quot;2021-09-06T22:20:54.430225Z&quot;
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (500, Error):</p>
+            <p>Example response (200, Error):</p>
         </blockquote>
                 <pre>
 
@@ -867,6 +868,7 @@ response.json()</code></pre>
     &quot;new_data_in_period&quot;: null,
     &quot;latest_data_sent_at&quot;: null,
     &quot;latest_data_diff_minutes&quot;: null,
+    &quot;possible_problem_detected&quot;: true,
     &quot;server_time&quot;: &quot;2021-09-06T22:20:54.430225Z&quot;
 }</code>
  </pre>
@@ -930,6 +932,11 @@ response.json()</code></pre>
 <br>
 <p>Diff in minutes of the latest data.</p>        </p>
             <p>
+            <b><code>possible_problem_detected</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>To check the response quickly, this flag indicates if a
+possible problem was found.</p>        </p>
+            <p>
             <b><code>server_time</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
 <br>
 <p>Current server time</p>        </p>
@@ -961,7 +968,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'eos',
+            'reference' =&gt; 'quibusdam',
         ],
     ]
 );
@@ -982,7 +989,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "eos"
+    "reference": "quibusdam"
 }
 
 fetch(url, {
@@ -999,7 +1006,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "eos"
+    "reference": "quibusdam"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1019,7 +1026,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"eos\"
+    \"reference\": \"quibusdam\"
 }"
 </code></pre>
 </span>
