@@ -13,8 +13,7 @@ class StatisticController
     /**
      * Data Status
      *
-     * You can check the latest state of your stored data. It throws a HTTP 500 if a system
-     * is not running well in the given period - otherwise it's a HTTP 200.
+     * You can check the latest state of your stored data. For more details check the output.
      * @group         Pull Information
      * @queryParam    period integer Check the data in the given period in minutes (min: 5). Default: 10 Example: 10
      * @responseField new_data_in_period integer Count of new data in the given period
