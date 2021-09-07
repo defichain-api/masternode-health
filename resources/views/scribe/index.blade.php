@@ -147,13 +147,13 @@ response.json()</code></pre>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 60
-x-ratelimit-remaining: 58
+x-ratelimit-remaining: 59
  </code></pre>
         </details>         <pre>
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-07T13:57:59.433653Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-07T15:52:13.401374Z&quot;
 }</code>
  </pre>
     </span>
@@ -778,8 +778,7 @@ response.json()</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>You can check the latest state of your stored data. It throws a HTTP 500 if a system
-is not running well in the given period - otherwise it's a HTTP 200.</p>
+<p>You can check the latest state of your stored data. For more details check the output.</p>
 
 <span id="example-requests-GETv1-data-status">
 <blockquote>Example request:</blockquote>
@@ -864,13 +863,9 @@ response.json()</code></pre>
         </blockquote>
                 <pre>
 
-<code class="language-json">{
-    &quot;new_data_in_period&quot;: null,
-    &quot;latest_data_sent_at&quot;: null,
-    &quot;latest_data_diff_minutes&quot;: null,
-    &quot;possible_problem_detected&quot;: true,
-    &quot;server_time&quot;: &quot;2021-09-06T22:20:54.430225Z&quot;
-}</code>
+<code class="language-json">{&quot;new_data_in_period&quot;:null,&quot;latest_data_sent_at&quot;:&quot;2021-09-06T07:20:54
+.430225Z&quot;,
+&quot;latest_data_diff_minutes&quot;:932,&quot;possible_problem_detected&quot;:true,&quot;server_time&quot;:&quot;2021-09-06T22:20:54.430225Z&quot;}</code>
  </pre>
     </span>
 <span id="execution-results-GETv1-data-status" hidden>
@@ -968,7 +963,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'quibusdam',
+            'reference' =&gt; 'aut',
         ],
     ]
 );
@@ -989,7 +984,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "quibusdam"
+    "reference": "aut"
 }
 
 fetch(url, {
@@ -1006,7 +1001,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "quibusdam"
+    "reference": "aut"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1026,7 +1021,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"quibusdam\"
+    \"reference\": \"aut\"
 }"
 </code></pre>
 </span>
