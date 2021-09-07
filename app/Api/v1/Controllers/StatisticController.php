@@ -26,8 +26,9 @@ class StatisticController
      * @response      scenario=Success
      *                {"new_data_in_period":6,"latest_data_sent_at":"2021-09-06T22:16:40.000000Z",
      * "latest_data_diff_minutes":4,"possible_problem_detected":false,"server_time":"2021-09-06T22:20:54.430225Z"}
-     * @response      status=200 scenario=Error {"new_data_in_period":null,"latest_data_sent_at":null,
-     * "latest_data_diff_minutes":null,"possible_problem_detected":true,"server_time":"2021-09-06T22:20:54.430225Z"}
+     * @response      status=200 scenario=Error {"new_data_in_period":null,"latest_data_sent_at":"2021-09-06T07:20:54
+ * .430225Z",
+     * "latest_data_diff_minutes":932,"possible_problem_detected":true,"server_time":"2021-09-06T22:20:54.430225Z"}
      */
     public function getDataStatus(DataStatusRequest $request): JsonResponse
     {
