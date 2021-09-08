@@ -53,6 +53,9 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: generate app key
         run: php artisan key:generate
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       - name: Clear Config
         run: php artisan config:clear
       - name: Run Migration
