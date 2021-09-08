@@ -14,6 +14,7 @@ jobs:
       QUEUE_CONNECTION: redis
       SESSION_DRIVER: redis
       REDIS_PORT: 6379
+      REDIS_HOST: redis
     services:
       mysql:
         image: mysql:5.7
