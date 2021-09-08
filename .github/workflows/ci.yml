@@ -29,8 +29,6 @@ jobs:
         ports:
           - 6379/tcp
         options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    strategy:
-      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -52,10 +50,10 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install Composer dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Prepare the application
-        run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-          php artisan key:generate
+      - name: copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: generate app key
+        run: php artisan key:generate
       - name: Clear Config
         run: php artisan config:clear
       - name: Run Migration
