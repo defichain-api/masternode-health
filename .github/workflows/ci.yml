@@ -52,8 +52,6 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: generate app key
-        run: php artisan key:generate
       - name: Clear Config
         run: php artisan config:clear
       - name: Run Migration
