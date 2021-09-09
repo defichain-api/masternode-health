@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Middleware\ApiThrottleRequests;
 use App\Models\ApiKey;
 use App\Models\Webhook;
 use Faker\Factory;
@@ -16,7 +15,7 @@ class ApiWebhookTest extends TestCase
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->post(route('api.v1.webhook.create'), [
-            'url' => route('home'),
+            'url' => 'https://google.de',
         ]);
 
         $this->assertEquals('webhook created', $response->json('message'));
