@@ -15,7 +15,7 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
         /** @var \App\Models\ApiKey $apiKey */
         $apiKey = $request->get('api_key');
 
-        if ((isset($apiKey->throttle_disabled) && !$apiKey->throttle_disabled) || $this->limiter->tooManyAttempts($key,
+        if ((isset($apiKey->throttle_disabled) && !$apiKey->throttle_disabled) && $this->limiter->tooManyAttempts($key,
             $maxAttempts)) {
             return $this->buildJsonResponse($key, $maxAttempts, $decayMinutes);
         }
@@ -56,7 +56,6 @@ class ApiThrottleRequests extends ThrottleRequestsLaravel
     protected function resolveRequestSignature($request)
     {
         if ($route = $request->route()) {
-            ray($route->uri);
             return sha1(sprintf('%s|%s', $route->uri, $request->ip()));
         }
 
