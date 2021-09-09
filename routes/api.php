@@ -24,11 +24,9 @@ Route::get('ping', [SetupController::class, 'ping'])
 Route::get('health', [SetupController::class, 'health'])
     ->name('health');
 
-Route::prefix('setup')->name('setup.')->group(function () {
-    Route::get('api_key', [SetupController::class, 'setupApiKey'])
-        ->name('api_key')
-        ->middleware('api_throttle:1,60');
-});
+Route::get('setup/api_key', [SetupController::class, 'setupApiKey'])
+    ->name('setup.api_key')
+    ->middleware('api_throttle:1,60');
 
 /** routes require x-api-key header */
 Route::middleware('api_access')

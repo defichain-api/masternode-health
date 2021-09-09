@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\UsesUuidPrimary;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ServerStat extends Model
 {
-    use UsesUuidPrimary;
+    use UsesUuidPrimary, HasFactory;
 
     protected $fillable = [
         'api_key_id',
