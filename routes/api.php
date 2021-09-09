@@ -26,7 +26,7 @@ Route::get('health', [SetupController::class, 'health'])
 
 Route::prefix('setup')->name('setup.')->group(function () {
     Route::get('api_key', [SetupController::class, 'setupApiKey'])
-        ->name('setup.api_key')
+        ->name('api_key')
         ->middleware('api_throttle:1,60');
 });
 
