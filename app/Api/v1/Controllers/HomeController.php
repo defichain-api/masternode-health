@@ -10,7 +10,7 @@ class HomeController
     public function home(): JsonResponse
     {
         return response()->json([
-            'docs' => route('docs.index'),
+            'docs'   => route('docs.index'),
             'github' => 'https://github.com/defichain-api/masternode-health',
         ], JsonResponse::HTTP_OK);
     }
