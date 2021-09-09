@@ -1,6 +1,6 @@
 ![DeFiChain Community Project](https://blog.defichain.com/content/images/size/w2000/2021/05/DeFiChain-Community-Projects.png)
 
-![CI](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![CI](https://github.com/defichain-api/masternode-health/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/defichain-api/masternode-health/branch/master/graph/badge.svg?token=7OI2BYPCI8)](https://codecov.io/gh/defichain-api/masternode-health)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

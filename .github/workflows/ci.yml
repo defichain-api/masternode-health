@@ -1,5 +1,5 @@
 # GitHub Action for Laravel with MySQL and Redis
-name: Testing Masternode Health
+name: Masternode Health Tests
 on: [ push, pull_request ]
 jobs:
   laravel:
