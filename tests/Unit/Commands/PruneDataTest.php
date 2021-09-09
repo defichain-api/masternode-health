@@ -35,4 +35,11 @@ class PruneDataTest extends TestCase
             ->assertExitCode(1);
         $this->assertDatabaseCount('server_stats', $countBefore);
     }
+
+    public function test_maxage_too_low(): void
+    {
+        $this->artisan('prune:api-key --maxAge=5')
+            ->expectsOutput('can\'t delete data newer than 14 days.')
+            ->assertExitCode(0);
+    }
 }
