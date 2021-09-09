@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Cache\RateLimiter;
 use Tests\TestCase;
 
 class ApiHealthTest extends TestCase

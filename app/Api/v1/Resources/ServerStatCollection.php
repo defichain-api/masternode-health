@@ -4,7 +4,10 @@ namespace App\Api\v1\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-/** @see \App\Models\ServerStat */
+/**
+ * @see \App\Models\ServerStat
+ * @codeCoverageIgnore
+ */
 class ServerStatCollection extends ResourceCollection
 {
     public $collects = ServerStatResource::class;

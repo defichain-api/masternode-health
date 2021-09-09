@@ -24,4 +24,16 @@ class ApiSetupTest extends TestCase
         $this->assertNotNull($apiKey, 'API key needs to be part of the response');
         $this->assertTrue(Str::isUuid($apiKey), 'API key should be a valid UUID');
     }
+
+    public function test_throttle_setup_api_key(): void
+    {
+        $this->get(route('api.setup.api_key'));
+        $response = $this->get(route('api.setup.api_key'));
+
+        $response->assertStatus(429);
+        $response->assertJsonFragment([
+            'code'    => 429,
+            'message' => 'Too Many Attempts. Only 1 requests are allowed every 60 seconds. After 60 seconds you can access this endpoint again.',
+        ]);
+    }
 }

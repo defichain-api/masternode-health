@@ -14,6 +14,7 @@ class SetupController
 
     /**
      * @hideFromAPIDocumentation
+     * @codeCoverageIgnore
      */
     public function index(): void
     {
