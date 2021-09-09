@@ -24,11 +24,9 @@ Route::get('ping', [SetupController::class, 'ping'])
 Route::get('health', [SetupController::class, 'health'])
     ->name('health');
 
-Route::prefix('setup')->name('setup.')->group(function () {
-    Route::get('api_key', [SetupController::class, 'setupApiKey'])
-        ->name('setup.api_key')
-        ->middleware('api_throttle:1,60');
-});
+Route::get('setup/api_key', [SetupController::class, 'setupApiKey'])
+    ->name('setup.api_key')
+    ->middleware('api_throttle:1,60');
 
 /** routes require x-api-key header */
 Route::middleware('api_access')
@@ -54,7 +52,7 @@ Route::middleware('api_access')
             ->middleware('api_throttle:60,60');
 
         Route::prefix('webhook')->name('webhook.')->group(function () {
-            Route::post('/', [WebhookController::class, 'create']);
-            Route::delete('/', [WebhookController::class, 'delete']);
+            Route::post('/', [WebhookController::class, 'create'])->name('create');
+            Route::delete('/', [WebhookController::class, 'delete'])->name('delete');
         });
     });

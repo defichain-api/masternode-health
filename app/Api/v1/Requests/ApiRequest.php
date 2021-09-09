@@ -7,6 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ApiRequest extends FormRequest
 {
     public function authorize(): bool
