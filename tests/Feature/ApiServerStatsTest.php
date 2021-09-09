@@ -15,7 +15,6 @@ class ApiServerStatsTest extends TestCase
 
         $response = $this->withHeaders(['x-api-key' => $apiKey->id])
             ->get(route('api.v1.get.server-stats'));
-        ray($response->json());
         $response->assertStatus(200);
         $this->assertEquals(3, count($response->json('data')));
     }
@@ -26,7 +25,6 @@ class ApiServerStatsTest extends TestCase
 
         $response = $this->withHeaders(['x-api-key' => $apiKey->id])
             ->get(route('api.v1.get.node-info'));
-        ray($response->json());
         $response->assertStatus(200);
         $this->assertEquals(4, count($response->json('data')));
     }

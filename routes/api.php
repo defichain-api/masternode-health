@@ -52,7 +52,7 @@ Route::middleware('api_access')
             ->middleware('api_throttle:60,60');
 
         Route::prefix('webhook')->name('webhook.')->group(function () {
-            Route::post('/', [WebhookController::class, 'create']);
-            Route::delete('/', [WebhookController::class, 'delete']);
+            Route::post('/', [WebhookController::class, 'create'])->name('create');
+            Route::delete('/', [WebhookController::class, 'delete'])->name('delete');
         });
     });
