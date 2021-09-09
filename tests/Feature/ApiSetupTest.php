@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Str;
-use Tests\ApiTestCase;
+use Tests\TestCase;
 
-class ApiSetupTest extends ApiTestCase
+class ApiSetupTest extends TestCase
 {
     public function test_ping_api(): void
     {

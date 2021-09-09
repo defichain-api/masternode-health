@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Tests\ApiTestCase;
+use Tests\TestCase;
 
-class ApiHealthTest extends ApiTestCase
+class ApiHealthTest extends TestCase
 {
     public function test_health_request(): void
     {

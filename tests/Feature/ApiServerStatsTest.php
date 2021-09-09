@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Str;
-use Tests\ApiTestCase;
+use Tests\TestCase;
 
-class ApiServerStatsTest extends ApiTestCase
+class ApiServerStatsTest extends TestCase
 {
     public function test_receive_server_stat(): void
     {

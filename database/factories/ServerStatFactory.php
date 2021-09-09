@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enum\ServerStatTypes;
+use App\Models\ApiKey;
 use App\Models\ServerStat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
@@ -16,7 +17,7 @@ class ServerStatFactory extends Factory
         $allServerStatTypes = array_merge(ServerStatTypes::SERVER_STATS, ServerStatTypes::NODE_INFO);
 
         return [
-            'api_key_id' => $this->faker->uuid,
+            'api_key_id' => ApiKey::factory()->create(),
             'type'       => Arr::random($allServerStatTypes, 1)[0],
             'value'      => $this->faker->word,
             'created_at' => now(),
