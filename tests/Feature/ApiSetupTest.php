@@ -16,6 +16,7 @@ class ApiSetupTest extends TestCase
 
     public function test_setup_api_key(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $response = $this->get(route('api.setup.api_key'));
         $apiKey = $response->json('api_key');
 

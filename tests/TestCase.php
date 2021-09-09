@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Enum\ServerStatTypes;
+use App\Http\Middleware\ApiThrottleRequests;
 use App\Models\ApiKey;
 use App\Models\ServerStat;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -12,6 +13,11 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
     use DatabaseTransactions;
+
+    protected function withoutApiThrottleMiddleware(): void
+    {
+        $this->withoutMiddleware(ApiThrottleRequests::class);
+    }
 
     protected function prepareNodeInfoData(): ApiKey
     {

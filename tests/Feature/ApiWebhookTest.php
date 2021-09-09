@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\ApiThrottleRequests;
 use App\Models\ApiKey;
 use App\Models\Webhook;
 use Faker\Factory;
@@ -11,6 +12,7 @@ class ApiWebhookTest extends TestCase
 {
     public function test_create_webhook(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->post(route('api.v1.webhook.create'), [
@@ -23,6 +25,7 @@ class ApiWebhookTest extends TestCase
 
     public function test_create_webhook_fails(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $faker = Factory::create();
 
         $response = $this->withHeaders([
@@ -35,6 +38,7 @@ class ApiWebhookTest extends TestCase
 
     public function test_delete_webhook(): void
     {
+        $this->withoutApiThrottleMiddleware();
         /** @var Webhook $webhook */
         $webhook = Webhook::factory()->create();
         $response = $this->withHeaders([
@@ -47,6 +51,7 @@ class ApiWebhookTest extends TestCase
 
     public function test_delete_webhook_fails(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->delete(route('api.v1.webhook.delete'), []);

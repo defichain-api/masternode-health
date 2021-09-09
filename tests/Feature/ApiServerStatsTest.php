@@ -11,6 +11,7 @@ class ApiServerStatsTest extends TestCase
 {
     public function test_receive_server_stat(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $apiKey = $this->prepareServerStatData();
 
         $response = $this->withHeaders(['x-api-key' => $apiKey->id])
@@ -21,6 +22,7 @@ class ApiServerStatsTest extends TestCase
 
     public function test_receive_node_info(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $apiKey = $this->prepareNodeInfoData();
 
         $response = $this->withHeaders(['x-api-key' => $apiKey->id])
@@ -31,6 +33,7 @@ class ApiServerStatsTest extends TestCase
 
     public function test_receive_server_stat_unauthenticated(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $responses = [
             $this->withHeaders(['x-api-key' => Str::random(32)])
                 ->get(route('api.v1.get.server-stats')),
@@ -46,6 +49,7 @@ class ApiServerStatsTest extends TestCase
 
     public function test_receive_node_info_unauthenticated(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $responses = [
             $this->withHeaders(['x-api-key' => Str::random(32)])
                 ->get(route('api.v1.get.node-info')),
@@ -61,6 +65,7 @@ class ApiServerStatsTest extends TestCase
 
     public function test_store_node_info(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->post(route('api.v1.post.node-info'), $this->prepareNodeInfoPostData());
@@ -70,6 +75,7 @@ class ApiServerStatsTest extends TestCase
 
     public function test_store_server_stats(): void
     {
+        $this->withoutApiThrottleMiddleware();
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->post(route('api.v1.post.server-stats'), $this->prepareServerStatPostData());
