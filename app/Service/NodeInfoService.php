@@ -26,6 +26,11 @@ class NodeInfoService
             ],
             [
                 'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::DEFID_RUNNING,
+                'value'      => $transformer->defidRunning(),
+            ],
+            [
+                'api_key_id' => $apiKeyId,
                 'type'       => ServerStatTypes::NODE_VERSION,
                 'value'      => $transformer->nodeVersion(),
             ],

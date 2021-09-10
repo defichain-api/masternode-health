@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="{{ asset("vendor/scribe/css/theme-default.style.css") }}" media="screen">
     <link rel="stylesheet" href="{{ asset("vendor/scribe/css/theme-default.print.css") }}" media="print">
-    <script src="{{ asset("vendor/scribe/js/theme-default-3.8.0.js") }}"></script>
+    <script src="{{ asset("vendor/scribe/js/theme-default-3.9.1.js") }}"></script>
 
     <link rel="stylesheet"
           href="//unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 7 2021</li>
+            <li>Last updated: September 10 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -73,7 +73,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -153,7 +153,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-07T15:52:13.401374Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-10T10:52:16.993618Z&quot;
 }</code>
  </pre>
     </span>
@@ -504,6 +504,10 @@ response.json()</code></pre>
             &quot;value&quot;: &quot;a3cca2b2aa1e3b5b3b5aad99a8529074&quot;
         },
         {
+            &quot;type&quot;: &quot;defid_running&quot;,
+            &quot;value&quot;: true
+        },
+        {
             &quot;type&quot;: &quot;operator_status&quot;,
             &quot;value&quot;: [
                 {
@@ -614,6 +618,10 @@ response.json()</code></pre>
             <b><code>logsize</code></b>&nbsp;&nbsp;  &nbsp;
 <br>
 <p>numeric Size of the debug.log in MB</p>        </p>
+            <p>
+            <b><code>defid_running</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>Flag if the DEFID is running. Example: true</p>        </p>
                 <h2 id="pull-information-GETv1-server-stats">Server Stats</h2>
 
 <p>
@@ -685,6 +693,10 @@ response.json()</code></pre>
         {
             &quot;type&quot;: &quot;hdd_total&quot;,
             &quot;value&quot;: 933.22
+        },
+        {
+            &quot;type&quot;: &quot;server_script_version&quot;,
+            &quot;value&quot;: &quot;1.0.1&quot;
         },
         {
             &quot;type&quot;: &quot;num_cores&quot;,
@@ -772,6 +784,10 @@ response.json()</code></pre>
             <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
 <br>
 <p>Number of cpu cores</p>        </p>
+            <p>
+            <b><code>server_script_version</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>Current Version of the server script. Example: 1.0.1</p>        </p>
                 <h2 id="pull-information-GETv1-data-status">Data Status</h2>
 
 <p>
@@ -963,7 +979,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'aut',
+            'reference' =&gt; 'a',
         ],
     ]
 );
@@ -984,7 +1000,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "aut"
+    "reference": "a"
 }
 
 fetch(url, {
@@ -1001,7 +1017,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "aut"
+    "reference": "a"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1021,7 +1037,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"aut\"
+    \"reference\": \"a\"
 }"
 </code></pre>
 </span>
@@ -1228,6 +1244,7 @@ $response = $client-&gt;post(
             'hdd_total' =&gt; 508.76,
             'ram_used' =&gt; 1.5,
             'ram_total' =&gt; 16.23,
+            'server_script_version' =&gt; '1.0.1',
         ],
     ]
 );
@@ -1250,7 +1267,8 @@ let body = {
     "hdd_used": 152,
     "hdd_total": 508.76,
     "ram_used": 1.5,
-    "ram_total": 16.23
+    "ram_total": 16.23,
+    "server_script_version": "1.0.1"
 }
 
 fetch(url, {
@@ -1269,7 +1287,8 @@ payload = {
     "hdd_used": 152,
     "hdd_total": 508.76,
     "ram_used": 1.5,
-    "ram_total": 16.23
+    "ram_total": 16.23,
+    "server_script_version": "1.0.1"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1291,7 +1310,8 @@ response.json()</code></pre>
     \"hdd_used\": 152,
     \"hdd_total\": 508.76,
     \"ram_used\": 1.5,
-    \"ram_total\": 16.23
+    \"ram_total\": 16.23,
+    \"server_script_version\": \"1.0.1\"
 }"
 </code></pre>
 </span>
@@ -1342,53 +1362,61 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>load_avg</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>load_avg</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="load_avg"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Current average load in GB as float.</p>        </p>
                 <p>
-            <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>num_cores</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="num_cores"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Number of cores of the system.</p>        </p>
                 <p>
-            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>hdd_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="hdd_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Used HDD memory in GB as float.</p>        </p>
                 <p>
-            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>hdd_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="hdd_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Total available HDD in GB memory as float.</p>        </p>
                 <p>
-            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>ram_used</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="ram_used"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Used RAM in GB as float.</p>        </p>
                 <p>
-            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+            <b><code>ram_total</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="ram_total"
                data-endpoint="POSTv1-server-stats"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Total available RAM in GB as float.</p>        </p>
+                <p>
+            <b><code>server_script_version</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="server_script_version"
+               data-endpoint="POSTv1-server-stats"
+               data-component="body"  hidden>
+    <br>
+<p>The current version of the python server script.</p>        </p>
     
     </form>
 
@@ -1426,9 +1454,10 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; false,
+                    'online' =&gt; true,
                 ],
             ],
+            'defid_running' =&gt; true,
         ],
     ]
 );
@@ -1456,9 +1485,10 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": false
+            "online": true
         }
-    ]
+    ],
+    "defid_running": true
 }
 
 fetch(url, {
@@ -1482,9 +1512,10 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": false
+            "online": true
         }
-    ]
+    ],
+    "defid_running": true
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1511,9 +1542,10 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": false
+            \"online\": true
         }
-    ]
+    ],
+    \"defid_running\": true
 }"
 </code></pre>
 </span>
@@ -1564,27 +1596,27 @@ response.json()</code></pre>
         </p>
                         <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <p>
-            <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>block_height_local</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="block_height_local"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>The number of the current block.</p>        </p>
                 <p>
-            <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>local_hash</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="local_hash"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Hash for the current block. Required length of 64 chars.</p>        </p>
                 <p>
-            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+            <b><code>node_uptime</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
                 <input type="number"
                name="node_uptime"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Uptime of the fullnode in seconds.</p>        </p>
                 <p>
@@ -1612,48 +1644,66 @@ response.json()</code></pre>
     <br>
 <p>MD5 Hash of the defi.conf file.</p>        </p>
                 <p>
-            <b><code>node_version</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>node_version</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="node_version"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>DeFiChain Node Version.</p>        </p>
                 <p>
         <details>
             <summary style="padding-bottom: 10px;">
-                <b><code>operator_status</code></b>&nbsp;&nbsp;<small>object[]</small>  &nbsp;
+                <b><code>operator_status</code></b>&nbsp;&nbsp;<small>object[]</small>     <i>optional</i> &nbsp;
 <br>
 <p>Online/Offline information for all masternodes registered on the
 fullnode.</p>            </summary>
                                                 <p>
-                        <b><code>operator_status[].id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                        <b><code>operator_status[].id</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="operator_status.0.id"
                data-endpoint="POSTv1-node-info"
-               data-component="body" required  hidden>
+               data-component="body"  hidden>
     <br>
 <p>Masternode ID</p>                    </p>
                                                                 <p>
-                        <b><code>operator_status[].online</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+                        <b><code>operator_status[].online</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
                 <label data-endpoint="POSTv1-node-info" hidden>
             <input type="radio" name="operator_status.0.online"
                    value="true"
                    data-endpoint="POSTv1-node-info"
-                   data-component="body" required             >
+                   data-component="body"             >
             <code>true</code>
         </label>
         <label data-endpoint="POSTv1-node-info" hidden>
             <input type="radio" name="operator_status.0.online"
                    value="false"
                    data-endpoint="POSTv1-node-info"
-                   data-component="body" required             >
+                   data-component="body"             >
             <code>false</code>
         </label>
     <br>
                     </p>
                                     </details>
         </p>
+                <p>
+            <b><code>defid_running</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+                <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="defid_running"
+                   value="true"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTv1-node-info" hidden>
+            <input type="radio" name="defid_running"
+                   value="false"
+                   data-endpoint="POSTv1-node-info"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Check if the DEFID on the server is running</p>        </p>
     
     </form>
 

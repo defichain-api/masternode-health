@@ -10,8 +10,10 @@ class ServerStatTypes
     const RAM_TOTAL = 'ram_total';
     const HDD_USED = 'hdd_used';
     const HDD_TOTAL = 'hdd_total';
+    const SERVER_SCRIPT_VERSION = 'server_script_version';
 
     const NODE_UPTIME = 'node_uptime';
+    const DEFID_RUNNING = 'defid_running';
     const NODE_VERSION = 'node_version';
     const BLOCK_HEIGHT = 'block_height_local';
     const LOCAL_HASH = 'local_hash';
@@ -27,10 +29,12 @@ class ServerStatTypes
         self::RAM_TOTAL,
         self::HDD_USED,
         self::HDD_TOTAL,
+        self::SERVER_SCRIPT_VERSION,
     ];
 
     const NODE_INFO = [
         self::NODE_UPTIME,
+        self::DEFID_RUNNING,
         self::NODE_VERSION,
         self::BLOCK_HEIGHT,
         self::LOCAL_HASH,
@@ -54,6 +58,10 @@ class ServerStatTypes
         self::NODE_UPTIME,
         self::BLOCK_HEIGHT,
         self::CONNECTION_COUNT,
+    ];
+
+    const BOOL_VALUE = [
+        self::DEFID_RUNNING,
     ];
 
     const ARRAY_VALUE = [

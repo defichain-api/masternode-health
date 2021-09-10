@@ -21,12 +21,12 @@ class NodeInfoTransformer
 
     public function connectioncount(): string
     {
-        return $this->request->input('connection_count');
+        return $this->request->input('connection_count', '');
     }
 
     public function blockHeightLocal(): string
     {
-        return $this->request->input('block_height_local');
+        return $this->request->input('block_height_local', '');
     }
 
     public function operatorStatus(): string
@@ -36,7 +36,7 @@ class NodeInfoTransformer
 
     public function localHash(): string
     {
-        return $this->request->input('local_hash');
+        return $this->request->input('local_hash', '');
     }
 
     /**
@@ -44,20 +44,25 @@ class NodeInfoTransformer
      */
     public function nodeUptime(): int
     {
-        return $this->request->input('node_uptime');
+        return $this->request->input('node_uptime', 0);
     }
 
     public function nodeVersion(): string
     {
-        return $this->request->input('node_version');
+        return $this->request->input('node_version', '');
+    }
+
+    public function defidRunning(): bool
+    {
+        return $this->request->input('defid_running', true);
     }
 
     /**
      * logsize in MB
      */
-    public function logsize(): string
+    public function logsize(): float
     {
-        return $this->request->input('logsize');
+        return (float)$this->request->input('logsize', 0);
     }
 
     public function configChecksum(): string

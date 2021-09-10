@@ -20,43 +20,48 @@ class ServerStatTransformer
         return $this->request->get('api_key');
     }
 
-    public function loadAvg(): ?float
+    public function loadAvg(): float
     {
-        $value = (float) $this->request->input('load_avg');
+        $value = (float)$this->request->input('load_avg', 0);
 
-        return is_float($value) ? round($value, 4) : null;
+        return is_float($value) ? round($value, 4) : 0;
     }
 
     public function numCores(): int
     {
-        return (int) $this->request->input('num_cores');
+        return (int)$this->request->input('num_cores', 0);
     }
 
-    public function hddUsed(): ?float
+    public function hddUsed(): float
     {
-        $value = (float) $this->request->input('hdd_used');
+        $value = (float)$this->request->input('hdd_used', 0);
 
-        return is_float($value) ? round($value, 4) : null;
+        return is_float($value) ? round($value, 4) : 0;
     }
 
-    public function hddTotal(): ?float
+    public function hddTotal(): float
     {
-        $value = (float) $this->request->input('hdd_total');
+        $value = (float)$this->request->input('hdd_total', 0);
 
-        return is_float($value) ? round($value, 4) : null;
+        return is_float($value) ? round($value, 4) : 0;
     }
 
-    public function ramUsed(): ?float
+    public function ramUsed(): float
     {
-        $value = (float) $this->request->input('ram_used');
+        $value = (float)$this->request->input('ram_used', 0);
 
-        return is_float($value) ? round($value, 4) : null;
+        return is_float($value) ? round($value, 4) : 0;
     }
 
-    public function ramTotal(): ?float
+    public function ramTotal(): float
     {
-        $value = (float) $this->request->input('ram_total');
+        $value = (float)$this->request->input('ram_total', 0);
 
-        return is_float($value) ? round($value, 4) : null;
+        return is_float($value) ? round($value, 4) : 0;
+    }
+
+    public function serverScriptVersion(): string
+    {
+        return str_replace('v', '', $this->request->input('server_script_version', ''));
     }
 }

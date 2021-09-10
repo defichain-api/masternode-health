@@ -44,9 +44,14 @@ class ServerStatService
                 'type'       => ServerStatTypes::RAM_USED,
                 'value'      => $transformer->ramUsed(),
             ],
+            [
+                'api_key_id' => $apiKeyId,
+                'type'       => ServerStatTypes::SERVER_SCRIPT_VERSION,
+                'value'      => $transformer->serverScriptVersion(),
+            ],
         ]);
         $data->each(function (array $item) {
-            if (is_null($item['value'])) {
+            if (is_null($item['value']) || $item['value'] == 0) {
                 return;
             }
             ServerStat::create([
