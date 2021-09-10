@@ -18,7 +18,7 @@ class WebhookService
     public function createWebhook(WebhookCreateRequest $request): bool
     {
         return Webhook::updateOrCreate([
-            'api_key_id' => $request->get('api_key')->id,
+            'api_key_id' => $request->get('api_key')->key(),
         ], [
             'url'                => $request->input('url'),
             'max_tries'          => $request->input('max_tries') ?? self::DEFAULT_MAX_TRIES,
@@ -29,7 +29,9 @@ class WebhookService
 
     public function deleteWebhook(Request $request): bool
     {
-        $webhook = Webhook::whereApiKeyId($request->get('api_key')->id)->first();
+        /** @var ApiKey $apiKey */
+        $apiKey = $request->get('api_key');
+        $webhook = Webhook::whereApiKeyId($apiKey->key())->first();
 
         return isset($webhook) ? $webhook->delete() : false;
     }
@@ -49,7 +51,7 @@ class WebhookService
             ->maximumTries($webhook->max_tries)
             ->timeoutInSeconds($webhook->timeout_in_seconds)
             ->payload((new ServerStatCollection($payloadData))->resolve())
-            ->useSecret($apiKey->id)
+            ->useSecret($apiKey->key())
             ->dispatch();
     }
 }

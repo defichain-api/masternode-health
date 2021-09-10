@@ -11,7 +11,7 @@ class ServerStatRepository
 {
     public function getLatestServerStatForApiKey(ApiKey $apiKey): Collection
     {
-        return ServerStat::where('api_key_id', $apiKey->id)
+        return ServerStat::where('api_key_id', $apiKey->key())
             ->orderByDesc('created_at')
             ->whereIn('type', ServerStatTypes::SERVER_STATS)
             ->get()
@@ -21,7 +21,7 @@ class ServerStatRepository
 
     public function getLatestNodeInfoForApiKey(ApiKey $apiKey): Collection
     {
-        return ServerStat::where('api_key_id', $apiKey->id)
+        return ServerStat::where('api_key_id', $apiKey->key())
             ->orderByDesc('created_at')
             ->whereIn('type', ServerStatTypes::NODE_INFO)
             ->get()

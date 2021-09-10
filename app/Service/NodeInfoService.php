@@ -12,7 +12,7 @@ class NodeInfoService
     public function store(NodeInfoRequest $request): void
     {
         $transformer = new NodeInfoTransformer($request);
-        $apiKeyId = $transformer->apiKey()->id;
+        $apiKeyId = $transformer->apiKey()->key();
         $data = collect([
             [
                 'api_key_id' => $apiKeyId,

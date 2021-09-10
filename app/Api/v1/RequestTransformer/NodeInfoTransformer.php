@@ -67,6 +67,6 @@ class NodeInfoTransformer
 
     public function configChecksum(): string
     {
-        return $this->request->input('config_checksum');
+        return $this->request->input('config_checksum', '');
     }
 }

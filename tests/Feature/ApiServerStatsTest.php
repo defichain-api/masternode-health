@@ -14,7 +14,7 @@ class ApiServerStatsTest extends TestCase
         $this->withoutApiThrottleMiddleware();
         $apiKey = $this->prepareServerStatData();
 
-        $response = $this->withHeaders(['x-api-key' => $apiKey->id])
+        $response = $this->withHeaders(['x-api-key' => $apiKey->key()])
             ->get(route('api.v1.get.server-stats'));
         $response->assertStatus(200);
         $this->assertEquals(3, count($response->json('data')));
@@ -25,10 +25,11 @@ class ApiServerStatsTest extends TestCase
         $this->withoutApiThrottleMiddleware();
         $apiKey = $this->prepareNodeInfoData();
 
-        $response = $this->withHeaders(['x-api-key' => $apiKey->id])
+        $response = $this->withHeaders(['x-api-key' => $apiKey->key()])
             ->get(route('api.v1.get.node-info'));
         $response->assertStatus(200);
-        $this->assertEquals(4, count($response->json('data')));
+        ray($response);
+        $this->assertEquals(6, count($response->json('data')));
     }
 
     public function test_receive_server_stat_unauthenticated(): void
@@ -94,7 +95,6 @@ class ApiServerStatsTest extends TestCase
             'node_uptime'        => $faker->numberBetween(0, 999999),
             'connection_count'   => $faker->numberBetween(1, 199),
             'logsize'            => $faker->randomFloat(2, 1, 20),
-            'config_checksum'    => Str::random(32),
             'node_version'       => Str::random(15),
             'operator_status'    => [
                 [
@@ -115,7 +115,7 @@ class ApiServerStatsTest extends TestCase
 
         return [
             'load_avg'              => $faker->randomFloat(2, 0, 1),
-            'num_cores'             => $faker->numberBetween(0, 32),
+            'num_cores'             => 0,
             'hdd_used'              => $faker->randomFloat(2, 3, 512),
             'hdd_total'             => $faker->numberBetween(512, 1024),
             'ram_used'              => $faker->randomFloat(2, 2, 8),

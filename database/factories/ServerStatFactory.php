@@ -7,6 +7,7 @@ use App\Models\ApiKey;
 use App\Models\ServerStat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
+use Str;
 
 class ServerStatFactory extends Factory
 {
@@ -34,15 +35,23 @@ class ServerStatFactory extends Factory
         });
     }
 
-    public function serverStat(?string $type = null)
+    public function serverStat(?string $type = null, $value = null)
     {
         if (is_null($type)) {
             $type = Arr::random(ServerStatTypes::SERVER_STATS, 1)[0];
         }
-        return $this->state(function (array $attributes) use ($type){
-            return [
+
+        return $this->state(function (array $attributes) use ($type, $value) {
+            $arrValue = [];
+            if (!is_null($value)) {
+                $arrValue = [
+                    'value' => $value,
+                ];
+            }
+
+            return array_merge([
                 'type' => $type,
-            ];
+            ], $arrValue);
         });
     }
 
