@@ -25,22 +25,32 @@ abstract class TestCase extends BaseTestCase
 
         ServerStat::factory()
             ->serverStat(ServerStatTypes::NODE_UPTIME)
-            ->apiKey($apiKey->id)
+            ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
             ->serverStat(ServerStatTypes::NODE_VERSION)
-            ->apiKey($apiKey->id)
+            ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::BLOCK_HEIGHT)
-            ->apiKey($apiKey->id)
+            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, 1231231212)
+            ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
             ->serverStat(ServerStatTypes::LOCAL_HASH)
-            ->apiKey($apiKey->id)
+            ->apiKey($apiKey->key())
+            ->create();
+
+        ServerStat::factory()
+            ->serverStat(ServerStatTypes::DEFID_RUNNING, true)
+            ->apiKey($apiKey->key())
+            ->create();
+
+        ServerStat::factory()
+            ->serverStat(ServerStatTypes::OPERATOR_STATUS, json_encode([['id'=>'1231231231231', 'online' => true]]))
+            ->apiKey($apiKey->key())
             ->create();
 
         return $apiKey;
@@ -52,17 +62,17 @@ abstract class TestCase extends BaseTestCase
 
         ServerStat::factory()
             ->serverStat(ServerStatTypes::RAM_TOTAL)
-            ->apiKey($apiKey->id)
+            ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
             ->serverStat(ServerStatTypes::RAM_USED)
-            ->apiKey($apiKey->id)
+            ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::LOAD_AVG)
-            ->apiKey($apiKey->id)
+            ->serverStat(ServerStatTypes::LOAD_AVG, 0.06)
+            ->apiKey($apiKey->key())
             ->create();
 
         return $apiKey;

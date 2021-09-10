@@ -15,7 +15,7 @@ class ApiWebhookTest extends TestCase
         $response = $this->withHeaders([
             'x-api-key' => ApiKey::factory()->create()->id,
         ])->post(route('api.v1.webhook.create'), [
-            'url' => 'https://google.de',
+            'url' => 'https://defichain.com/',
         ]);
 
         $this->assertEquals('webhook created', $response->json('message'));
@@ -41,7 +41,7 @@ class ApiWebhookTest extends TestCase
         /** @var Webhook $webhook */
         $webhook = Webhook::factory()->create();
         $response = $this->withHeaders([
-            'x-api-key' => $webhook->apiKey->id,
+            'x-api-key' => $webhook->apiKey->key(),
         ])->delete(route('api.v1.webhook.delete'), []);
 
         $this->assertEquals('webhook deleted', $response->json('message'));

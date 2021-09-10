@@ -44,11 +44,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
-        $apiKey = $request->get('api_key');
-        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->passed()) {
-            app(WebhookService::class)->sendWebhook($apiKey, false, true);
-            $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_NODE_INFO]));
-        }
+//        $apiKey = $request->get('api_key');
+//        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->passed()) {
+//            app(WebhookService::class)->sendWebhook($apiKey, false, true);
+//            $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_NODE_INFO]));
+//        }
 
         return response()->json([
             'message' => 'ok',
@@ -100,11 +100,11 @@ class ServerStatController
         $service->store($request);
 
         // @todo implement an analysation of the data
-        $apiKey = $request->get('api_key');
-        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->passed()) {
-            app(WebhookService::class)->sendWebhook($apiKey, true, false);
-            $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_SERVER_STATS]));
-        }
+//        $apiKey = $request->get('api_key');
+//        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->passed()) {
+//            app(WebhookService::class)->sendWebhook($apiKey, true, false);
+//            $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_SERVER_STATS]));
+//        }
 
         return response()->json([
             'message' => 'ok',

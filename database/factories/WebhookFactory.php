@@ -18,7 +18,7 @@ class WebhookFactory extends Factory
             'url'                => $this->faker->url,
             'reference'          => bcrypt($this->faker->word),
             'api_key_id'         => function () {
-                return ApiKey::factory()->create()->id;
+                return ApiKey::factory()->create()->key();
             },
         ];
     }

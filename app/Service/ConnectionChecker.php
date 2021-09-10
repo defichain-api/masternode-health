@@ -11,7 +11,9 @@ class ConnectionChecker
     {
         $isReady = true;
         try {
-            DB::connection($connection)->getPdo();
+            if (!DB::connection()->getDatabaseName()) {
+                $isReady = false;
+            }
         } catch (\Exception $e) {
             $isReady = false;
         }

@@ -7,6 +7,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Middleware\ThrottleRequests as ThrottleRequestsLaravel;
 use RuntimeException;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ApiThrottleRequests extends ThrottleRequestsLaravel
 {
     public function handle($request, Closure $next, $maxAttempts = 60, $decayMinutes = 1, $prefix = '')

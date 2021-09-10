@@ -28,16 +28,20 @@ class ServerStatResource extends JsonResource
 
     protected function arrayValue(): array
     {
+        ray('array');
         return json_decode($this->value);
     }
 
     protected function boolValue(): bool
     {
+        ray('bool');
+
         return (bool)$this->value;
     }
 
     protected function getValue()
     {
+        ray($this->type);
         if (in_array($this->type, ServerStatTypes::FLOAT_VALUE)) {
             return $this->floatValue();
         }

@@ -12,7 +12,7 @@ class ServerStatService
     public function store(ServerStatsRequest $request): void
     {
         $transformer = new ServerStatTransformer($request);
-        $apiKeyId = $transformer->api_key()->id;
+        $apiKeyId = $transformer->api_key()->key();
         $data = collect([
             [
                 'api_key_id' => $apiKeyId,
