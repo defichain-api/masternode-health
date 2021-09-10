@@ -12,12 +12,13 @@ class ServerStatsRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'load_avg'  => ['required', 'numeric', 'min:0'],
-            'num_cores' => ['required', 'integer', 'min:0'],
-            'hdd_used'  => ['required', 'numeric', 'min:0'],
-            'hdd_total' => ['required', 'numeric', 'min:0'],
-            'ram_used'  => ['required', 'numeric', 'min:0'],
-            'ram_total' => ['required', 'numeric', 'min:0'],
+            'load_avg'              => ['sometimes', 'numeric', 'min:0'],
+            'num_cores'             => ['sometimes', 'integer', 'min:0'],
+            'hdd_used'              => ['sometimes', 'numeric', 'min:0'],
+            'hdd_total'             => ['sometimes', 'numeric', 'min:0'],
+            'ram_used'              => ['sometimes', 'numeric', 'min:0'],
+            'ram_total'             => ['sometimes', 'numeric', 'min:0'],
+            'server_script_version' => ['sometimes', 'string'],
         ];
     }
 }
