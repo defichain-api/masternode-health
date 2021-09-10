@@ -90,6 +90,7 @@ class ApiServerStatsTest extends TestCase
         return [
             'block_height_local' => $faker->numberBetween(111111, 999999),
             'local_hash'         => Str::random(64),
+            'defid_running'      => $faker->boolean(90),
             'node_uptime'        => $faker->numberBetween(0, 999999),
             'connection_count'   => $faker->numberBetween(1, 199),
             'logsize'            => $faker->randomFloat(2, 1, 20),
@@ -113,12 +114,13 @@ class ApiServerStatsTest extends TestCase
         $faker = Factory::create();
 
         return [
-            'load_avg'  => $faker->randomFloat(2, 0, 1),
-            'num_cores' => $faker->numberBetween(0, 32),
-            'hdd_used'  => $faker->randomFloat(2, 3, 512),
-            'hdd_total' => $faker->numberBetween(512, 1024),
-            'ram_used'  => $faker->randomFloat(2, 2, 8),
-            'ram_total' => $faker->randomFloat(2, 8, 32),
+            'load_avg'              => $faker->randomFloat(2, 0, 1),
+            'num_cores'             => $faker->numberBetween(0, 32),
+            'hdd_used'              => $faker->randomFloat(2, 3, 512),
+            'hdd_total'             => $faker->numberBetween(512, 1024),
+            'ram_used'              => $faker->randomFloat(2, 2, 8),
+            'ram_total'             => $faker->randomFloat(2, 8, 32),
+            'server_script_version' => sprintf('1.0.%s', $faker->numberBetween(0, 45)),
         ];
     }
 }
