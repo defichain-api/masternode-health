@@ -14,7 +14,6 @@ class CreateStatisticsTable extends Migration
             $table->integer('api_key_count')->default(0);
             $table->integer('webhook_sent_count')->default(0);
             $table->integer('request_received_count')->default(0);
-			$table->timestamps();
 		});
 	}
 
