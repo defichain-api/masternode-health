@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Api\v1\Middleware\ApiAccess;
+use App\Api\v1\Middleware\PaginateAPI;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
@@ -51,6 +52,7 @@ ConvertEmptyStringsToNull::class,
 
         'api' => [
             'throttle:api',
+            PaginateAPI::class,
             SubstituteBindings::class,
         ],
     ];
