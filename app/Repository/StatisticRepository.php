@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 
 class StatisticRepository
 {
+    const MAX_PER_PAGE = 25;
     public static function lastWeek(): Collection
     {
         return Statistic::whereDate('date', '<', today())
@@ -20,6 +21,15 @@ class StatisticRepository
     {
         return Statistic::whereDate('date', '<', today())
             ->orderByDesc('date')
-            ->paginate(25);
+            ->paginate(self::MAX_PER_PAGE);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     */
+    public static function today()
+    {
+        return Statistic::whereDate('date', '=', today())
+            ->first();
     }
 }
