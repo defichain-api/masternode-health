@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Api\v1\Requests\WebhookCreateRequest;
 use App\Api\v1\Resources\ServerStatCollection;
 use App\Models\ApiKey;
+use App\Models\Service\StatisticService;
 use App\Models\Webhook;
 use App\Repository\ServerStatRepository;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class WebhookService
         } elseif ($nodeInfo) {
             $payloadData = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($apiKey);
         }
+        app(StatisticService::class)->webhookSent();
 
         /** @var \App\Models\Webhook $webhook */
         $webhook = $apiKey->webhook;

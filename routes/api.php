@@ -2,6 +2,7 @@
 
 use App\Api\v1\Controllers\ServerStatController;
 use App\Api\v1\Controllers\SetupController;
+use App\Api\v1\Controllers\DataStatusController;
 use App\Api\v1\Controllers\StatisticController;
 use App\Api\v1\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,7 @@ Route::middleware('api_access')
             ->name('get.server-stats')
             ->middleware('api_throttle:60,60');
 
-        Route::get('data-status', [StatisticController::class, 'getDataStatus'])
+        Route::get('data-status', [DataStatusController::class, 'getDataStatus'])
             ->name('get.data-status')
             ->middleware('api_throttle:60,60');
 
@@ -55,4 +56,13 @@ Route::middleware('api_access')
             Route::post('/', [WebhookController::class, 'create'])->name('create');
             Route::delete('/', [WebhookController::class, 'delete'])->name('delete');
         });
+    });
+
+Route::name('statistic.')
+    ->prefix('statistic')
+    ->group(function () {
+        Route::get('all', [StatisticController::class, 'getAll'])
+            ->name('all');
+        Route::get('last_week', [StatisticController::class, 'getLastWeek'])
+            ->name('last_week');
     });

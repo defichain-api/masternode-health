@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\FinalizeStatisticsCommand;
 use App\Console\Commands\PruneDataCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,6 +20,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(PruneDataCommand::class, ['--maxAge=14'])
             ->dailyAt('1:00');
+        $schedule->command(FinalizeStatisticsCommand::class, ['--forLastDays=1'])
+            ->dailyAt('0:00');
     }
 
     protected function commands(): void
