@@ -47,7 +47,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             $localBlockHeight > $mainnetBlockHeight
             && $diffBlockHeight > 15
         ) {
-            $this->warnings->add([
+            $this->critical->add([
                 'type'      => 'block_height',
                 'value'     => $localBlockHeight,
                 'expected'  => $mainnetBlockHeight,
