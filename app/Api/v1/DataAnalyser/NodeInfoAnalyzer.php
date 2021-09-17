@@ -113,7 +113,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             $this->critical->add([
                 'type'      => 'defid_running',
                 'value'     => $defidRunning,
-                'explained' => 'The defid seems not running fine. As long as it is not running, no blocks can be minted.',
+                'explained' => 'The defid service seems to be either not running or not responding. It is possible that your node won\'t mint new blocks.',
             ]);
         }
         $this->result->add([
