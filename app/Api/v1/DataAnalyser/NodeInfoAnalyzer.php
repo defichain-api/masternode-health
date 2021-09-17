@@ -57,7 +57,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
 
         $this->result->add([
             'type'    => 'block_height',
-            'message' => sprintf('Node is has %s as latest block, main net is at block height %s', $localBlockHeight,
+            'message' => sprintf('Node\'s block height is at %s, main net is currently at %s', $localBlockHeight,
                 $mainnetBlockHeight),
             'value'   => $localBlockHeight,
         ]);
