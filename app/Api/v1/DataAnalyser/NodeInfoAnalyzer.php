@@ -3,9 +3,11 @@
 namespace App\Api\v1\DataAnalyser;
 
 use App\Client\CryptoidExplorerClient;
+use App\Client\DefidVersion;
 use App\Enum\ServerStatTypes;
 use App\Exceptions\AnalyzerException;
 use App\Exceptions\Client\CryptoidClientException;
+use App\Helper\Version;
 use App\Models\ServerStat;
 
 class NodeInfoAnalyzer extends BaseAnalyzer
@@ -18,7 +20,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             ->analyzeConnectionCount()
             ->analyzeLogSize()
             ->analyzeConfigChecksum()
-            ->analyzeOperatorStatus();
+            ->analyzeOperatorStatus()
+            ->analyzeDefidVersion();
     }
 
     protected function analyzeBlockHeight(): self
@@ -142,8 +145,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             ]);
         }
         $this->result->add([
-            'type'    => 'block_hash',
-            'message' => 'Block hashes of the node and the main net are equal',
+            'type'    => 'connection_count',
+            'message' => sprintf('The node has %s active connections', $connectionCount),
             'value'   => $connectionCount,
         ]);
 
@@ -162,7 +165,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             $this->warnings->add([
                 'type'      => 'logsize',
                 'value'     => $logSize,
-                'explained' => sprintf('The logfile seems to be quite big with %s MB.', $logSize),
+                'explained' => sprintf('The logfile appears to be quite big with %s MB.', $logSize),
             ]);
         }
         $this->result->add([
@@ -243,6 +246,36 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 $countOfflineOperators
             ),
             'value'   => $operators,
+        ]);
+
+        return $this;
+    }
+
+    protected function analyzeDefidVersion(): self
+    {
+        try {
+            /** @var Serverstat $localVersion */
+            $localVersion = $this->getAttribute(ServerStatTypes::NODE_VERSION)->value;
+        } catch (AnalyzerException $e) {
+            return $this;
+        }
+        $defidVersion = app(DefidVersion::class)->getCurrentVersion();
+
+        if (Version::getVersionAsInt($localVersion) < Version::getVersionAsInt($defidVersion)) {
+            $this->warnings->add([
+                'type'      => 'node_version',
+                'value'     => $localVersion,
+                'expected'  => $defidVersion,
+                'explained' => sprintf('Installed %s but current version is %s. Please upgrade to current version',
+                    $localVersion,
+                    $defidVersion),
+            ]);
+        }
+
+        $this->result->add([
+            'type'    => 'node_version',
+            'message' => sprintf('Installed %s, current version installable %s', $localVersion, $defidVersion),
+            'value'   => $localVersion,
         ]);
 
         return $this;
