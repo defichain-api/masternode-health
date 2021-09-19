@@ -10,7 +10,7 @@ class DefidVersion extends BaseGithubVersionClient
     public function __construct()
     {
         parent::__construct(new Client([
-            'base_uri' => 'https://api.github.com/repos/DeFiCh/ain/releases/latest',
+            'base_uri' => config('client_uri.github.defid'),
         ]));
     }
     public function getCurrentVersion(): string

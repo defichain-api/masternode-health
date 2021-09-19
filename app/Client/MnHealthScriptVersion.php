@@ -9,7 +9,7 @@ class MnHealthScriptVersion extends BaseGithubVersionClient
     public function __construct()
     {
         parent::__construct(new Client([
-            'base_uri' => 'https://api.github.com/repos/defichain-api/masternode-health-server/releases/latest',
+            'base_uri' => config('client_uri.github.mn_health_script'),
         ]));
     }
 

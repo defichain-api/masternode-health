@@ -14,7 +14,7 @@ class CryptoidExplorerClient
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'https://chainz.cryptoid.info/dfi/api.dws',
+            'base_uri' => config('client_uri.main_net.cryptoid'),
         ]);
     }
 
