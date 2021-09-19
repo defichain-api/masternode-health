@@ -69,6 +69,12 @@ class ServerStatAnalyzer extends BaseAnalyzer
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
             ]);
+        } elseif ($currentRatio > 0.95) {
+            $this->critical->add([
+                'type'      => 'hdd',
+                'value'     => $currentRatio,
+                'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
+            ]);
         }
 
         $this->result->add([
@@ -98,6 +104,12 @@ class ServerStatAnalyzer extends BaseAnalyzer
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),
             ]);
+        } elseif ($currentRatio > 0.95) {
+            $this->critical->add([
+                'type'      => 'ram',
+                'value'     => $currentRatio,
+                'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),
+            ]);
         }
 
         $this->result->add([
@@ -112,8 +124,7 @@ class ServerStatAnalyzer extends BaseAnalyzer
     protected function analyzeServerScriptVersion(): self
     {
         try {
-            /** @var Serverstat $usedValue */
-            /** @var Serverstat $totalValue */
+            /** @var Serverstat $localVersion */
             $localVersion = $this->getAttribute(ServerStatTypes::SERVER_SCRIPT_VERSION)->value;
         } catch (AnalyzerException $e) {
             return $this;
