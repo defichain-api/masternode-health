@@ -4,6 +4,7 @@ namespace App\Api\v1\DataAnalyser;
 
 use App\Client\CryptoidExplorerClient;
 use App\Client\DefidVersion;
+use App\Enum\Cooldown;
 use App\Enum\ServerStatTypes;
 use App\Exceptions\AnalyzerException;
 use App\Exceptions\Client\CryptoidClientException;
@@ -267,8 +268,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 'value'     => $localVersion,
                 'expected'  => $defidVersion,
                 'explained' => sprintf('Installed %s but current version is %s. Please upgrade to current version',
-                    $localVersion,
-                    $defidVersion),
+                    $localVersion, $defidVersion),
             ]);
         }
 
@@ -279,5 +279,10 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         ]);
 
         return $this;
+    }
+
+    public function getAnalyzerType(): string
+    {
+        return Cooldown::WEBHOOK_NODE_INFO;
     }
 }

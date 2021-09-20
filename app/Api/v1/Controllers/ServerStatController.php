@@ -2,10 +2,11 @@
 
 namespace App\Api\v1\Controllers;
 
+use App\Api\v1\DataAnalyser\NodeInfoAnalyzer;
+use App\Api\v1\DataAnalyser\ServerStatAnalyzer;
 use App\Api\v1\Resources\ServerStatCollection;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Api\v1\Requests\ServerStatsRequest;
-use App\Enum\Cooldown;
 use App\Repository\ServerStatRepository;
 use App\Service\NodeInfoService;
 use App\Service\ServerStatService;
@@ -39,16 +40,21 @@ class ServerStatController
      * @response  scenario=Success {"message":"ok"}
      * @authenticated
      */
-    public function storeNodeInfo(NodeInfoRequest $request, NodeInfoService $service): JsonResponse
-    {
+    public function storeNodeInfo(
+        NodeInfoRequest $request,
+        NodeInfoService $service,
+        NodeInfoAnalyzer $analyzer,
+        WebhookService $webhookService
+    ): JsonResponse {
         $service->store($request);
+        $storedNodeInfo = $service->store($request);
+        $analyzer->withCollection($storedNodeInfo)->analyze();
 
-        // @todo implement an analysation of the data
-//        $apiKey = $request->get('api_key');
-//        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->passed()) {
-//            app(WebhookService::class)->sendWebhook($apiKey, false, true);
-//            $apiKey->cooldown(Cooldown::WEBHOOK_NODE_INFO)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_NODE_INFO]));
-//        }
+        /** @var \App\Models\ApiKey $apiKey */
+        $apiKey = $request->get('api_key');
+        $webhookService
+            ->setInfo($apiKey, $analyzer, $storedNodeInfo)
+            ->checkAndSendWebhook();
 
         return response()->json([
             'message' => 'ok',
@@ -73,9 +79,16 @@ class ServerStatController
      * @responseField logsize numeric Size of the debug.log in MB
      * @responseField defid_running boolean Flag if the DEFID is running. Example: true
      */
-    public function getNodeInfo(ServerStatRepository $repository): ServerStatCollection
+    public function getNodeInfo(ServerStatRepository $repository, NodeInfoAnalyzer $analyzer): ServerStatCollection
     {
-        return new ServerStatCollection($repository->getLatestNodeInfoForApiKey(request('api_key')));
+        /** @var \App\Models\ApiKey $apiKey */
+        $apiKey = request('api_key');
+        $resourceCollection = $repository->getLatestNodeInfoForApiKey($apiKey);
+
+        return new ServerStatCollection(
+            $resourceCollection,
+            $analyzer->withCollection($resourceCollection)
+        );
     }
 
     /**
@@ -95,16 +108,20 @@ class ServerStatController
      * @group     Server-Script
      * @response  scenario=Success {"message":"ok"}
      */
-    public function storeServerStats(ServerStatsRequest $request, ServerStatService $service): JsonResponse
-    {
-        $service->store($request);
+    public function storeServerStats(
+        ServerStatsRequest $request,
+        ServerStatService $service,
+        ServerStatAnalyzer $analyzer,
+        WebhookService $webhookService
+    ): JsonResponse {
+        $storedServerStats = $service->store($request);
+        $analyzer->withCollection($storedServerStats)->analyze();
 
-        // @todo implement an analysation of the data
-//        $apiKey = $request->get('api_key');
-//        if ($apiKey->webhook && $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->passed()) {
-//            app(WebhookService::class)->sendWebhook($apiKey, true, false);
-//            $apiKey->cooldown(Cooldown::WEBHOOK_SERVER_STATS)->until(now()->addMinutes(Cooldown::COOLDOWN_MIN[Cooldown::WEBHOOK_SERVER_STATS]));
-//        }
+        /** @var \App\Models\ApiKey $apiKey */
+        $apiKey = $request->get('api_key');
+        $webhookService
+            ->setInfo($apiKey, $analyzer, $storedServerStats)
+            ->checkAndSendWebhook();
 
         return response()->json([
             'message' => 'ok',
@@ -127,8 +144,12 @@ class ServerStatController
      * @responseField num_cores integer Number of cpu cores
      * @responseField server_script_version string Current Version of the server script. Example: 1.0.1
      */
-    public function getServerStats(ServerStatRepository $repository): ServerStatCollection
+    public function getServerStats(ServerStatRepository $repository, ServerStatAnalyzer $analyzer): ServerStatCollection
     {
-        return new ServerStatCollection($repository->getLatestServerStatForApiKey(request('api_key')));
+        /** @var \App\Models\ApiKey $apiKey */
+        $apiKey = request('api_key');
+        $resourceCollection = $repository->getLatestServerStatForApiKey($apiKey);
+
+        return new ServerStatCollection($resourceCollection, $analyzer->withCollection($resourceCollection));
     }
 }

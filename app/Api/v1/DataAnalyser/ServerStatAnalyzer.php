@@ -3,6 +3,7 @@
 namespace App\Api\v1\DataAnalyser;
 
 use App\Client\MnHealthScriptVersion;
+use App\Enum\Cooldown;
 use App\Enum\ServerStatTypes;
 use App\Exceptions\AnalyzerException;
 use App\Helper\Version;
@@ -149,5 +150,10 @@ class ServerStatAnalyzer extends BaseAnalyzer
         ]);
 
         return $this;
+    }
+
+    public function getAnalyzerType(): string
+    {
+        return Cooldown::WEBHOOK_SERVER_STATS;
     }
 }

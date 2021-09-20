@@ -3,17 +3,18 @@
 namespace App\Api\v1\Controllers;
 
 use App\Api\v1\Requests\WebhookCreateRequest;
+use App\Repository\WebhookRepository;
 use App\Service\WebhookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class WebhookController
 {
-    protected WebhookService $webhookService;
+    protected WebhookRepository $webhookService;
 
-    public function __construct(WebhookService $webhookService)
+    public function __construct(WebhookRepository $webhookRepository)
     {
-        $this->webhookService = $webhookService;
+        $this->webhookRepository = $webhookRepository;
     }
 
     /**
@@ -29,7 +30,7 @@ class WebhookController
      */
     public function create(WebhookCreateRequest $request): JsonResponse
     {
-        if (!$this->webhookService->createWebhook($request)) {
+        if (!$this->webhookRepository->createWebhook($request)) {
             return response()->json([
                 'message' => 'error while creating webhook',
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
@@ -48,7 +49,7 @@ class WebhookController
      */
     public function delete(Request $request)
     {
-        if (!$this->webhookService->deleteWebhook($request)) {
+        if (!$this->webhookRepository->deleteWebhook($request)) {
             return response()->json([
                 'message' => 'webhook not existing or could not delete',
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);

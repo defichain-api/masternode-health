@@ -3,7 +3,6 @@
 namespace App\Api\v1\DataAnalyser;
 
 use App\Exceptions\AnalyzerException;
-use App\Models\ApiKey;
 use App\Models\ServerStat;
 use Illuminate\Support\Collection;
 
@@ -13,18 +12,19 @@ abstract class BaseAnalyzer
     protected Collection $warnings;
     protected Collection $critical;
     protected Collection $serverStats;
-    protected ?ApiKey $apiKey;
 
-    public function __construct(Collection $serverStats, ApiKey $apiKey = null)
+    public function withCollection(Collection $serverStats): self
     {
         $this->result = new Collection();
         $this->warnings = new Collection();
         $this->critical = new Collection();
         $this->serverStats = $serverStats;
-        $this->apiKey = $apiKey;
+
+        return $this;
     }
 
     abstract public function analyze(): self;
+    abstract public function getAnalyzerType(): string;
 
     /**
      * @throws \App\Exceptions\AnalyzerException
