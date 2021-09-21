@@ -280,9 +280,4 @@ class NodeInfoAnalyzer extends BaseAnalyzer
 
         return $this;
     }
-
-    public function getAnalyzerType(): string
-    {
-        return Cooldown::WEBHOOK_NODE_INFO;
-    }
 }

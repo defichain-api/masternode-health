@@ -52,9 +52,8 @@ class ServerStatController
 
         /** @var \App\Models\ApiKey $apiKey */
         $apiKey = $request->get('api_key');
-        $webhookService
-            ->setInfo($apiKey, $analyzer, $storedNodeInfo)
-            ->checkAndSendWebhook();
+        $webhookService->setInfo($apiKey, $analyzer, $storedNodeInfo)
+            ->sendWebhook();
 
         return response()->json([
             'message' => 'ok',
@@ -119,9 +118,8 @@ class ServerStatController
 
         /** @var \App\Models\ApiKey $apiKey */
         $apiKey = $request->get('api_key');
-        $webhookService
-            ->setInfo($apiKey, $analyzer, $storedServerStats)
-            ->checkAndSendWebhook();
+        $webhookService->setInfo($apiKey, $analyzer, $storedServerStats)
+            ->sendWebhook();
 
         return response()->json([
             'message' => 'ok',

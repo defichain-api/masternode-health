@@ -24,7 +24,6 @@ abstract class BaseAnalyzer
     }
 
     abstract public function analyze(): self;
-    abstract public function getAnalyzerType(): string;
 
     /**
      * @throws \App\Exceptions\AnalyzerException

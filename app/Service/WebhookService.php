@@ -17,7 +17,6 @@ class WebhookService
     protected ApiKey $apiKey;
     protected Collection $payloadData;
     protected BaseAnalyzer $analyzer;
-    protected bool $webhookEnabled = false;
 
     public function setInfo(
         ApiKey $apiKey,
@@ -31,12 +30,14 @@ class WebhookService
         return $this;
     }
 
-    protected function sendWebhook(): void
+    public function sendWebhook(): void
     {
-        if (!$this->webhookEnabled) {
+        if (is_null($this->apiKey)
+            || is_null($this->apiKey->webhook)
+            || (!$this->analyzer->hasWarnings() && !$this->analyzer->hasFatalErrors())
+        ) {
             return;
         }
-        app(StatisticService::class)->webhookSent();
 
         /** @var \App\Models\Webhook $webhook */
         $webhook = $this->apiKey->webhook;
@@ -48,30 +49,13 @@ class WebhookService
                 ->payload((new ServerStatCollection($this->payloadData, $this->analyzer))->resolve())
                 ->useSecret(bcrypt($this->apiKey->key()))
                 ->dispatch();
+            app(StatisticService::class)->webhookSent();
         } catch (Exception $e) {
             Log::error('webhook sent failed', [
                 'message' => $e->getMessage(),
                 'line'    => $e->getLine(),
                 'code'    => $e->getCode(),
             ]);
-
-            return;
-        }
-        $analyzerType = $this->analyzer->getAnalyzerType();
-        $this->apiKey->cooldown($analyzerType)->until(now()->addHours(Cooldown::COOLDOWN_IN_HOURS[$analyzerType]));
-        $this->webhookEnabled = false;
-    }
-
-    public function checkAndSendWebhook(): void
-    {
-        if (
-            isset($this->apiKey)
-            && $this->apiKey->webhook
-            && ($this->analyzer->hasWarnings() || $this->analyzer->hasFatalErrors())
-            && $this->apiKey->cooldown($this->analyzer->getAnalyzerType())->passed()
-        ) {
-            $this->webhookEnabled = true;
-            $this->sendWebhook();
         }
     }
 }

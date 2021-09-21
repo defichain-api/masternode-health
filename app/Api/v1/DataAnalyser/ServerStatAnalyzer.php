@@ -151,9 +151,4 @@ class ServerStatAnalyzer extends BaseAnalyzer
 
         return $this;
     }
-
-    public function getAnalyzerType(): string
-    {
-        return Cooldown::WEBHOOK_SERVER_STATS;
-    }
 }
