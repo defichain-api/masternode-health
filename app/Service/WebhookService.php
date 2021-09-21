@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Api\v1\DataAnalyser\BaseAnalyzer;
 use App\Api\v1\Resources\ServerStatCollection;
-use App\Enum\Cooldown;
 use App\Models\ApiKey;
 use App\Models\Service\StatisticService;
 use Exception;
@@ -34,8 +33,7 @@ class WebhookService
     {
         if (is_null($this->apiKey)
             || is_null($this->apiKey->webhook)
-            || (!$this->analyzer->hasWarnings() && !$this->analyzer->hasFatalErrors())
-        ) {
+            || (!$this->analyzer->hasWarnings() && !$this->analyzer->hasFatalErrors())) {
             return;
         }
 
