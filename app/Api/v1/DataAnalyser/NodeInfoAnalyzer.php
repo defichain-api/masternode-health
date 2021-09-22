@@ -4,7 +4,6 @@ namespace App\Api\v1\DataAnalyser;
 
 use App\Client\CryptoidExplorerClient;
 use App\Client\DefidVersion;
-use App\Enum\Cooldown;
 use App\Enum\ServerStatTypes;
 use App\Exceptions\AnalyzerException;
 use App\Exceptions\Client\CryptoidClientException;
@@ -189,6 +188,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 ->whereType(ServerStatTypes::CONFIG_CHECKSUM)
                 ->orderByDesc('created_at')->skip(1)->take(1)->first();
         } catch (AnalyzerException $e) {
+            ray($e->getMessage());
             return $this;
         }
         // if no other checksum is available, skip this analysis

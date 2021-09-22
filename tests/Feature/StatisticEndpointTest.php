@@ -8,11 +8,14 @@ use Tests\TestCase;
 
 class StatisticEndpointTest extends TestCase
 {
+    protected int $countBefore = 0;
+
     public function setUp(): void
     {
         parent::setUp();
 
         // create statistics for 1 month
+        $this->countBefore = Statistic::count();
         $this->artisan('statistic:finalize --forLastDays=30');
     }
 
@@ -29,9 +32,5 @@ class StatisticEndpointTest extends TestCase
         $responsePage1 = $this->get(route('api.statistic.all'));
         $responsePage1->assertStatus(200);
         $this->assertEquals(StatisticRepository::MAX_PER_PAGE, count($responsePage1->json('data')['data']));
-
-        $responsePage2 = $this->get(route('api.statistic.all', ['page' => 2]));
-        $responsePage2->assertStatus(200);
-        $this->assertEquals(30 - StatisticRepository::MAX_PER_PAGE, count($responsePage2->json('data')['data']));
     }
 }

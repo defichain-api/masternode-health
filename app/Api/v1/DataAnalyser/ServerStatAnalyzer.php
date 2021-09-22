@@ -3,7 +3,6 @@
 namespace App\Api\v1\DataAnalyser;
 
 use App\Client\MnHealthScriptVersion;
-use App\Enum\Cooldown;
 use App\Enum\ServerStatTypes;
 use App\Exceptions\AnalyzerException;
 use App\Helper\Version;
@@ -24,7 +23,7 @@ class ServerStatAnalyzer extends BaseAnalyzer
     {
         try {
             $loadAvg = (float)$this->getAttribute(ServerStatTypes::LOAD_AVG)->value;
-            $cores = $this->getAttribute(ServerStatTypes::NUM_CORES)->value;
+            $cores = (int)$this->getAttribute(ServerStatTypes::NUM_CORES)->value;
         } catch (AnalyzerException $e) {
             return $this;
         }
@@ -57,21 +56,21 @@ class ServerStatAnalyzer extends BaseAnalyzer
         try {
             /** @var Serverstat $usedValue */
             /** @var Serverstat $totalValue */
-            $usedValue = $this->getAttribute(ServerStatTypes::HDD_USED);
-            $totalValue = $this->getAttribute(ServerStatTypes::HDD_TOTAL);
-            $currentRatio = round($usedValue->value / $totalValue->value, 2, PHP_ROUND_HALF_UP);
+            $usedValue = (float)$this->getAttribute(ServerStatTypes::HDD_USED)->value;
+            $totalValue = (float)$this->getAttribute(ServerStatTypes::HDD_TOTAL)->value;
+            $currentRatio = round($usedValue / $totalValue, 2, PHP_ROUND_HALF_UP);
         } catch (AnalyzerException $e) {
             return $this;
         }
 
-        if ($currentRatio > 0.8) {
-            $this->warnings->add([
+        if ($currentRatio >= 0.95) {
+            $this->critical->add([
                 'type'      => 'hdd',
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
             ]);
-        } elseif ($currentRatio > 0.95) {
-            $this->critical->add([
+        } elseif ($currentRatio >= 0.8) {
+            $this->warnings->add([
                 'type'      => 'hdd',
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
@@ -92,21 +91,21 @@ class ServerStatAnalyzer extends BaseAnalyzer
         try {
             /** @var Serverstat $usedValue */
             /** @var Serverstat $totalValue */
-            $usedValue = $this->getAttribute(ServerStatTypes::RAM_USED);
-            $totalValue = $this->getAttribute(ServerStatTypes::RAM_TOTAL);
-            $currentRatio = round($usedValue->value / $totalValue->value, 2, PHP_ROUND_HALF_UP);
+            $usedValue = (float)$this->getAttribute(ServerStatTypes::RAM_USED)->value;
+            $totalValue = (float)$this->getAttribute(ServerStatTypes::RAM_TOTAL)->value;
+            $currentRatio = round($usedValue / $totalValue, 2, PHP_ROUND_HALF_UP);
         } catch (AnalyzerException $e) {
             return $this;
         }
 
-        if ($currentRatio > 0.8) {
-            $this->warnings->add([
+        if ($currentRatio >= 0.95) {
+            $this->critical->add([
                 'type'      => 'ram',
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),
             ]);
-        } elseif ($currentRatio > 0.95) {
-            $this->critical->add([
+        } elseif ($currentRatio >= 0.8) {
+            $this->warnings->add([
                 'type'      => 'ram',
                 'value'     => $currentRatio,
                 'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),

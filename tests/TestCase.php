@@ -34,7 +34,7 @@ abstract class TestCase extends BaseTestCase
             ->create();
 
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, 1231231212)
+            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, 1212484)
             ->apiKey($apiKey->key())
             ->create();
 
@@ -61,12 +61,12 @@ abstract class TestCase extends BaseTestCase
         $apiKey = ApiKey::factory()->create();
 
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::RAM_TOTAL)
+            ->serverStat(ServerStatTypes::RAM_TOTAL, 18.32)
             ->apiKey($apiKey->key())
             ->create();
 
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::RAM_USED)
+            ->serverStat(ServerStatTypes::RAM_USED, 9.11)
             ->apiKey($apiKey->key())
             ->create();
 
