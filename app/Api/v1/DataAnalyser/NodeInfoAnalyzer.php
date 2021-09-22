@@ -83,20 +83,20 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 'type'      => 'block_hash',
                 'value'     => $localBlockHash,
                 'expected'  => $mainnetBlockHash,
-                'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s. ',
+                'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s.',
                     $localBlockHeight),
             ]);
             $this->result->add([
                 'type'     => 'block_hash',
                 'message'  => 'Block hashes of the node and the main net are not equal',
-                'value'    => $localBlockHeight,
+                'value'    => $localBlockHash,
                 'expected' => $mainnetBlockHash,
             ]);
         } else {
             $this->result->add([
                 'type'     => 'block_hash',
                 'message'  => 'Block hashes of the node and the main net are equal',
-                'value'    => $localBlockHeight,
+                'value'    => $localBlockHash,
                 'expected' => $mainnetBlockHash,
             ]);
         }
@@ -188,7 +188,6 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 ->whereType(ServerStatTypes::CONFIG_CHECKSUM)
                 ->orderByDesc('created_at')->skip(1)->take(1)->first();
         } catch (AnalyzerException $e) {
-            ray($e->getMessage());
             return $this;
         }
         // if no other checksum is available, skip this analysis
@@ -243,7 +242,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             'type'    => 'operator_status',
             'message' => sprintf(
                 '%s operator online, %s operator offline',
-                count($operatorStatusArray) - $countOfflineOperators,
+                count($operators) - $countOfflineOperators,
                 $countOfflineOperators
             ),
             'value'   => $operators,

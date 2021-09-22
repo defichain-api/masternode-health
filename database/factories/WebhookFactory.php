@@ -22,4 +22,13 @@ class WebhookFactory extends Factory
             },
         ];
     }
+
+    public function apiKey(string $apiKey)
+    {
+        return $this->state(function (array $attributes) use ($apiKey) {
+            return [
+                'api_key_id' => $apiKey,
+            ];
+        });
+    }
 }

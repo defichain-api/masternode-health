@@ -25,7 +25,7 @@ class ServerStatCollection extends ResourceCollection
         $firstElement = $this->collection->first();
         $apiKey = $request->get('api_key');
         /** @var \App\Models\Webhook $webhook */
-        $webhook = $apiKey->webhook;
+        $webhook = $apiKey->webhook ?? null;
 
         return [
             'data'     => $this->collection,

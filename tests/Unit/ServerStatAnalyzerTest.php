@@ -239,7 +239,7 @@ class ServerStatAnalyzerTest extends TestCase
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
-        ray($result);
+
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));

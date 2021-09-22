@@ -52,6 +52,7 @@ class WebhookService
             Log::error('webhook sent failed', [
                 'message' => $e->getMessage(),
                 'line'    => $e->getLine(),
+                'file'    => $e->getFile(),
                 'code'    => $e->getCode(),
             ]);
         }
