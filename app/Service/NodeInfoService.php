@@ -6,10 +6,11 @@ use App\Api\v1\RequestTransformer\NodeInfoTransformer;
 use App\Enum\ServerStatTypes;
 use App\Api\v1\Requests\NodeInfoRequest;
 use App\Models\ServerStat;
+use Illuminate\Support\Collection;
 
 class NodeInfoService
 {
-    public function store(NodeInfoRequest $request): void
+    public function store(NodeInfoRequest $request): Collection
     {
         $transformer = new NodeInfoTransformer($request);
         $apiKeyId = $transformer->apiKey()->key();
@@ -60,15 +61,21 @@ class NodeInfoService
                 'value'      => $transformer->configChecksum(),
             ],
         ]);
-        $data->each(function (array $item) {
-            if (is_null($item['value']) || $item['value'] === ''){
+        $addedNodeInfo = new Collection();
+
+        $data->each(function (array $item) use (&$addedNodeInfo) {
+            if (is_null($item['value']) || $item['value'] === '') {
                 return;
             }
-            ServerStat::create([
-                'api_key_id' => $item['api_key_id'],
-                'type'       => $item['type'],
-                'value'      => $item['value'],
-            ]);
+            $addedNodeInfo->add(
+                ServerStat::create([
+                    'api_key_id' => $item['api_key_id'],
+                    'type'       => $item['type'],
+                    'value'      => $item['value'],
+                ])
+            );
         });
+
+        return $addedNodeInfo;
     }
 }
