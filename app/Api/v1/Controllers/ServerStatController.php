@@ -22,6 +22,7 @@ class ServerStatController
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
      * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
+     * <aside class="notice">If you setup the webhooks, you'll receive the "pull node info" payload.</aside>
      * @bodyParam block_height_local integer The number of the current block. Example: 1131998
      * @bodyParam local_hash string Hash for the current block. Required length of 64 chars. Example:
      * cefe56ff49a94787a8e8c65da5c4ead6e748838ece6721a06624de15875395a3
@@ -97,6 +98,7 @@ class ServerStatController
      * <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
      * documented here for a transparent look inside this tool.</aside>
      * <aside class="warning">Throttle: 1 request every 300 sec.</aside>
+     * <aside class="notice">If you setup the webhooks, you'll receive the "server stats info" payload.</aside>
      * @bodyParam load_avg float Current average load in GB as float. Example: 0.23
      * @bodyParam num_cores integer Number of cores of the system. Example: 8
      * @bodyParam hdd_used float Used HDD memory in GB as float. Example: 152

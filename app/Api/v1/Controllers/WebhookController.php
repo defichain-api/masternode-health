@@ -21,6 +21,8 @@ class WebhookController
      * Create Webhook
      *
      * Get informed by webhooks with the current data of your server. You'll receive webhooks only every 5 minutes.
+     * <aside class="notice">The sent webhooks have the same markup as the pulled information for the node info and server stats
+     * .</aside>
      * @bodyParam url string required URL receiving the webhooks. Has to be public reachable. Example:
      *            https://your-domain.com/defichain-masternode-health/webhook
      * @bodyParam max_tries integer The max tries to send the webhook to your url. (between 1..10). Default: 3 Example: 3
