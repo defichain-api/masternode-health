@@ -33,6 +33,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -52,6 +54,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -71,6 +75,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -97,6 +103,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(2, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -123,6 +131,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(2, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -143,6 +153,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -160,6 +172,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -182,6 +196,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -199,6 +215,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -217,6 +235,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -234,6 +254,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -255,6 +277,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -278,6 +302,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -296,7 +322,9 @@ class NodeInfoAnalyzerTest extends TestCase
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
-        ray($result);
+
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(0, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -312,6 +340,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -335,6 +365,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -361,6 +393,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -380,6 +414,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
         $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->nodeInfoAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->nodeInfoAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));

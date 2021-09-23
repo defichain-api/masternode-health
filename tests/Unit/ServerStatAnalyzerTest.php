@@ -35,6 +35,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -56,6 +58,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -77,6 +81,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -98,6 +104,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -119,6 +127,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -140,6 +150,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -161,6 +173,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -182,6 +196,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -203,6 +219,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertTrue($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
@@ -221,6 +239,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertFalse($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
@@ -240,6 +260,8 @@ class ServerStatAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestServerStatForApiKey($this->apiKey);
         $result = $this->serverStatAnalyzer->withCollection($resourceCollection)->analyze()->result();
 
+        $this->assertFalse($this->serverStatAnalyzer->hasFatalErrors());
+        $this->assertTrue($this->serverStatAnalyzer->hasWarnings());
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
