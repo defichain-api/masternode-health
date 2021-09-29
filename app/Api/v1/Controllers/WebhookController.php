@@ -3,23 +3,26 @@
 namespace App\Api\v1\Controllers;
 
 use App\Api\v1\Requests\WebhookCreateRequest;
+use App\Repository\WebhookRepository;
 use App\Service\WebhookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class WebhookController
 {
-    protected WebhookService $webhookService;
+    protected WebhookRepository $webhookService;
 
-    public function __construct(WebhookService $webhookService)
+    public function __construct(WebhookRepository $webhookRepository)
     {
-        $this->webhookService = $webhookService;
+        $this->webhookRepository = $webhookRepository;
     }
 
     /**
      * Create Webhook
      *
      * Get informed by webhooks with the current data of your server. You'll receive webhooks only every 5 minutes.
+     * <aside class="notice">The sent webhooks have the same markup as the pulled information for the node info and server stats
+     * .</aside>
      * @bodyParam url string required URL receiving the webhooks. Has to be public reachable. Example:
      *            https://your-domain.com/defichain-masternode-health/webhook
      * @bodyParam max_tries integer The max tries to send the webhook to your url. (between 1..10). Default: 3 Example: 3
@@ -29,7 +32,7 @@ class WebhookController
      */
     public function create(WebhookCreateRequest $request): JsonResponse
     {
-        if (!$this->webhookService->createWebhook($request)) {
+        if (!$this->webhookRepository->createWebhook($request)) {
             return response()->json([
                 'message' => 'error while creating webhook',
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
@@ -48,7 +51,7 @@ class WebhookController
      */
     public function delete(Request $request)
     {
-        if (!$this->webhookService->deleteWebhook($request)) {
+        if (!$this->webhookRepository->deleteWebhook($request)) {
             return response()->json([
                 'message' => 'webhook not existing or could not delete',
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);

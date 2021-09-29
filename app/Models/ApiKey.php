@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Kurozora\Cooldown\HasCooldowns;
 
 /**
  * @mixin \Eloquent
@@ -21,7 +20,7 @@ use Kurozora\Cooldown\HasCooldowns;
  */
 class ApiKey extends Model
 {
-    use HasFactory, UsesUuidPrimary, HasCooldowns;
+    use HasFactory, UsesUuidPrimary;
 
     protected $fillable = [
         'throttle',

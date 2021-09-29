@@ -6,10 +6,11 @@ use App\Api\v1\Requests\ServerStatsRequest;
 use App\Api\v1\RequestTransformer\ServerStatTransformer;
 use App\Enum\ServerStatTypes;
 use App\Models\ServerStat;
+use Illuminate\Support\Collection;
 
 class ServerStatService
 {
-    public function store(ServerStatsRequest $request): void
+    public function store(ServerStatsRequest $request): Collection
     {
         $transformer = new ServerStatTransformer($request);
         $apiKeyId = $transformer->api_key()->key();
@@ -50,15 +51,20 @@ class ServerStatService
                 'value'      => $transformer->serverScriptVersion(),
             ],
         ]);
-        $data->each(function (array $item) {
+        $addedServerStats = new Collection();
+        $data->each(function (array $item) use (&$addedServerStats) {
             if (is_null($item['value']) || $item['value'] == 0) {
                 return;
             }
-            ServerStat::create([
-                'api_key_id' => $item['api_key_id'],
-                'type'       => $item['type'],
-                'value'      => $item['value'],
-            ]);
+            $addedServerStats->add(
+                ServerStat::create([
+                    'api_key_id' => $item['api_key_id'],
+                    'type'       => $item['type'],
+                    'value'      => $item['value'],
+                ])
+            );
         });
+
+        return $addedServerStats;
     }
 }

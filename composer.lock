@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "410c209b5f9847643b7c626418215156",
+    "content-hash": "696bb5f83a7566a3adf38003bd27a44a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1271,63 +1271,6 @@
                 }
             ],
             "time": "2021-08-26T12:53:10+00:00"
-        },
-        {
-            "name": "kurozora/laravel-cooldown",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Kurozora/laravel-cooldown.git",
-                "reference": "20b024d8debaf8227f978867620275acda30773b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Kurozora/laravel-cooldown/zipball/20b024d8debaf8227f978867620275acda30773b",
-                "reference": "20b024d8debaf8227f978867620275acda30773b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0",
-                "phpunit/phpunit": "^8.2",
-                "symfony/var-dumper": "^4.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Kurozora\\Cooldown\\CooldownServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Kurozora\\Cooldown\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "musa11971",
-                    "email": "mussesemou99@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Easily implement global or model-specific cooldowns into your Laravel app.",
-            "homepage": "https://github.com/Kurozora/laravel-cooldown",
-            "keywords": [
-                "laravel-cooldown"
-            ],
-            "support": {
-                "issues": "https://github.com/Kurozora/laravel-cooldown/issues",
-                "source": "https://github.com/Kurozora/laravel-cooldown/tree/1.0"
-            },
-            "time": "2020-04-28T14:33:42+00:00"
         },
         {
             "name": "laravel/framework",
@@ -10819,5 +10762,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

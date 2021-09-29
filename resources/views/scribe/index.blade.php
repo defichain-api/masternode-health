@@ -48,7 +48,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 15 2021</li>
+            <li>Last updated: September 23 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -73,7 +73,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">https://api.defichain-masternode-health.com</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
+<p>This API is authenticated by sending a <strong><code>x-api-key</code></strong> header with the value <strong><code>"YOUR_API_KEY"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>For &quot;how to create this credential&quot; take a look at the <b>Setup</b> section of this documentation.</p>
 
@@ -153,7 +153,7 @@ x-ratelimit-remaining: 59
 
 <code class="language-json">{
     &quot;message&quot;: &quot;pong&quot;,
-    &quot;server_time&quot;: &quot;2021-09-15T07:56:03.646519Z&quot;
+    &quot;server_time&quot;: &quot;2021-09-23T07:55:30.211384Z&quot;
 }</code>
  </pre>
     </span>
@@ -965,6 +965,7 @@ possible problem was found.</p>        </p>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
 <aside class="warning">Throttle: 1 request every 300 sec.</aside>
+<aside class="notice">If you setup the webhooks, you'll receive the "server stats info" payload.</aside>
 
 <span id="example-requests-POSTv1-server-stats">
 <blockquote>Example request:</blockquote>
@@ -1171,6 +1172,7 @@ response.json()</code></pre>
 <aside class="notice">You don't need to implement this endpoint. It's used by the server script and
 documented here for a transparent look inside this tool.</aside>
 <aside class="warning">Throttle: 1 request every 300 sec.</aside>
+<aside class="notice">If you setup the webhooks, you'll receive the "pull node info" payload.</aside>
 
 <span id="example-requests-POSTv1-node-info">
 <blockquote>Example request:</blockquote>
@@ -1195,7 +1197,7 @@ $response = $client-&gt;post(
             'operator_status' =&gt; [
                 [
                     'id' =&gt; '8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87',
-                    'online' =&gt; true,
+                    'online' =&gt; false,
                 ],
             ],
             'defid_running' =&gt; true,
@@ -1226,7 +1228,7 @@ let body = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ],
     "defid_running": true
@@ -1253,7 +1255,7 @@ payload = {
     "operator_status": [
         {
             "id": "8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87",
-            "online": true
+            "online": false
         }
     ],
     "defid_running": true
@@ -1283,7 +1285,7 @@ response.json()</code></pre>
     \"operator_status\": [
         {
             \"id\": \"8cb09568143d7bae6822a7a78f91cb907c23fd12dcf986d4d2c8de89457edf87\",
-            \"online\": true
+            \"online\": false
         }
     ],
     \"defid_running\": true
@@ -1459,6 +1461,8 @@ fullnode.</p>            </summary>
 </p>
 
 <p>Get informed by webhooks with the current data of your server. You'll receive webhooks only every 5 minutes.</p>
+<aside class="notice">The sent webhooks have the same markup as the pulled information for the node info and server stats
+.</aside>
 
 <span id="example-requests-POSTv1-webhook">
 <blockquote>Example request:</blockquote>
@@ -1476,7 +1480,7 @@ $response = $client-&gt;post(
             'url' =&gt; 'https://your-domain.com/defichain-masternode-health/webhook',
             'max_tries' =&gt; 3,
             'timeout_in_seconds' =&gt; 3,
-            'reference' =&gt; 'ipsa',
+            'reference' =&gt; 'eum',
         ],
     ]
 );
@@ -1497,7 +1501,7 @@ let body = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "ipsa"
+    "reference": "eum"
 }
 
 fetch(url, {
@@ -1514,7 +1518,7 @@ payload = {
     "url": "https:\/\/your-domain.com\/defichain-masternode-health\/webhook",
     "max_tries": 3,
     "timeout_in_seconds": 3,
-    "reference": "ipsa"
+    "reference": "eum"
 }
 headers = {
   'x-api-key': 'YOUR_API_KEY',
@@ -1534,7 +1538,7 @@ response.json()</code></pre>
     \"url\": \"https:\\/\\/your-domain.com\\/defichain-masternode-health\\/webhook\",
     \"max_tries\": 3,
     \"timeout_in_seconds\": 3,
-    \"reference\": \"ipsa\"
+    \"reference\": \"eum\"
 }"
 </code></pre>
 </span>
