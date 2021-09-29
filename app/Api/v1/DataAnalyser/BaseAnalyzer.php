@@ -13,6 +13,7 @@ abstract class BaseAnalyzer
     protected Collection $warnings;
     protected Collection $critical;
     protected Collection $serverStats;
+    protected ApiKey $apiKey;
 
     public function withCollection(Collection $serverStats): self
     {
@@ -20,6 +21,7 @@ abstract class BaseAnalyzer
         $this->warnings = new Collection();
         $this->critical = new Collection();
         $this->serverStats = $serverStats;
+        $this->apiKey = $serverStats->first()->apiKey;
 
         return $this;
     }
@@ -28,7 +30,7 @@ abstract class BaseAnalyzer
 
     final public function getApiKey(): ApiKey
     {
-        return $this->serverStats->first()->apiKey;
+        return $this->apiKey;
     }
 
     /**

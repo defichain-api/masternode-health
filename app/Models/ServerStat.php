@@ -6,6 +6,7 @@ use App\Models\Concerns\UsesUuidPrimary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @mixin \Eloquent
@@ -32,4 +33,9 @@ class ServerStat extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function apiKey(): BelongsTo
+    {
+        return $this->belongsTo(ApiKey::class, 'api_key_id');
+    }
 }

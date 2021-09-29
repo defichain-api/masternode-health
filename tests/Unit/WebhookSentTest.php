@@ -16,7 +16,7 @@ class WebhookSentTest extends TestCase
     {
         Queue::fake();
         $this->assertDatabaseMissing('statistics', [
-            'date'               => today(),
+            'date'               => today()->format('Y-m-d'),
             'webhook_sent_count' => 1,
         ]);
         $apiKey = $this->prepareNodeInfoData();
@@ -32,7 +32,7 @@ class WebhookSentTest extends TestCase
         Queue::assertPushed(CallWebhookJob::class, 1);
 
         $this->assertDatabaseHas('statistics', [
-            'date'               => today(),
+            'date'               => today()->format('Y-m-d'),
             'webhook_sent_count' => 1,
         ]);
     }
