@@ -3,6 +3,7 @@
 namespace App\Api\v1\DataAnalyser;
 
 use App\Exceptions\AnalyzerException;
+use App\Models\ApiKey;
 use App\Models\ServerStat;
 use Illuminate\Support\Collection;
 
@@ -24,6 +25,11 @@ abstract class BaseAnalyzer
     }
 
     abstract public function analyze(): self;
+
+    final public function getApiKey(): ApiKey
+    {
+        return $this->serverStats->first()->apiKey;
+    }
 
     /**
      * @throws \App\Exceptions\AnalyzerException

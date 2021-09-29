@@ -30,7 +30,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         try {
             $localBlockHeight = (int)$this->getAttribute(ServerStatTypes::BLOCK_HEIGHT)->value;
             $mainnetBlockHeight = cache()->remember(
-                sprintf('block_height_%s', md5($this->serverStats->toJson())),
+                sprintf('block_height_%s', md5($this->serverStats->getApiKey()->id)),
                 now()->addMinutes(10),
                 function () {
                     return app(CryptoidExplorerClient::class)->getLatestBlockHeight();
