@@ -9,6 +9,7 @@ use App\Exceptions\AnalyzerException;
 use App\Exceptions\Client\CryptoidClientException;
 use App\Helper\Version;
 use App\Models\ServerStat;
+use Exception;
 
 class NodeInfoAnalyzer extends BaseAnalyzer
 {
@@ -28,8 +29,13 @@ class NodeInfoAnalyzer extends BaseAnalyzer
     {
         try {
             $localBlockHeight = (int)$this->getAttribute(ServerStatTypes::BLOCK_HEIGHT)->value;
-            $mainnetBlockHeight = app(CryptoidExplorerClient::class)->getLatestBlockHeight();
-        } catch (AnalyzerException | CryptoidClientException $e) {
+            $mainnetBlockHeight = cache()->remember(
+                sprintf('block_height_%s', md5($this->serverStats->getApiKey()->id)),
+                now()->addMinutes(10),
+                function () {
+                    return app(CryptoidExplorerClient::class)->getLatestBlockHeight();
+                });
+        } catch (AnalyzerException | Exception $e) {
             return $this;
         }
 
