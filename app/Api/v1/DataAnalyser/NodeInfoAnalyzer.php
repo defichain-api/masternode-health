@@ -27,7 +27,6 @@ class NodeInfoAnalyzer extends BaseAnalyzer
 
     protected function analyzeBlockHeight(): self
     {
-        ray(md5($this->serverStats->toJson()));
         try {
             $localBlockHeight = (int)$this->getAttribute(ServerStatTypes::BLOCK_HEIGHT)->value;
             $mainnetBlockHeight = cache()->remember(
