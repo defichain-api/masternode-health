@@ -66,21 +66,21 @@ class ServerStatAnalyzer extends BaseAnalyzer
         if ($currentRatio >= 0.95) {
             $this->critical->add([
                 'type'      => 'hdd',
-                'value'     => $currentRatio,
-                'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
+                'value'     => $currentRatio * 100,
+                'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio * 100),
             ]);
         } elseif ($currentRatio >= 0.8) {
             $this->warnings->add([
                 'type'      => 'hdd',
-                'value'     => $currentRatio,
-                'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio),
+                'value'     => $currentRatio * 100,
+                'explained' => sprintf('%s percent of your HDD capacity used', $currentRatio * 100),
             ]);
         }
 
         $this->result->add([
             'type'    => 'hdd',
-            'message' => sprintf('%s percent of your HDD capacity used', $currentRatio),
-            'value'   => $currentRatio,
+            'message' => sprintf('%s percent of your HDD capacity used', $currentRatio * 100),
+            'value'   => $currentRatio * 100,
         ]);
 
         return $this;
@@ -101,21 +101,21 @@ class ServerStatAnalyzer extends BaseAnalyzer
         if ($currentRatio >= 0.95) {
             $this->critical->add([
                 'type'      => 'ram',
-                'value'     => $currentRatio,
-                'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),
+                'value'     => $currentRatio * 100,
+                'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio * 100),
             ]);
         } elseif ($currentRatio >= 0.8) {
             $this->warnings->add([
                 'type'      => 'ram',
-                'value'     => $currentRatio,
-                'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio),
+                'value'     => $currentRatio * 100,
+                'explained' => sprintf('%s percent of your RAM capacity used', $currentRatio * 100),
             ]);
         }
 
         $this->result->add([
             'type'    => 'ram',
-            'message' => sprintf('%s percent of your RAM capacity used', $currentRatio),
-            'value'   => $currentRatio,
+            'message' => sprintf('%s percent of your RAM capacity used', $currentRatio * 100),
+            'value'   => $currentRatio * 100,
         ]);
 
         return $this;
