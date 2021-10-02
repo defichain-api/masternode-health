@@ -87,7 +87,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         if ($localBlockHash !== $mainnetBlockHash) {
             $this->critical->add([
                 'type'      => 'block_hash',
-                'value'     => $localBlockHash,
+                'value'     => $localBlockHeight,
                 'expected'  => $mainnetBlockHash,
                 'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s.',
                     $localBlockHeight),
