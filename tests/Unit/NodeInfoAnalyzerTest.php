@@ -140,7 +140,7 @@ class NodeInfoAnalyzerTest extends TestCase
             $latestBlockHeight),
             $result['critical'][0]['explained']);
         $this->assertEquals('block_hash', $result['critical'][0]['type']);
-        $this->assertEquals($latestBlockHash . 'invalid', $result['critical'][0]['value']);
+        $this->assertEquals($latestBlockHeight, $result['critical'][0]['value']);
         $this->assertEquals($latestBlockHash, $result['critical'][0]['expected']);
     }
 
