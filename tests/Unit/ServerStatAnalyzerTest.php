@@ -109,9 +109,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('0.45 percent of your HDD capacity used', $result['analysis_result'][0]['message']);
+        $this->assertEquals('45 percent of your HDD capacity used', $result['analysis_result'][0]['message']);
         $this->assertEquals('hdd', $result['analysis_result'][0]['type']);
-        $this->assertEquals(0.45, $result['analysis_result'][0]['value']);
+        $this->assertEquals(45, $result['analysis_result'][0]['value']);
     }
 
     public function test_hdd_warning_analyzer(): void
@@ -132,9 +132,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('0.81 percent of your HDD capacity used', $result['warnings'][0]['explained']);
+        $this->assertEquals('81 percent of your HDD capacity used', $result['warnings'][0]['explained']);
         $this->assertEquals('hdd', $result['warnings'][0]['type']);
-        $this->assertEquals(0.81, $result['warnings'][0]['value']);
+        $this->assertEquals(81, $result['warnings'][0]['value']);
     }
 
     public function test_hdd_critical_analyzer(): void
@@ -155,9 +155,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
-        $this->assertEquals('0.95 percent of your HDD capacity used', $result['critical'][0]['explained']);
+        $this->assertEquals('95 percent of your HDD capacity used', $result['critical'][0]['explained']);
         $this->assertEquals('hdd', $result['critical'][0]['type']);
-        $this->assertEquals(0.95, $result['critical'][0]['value']);
+        $this->assertEquals(95, $result['critical'][0]['value']);
     }
 
     public function test_ram_analyzer(): void
@@ -178,9 +178,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('0.5 percent of your RAM capacity used', $result['analysis_result'][0]['message']);
+        $this->assertEquals('50 percent of your RAM capacity used', $result['analysis_result'][0]['message']);
         $this->assertEquals('ram', $result['analysis_result'][0]['type']);
-        $this->assertEquals(0.5, $result['analysis_result'][0]['value']);
+        $this->assertEquals(50, $result['analysis_result'][0]['value']);
     }
 
     public function test_ram_warning_analyzer(): void
@@ -201,9 +201,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('0.8 percent of your RAM capacity used', $result['warnings'][0]['explained']);
+        $this->assertEquals('80 percent of your RAM capacity used', $result['warnings'][0]['explained']);
         $this->assertEquals('ram', $result['warnings'][0]['type']);
-        $this->assertEquals(0.8, $result['warnings'][0]['value']);
+        $this->assertEquals(80, $result['warnings'][0]['value']);
     }
 
     public function test_ram_critical_analyzer(): void
@@ -224,9 +224,9 @@ class ServerStatAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
-        $this->assertEquals('0.95 percent of your RAM capacity used', $result['critical'][0]['explained']);
+        $this->assertEquals('95 percent of your RAM capacity used', $result['critical'][0]['explained']);
         $this->assertEquals('ram', $result['critical'][0]['type']);
-        $this->assertEquals(0.95, $result['critical'][0]['value']);
+        $this->assertEquals(95, $result['critical'][0]['value']);
     }
 
     public function test_server_script_version_analyzer(): void
