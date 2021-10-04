@@ -167,7 +167,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             return $this;
         }
 
-        if ($logSize > 20) {
+        if ($logSize > 35) {
             $this->warnings->add([
                 'type'      => 'logsize',
                 'value'     => $logSize,

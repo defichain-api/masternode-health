@@ -248,7 +248,7 @@ class NodeInfoAnalyzerTest extends TestCase
     public function test_logsize_warning_analyzer(): void
     {
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::LOGSIZE, 21.37)
+            ->serverStat(ServerStatTypes::LOGSIZE, 36.37)
             ->apiKey($this->apiKey->key())
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
@@ -259,9 +259,9 @@ class NodeInfoAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('The logfile appears to be quite big with 21.37 MB.', $result['warnings'][0]['explained']);
+        $this->assertEquals('The logfile appears to be quite big with 36.37 MB.', $result['warnings'][0]['explained']);
         $this->assertEquals('logsize', $result['warnings'][0]['type']);
-        $this->assertEquals(21.37, $result['warnings'][0]['value']);
+        $this->assertEquals(36.37, $result['warnings'][0]['value']);
     }
 
     public function test_config_checksum_analyzer(): void
