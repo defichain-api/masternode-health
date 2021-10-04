@@ -42,7 +42,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         $diffBlockHeight = abs($localBlockHeight - $mainnetBlockHeight);
         if (
             $localBlockHeight < $mainnetBlockHeight
-            && $diffBlockHeight > 25
+            && $diffBlockHeight > 50
         ) {
             $this->warnings->add([
                 'type'      => 'block_height',
@@ -54,7 +54,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
 
         if (
             $localBlockHeight > $mainnetBlockHeight
-            && $diffBlockHeight > 15
+            && $diffBlockHeight > 50
         ) {
             $this->critical->add([
                 'type'      => 'block_height',
