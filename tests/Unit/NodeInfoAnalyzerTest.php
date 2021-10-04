@@ -48,7 +48,7 @@ class NodeInfoAnalyzerTest extends TestCase
     {
         $mainnetBlockHeight = app(CryptoidExplorerClient::class)->getLatestBlockHeight();
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, $mainnetBlockHeight - 26)
+            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, $mainnetBlockHeight - 51)
             ->apiKey($this->apiKey->key())
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
@@ -59,9 +59,9 @@ class NodeInfoAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(1, count($result['warnings']));
         $this->assertEquals(0, count($result['critical']));
-        $this->assertEquals('Node is 26 blocks behind main net', $result['warnings'][0]['explained']);
+        $this->assertEquals('Node is 51 blocks behind main net', $result['warnings'][0]['explained']);
         $this->assertEquals('block_height', $result['warnings'][0]['type']);
-        $this->assertEquals($mainnetBlockHeight - 26, $result['warnings'][0]['value']);
+        $this->assertEquals($mainnetBlockHeight - 51, $result['warnings'][0]['value']);
         $this->assertEquals($mainnetBlockHeight, $result['warnings'][0]['expected']);
     }
 
@@ -69,7 +69,7 @@ class NodeInfoAnalyzerTest extends TestCase
     {
         $mainnetBlockHeight = app(CryptoidExplorerClient::class)->getLatestBlockHeight();
         ServerStat::factory()
-            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, $mainnetBlockHeight + 16)
+            ->serverStat(ServerStatTypes::BLOCK_HEIGHT, $mainnetBlockHeight + 51)
             ->apiKey($this->apiKey->key())
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
@@ -80,10 +80,10 @@ class NodeInfoAnalyzerTest extends TestCase
         $this->assertEquals(1, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
-        $this->assertEquals('Possible chainsplit: node is 16 blocks in front of main net',
+        $this->assertEquals('Possible chainsplit: node is 51 blocks in front of main net',
             $result['critical'][0]['explained']);
         $this->assertEquals('block_height', $result['critical'][0]['type']);
-        $this->assertEquals($mainnetBlockHeight + 16, $result['critical'][0]['value']);
+        $this->assertEquals($mainnetBlockHeight + 51, $result['critical'][0]['value']);
         $this->assertEquals($mainnetBlockHeight, $result['critical'][0]['expected']);
     }
 
