@@ -16,6 +16,9 @@ class Version extends Facade
 
     public static function getVersionAsInt(string $version): int
     {
-        return (int) Str::replace('.','',self::getVersionAsString($version));
+        // normalize the local version as it's output as e.g. 1.8.4.0, the remote one as 1.8.4
+        $value = (int)Str::replace('.', '', self::getVersionAsString($version));
+
+        return $value > 1000 ? $value / 10 : $value;
     }
 }
