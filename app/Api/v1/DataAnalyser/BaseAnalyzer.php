@@ -64,4 +64,25 @@ abstract class BaseAnalyzer
             'critical'        => $this->critical->toArray(),
         ];
     }
+
+    final public function checkRelevanceForApiKey(string $infoType, int $checkOccurence = 3): bool
+    {
+        $cacheKey = sprintf('%s_%s', $infoType, md5($this->getApiKey()));
+        cache()->increment($cacheKey);
+
+        if (cache($cacheKey) >= $checkOccurence) {
+            cache()->forget($cacheKey);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    final public function resetRelevanceForApiKey(string $infoType): bool
+    {
+        $cacheKey = sprintf('%s_%s', $infoType, md5($this->getApiKey()));
+
+        return cache()->forget($cacheKey);
+    }
 }

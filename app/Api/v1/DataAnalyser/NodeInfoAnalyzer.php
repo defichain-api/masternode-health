@@ -84,7 +84,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             return $this;
         }
 
-        if ($localBlockHash !== $mainnetBlockHash) {
+        if ($localBlockHash !== $mainnetBlockHash && $this->checkRelevanceForApiKey('block_hash', 2)) {
             $this->critical->add([
                 'type'      => 'block_hash',
                 'value'     => $localBlockHeight,
@@ -99,6 +99,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 'expected' => $mainnetBlockHash,
             ]);
         } else {
+            $this->resetRelevanceForApiKey('block_hash');
             $this->result->add([
                 'type'     => 'block_hash',
                 'message'  => 'Block hashes of the node and the main net are equal',
