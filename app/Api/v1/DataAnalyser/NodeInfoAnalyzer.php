@@ -89,7 +89,21 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 'type'      => 'block_hash',
                 'value'     => $localBlockHeight,
                 'expected'  => $mainnetBlockHash,
-                'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s.',
+                'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s, occured multiple times.',
+                    $localBlockHeight),
+            ]);
+            $this->result->add([
+                'type'     => 'block_hash',
+                'message'  => 'Block hashes of the node and the main net are not equal',
+                'value'    => $localBlockHash,
+                'expected' => $mainnetBlockHash,
+            ]);
+        } elseif ($localBlockHash !== $mainnetBlockHash) {
+            $this->warnings->add([
+                'type'      => 'block_hash',
+                'value'     => $localBlockHeight,
+                'expected'  => $mainnetBlockHash,
+                'explained' => sprintf('Possible chainsplit: Node has different block hash for block %s, occured one time.',
                     $localBlockHeight),
             ]);
             $this->result->add([
@@ -111,7 +125,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeDefidRunning(): self
+    protected
+    function analyzeDefidRunning(): self
     {
         try {
             $defidRunning = (bool)$this->getAttribute(ServerStatTypes::DEFID_RUNNING)->value;
@@ -135,7 +150,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeConnectionCount(): self
+    protected
+    function analyzeConnectionCount(): self
     {
         try {
             $connectionCount = (int)$this->getAttribute(ServerStatTypes::CONNECTION_COUNT)->value;
@@ -160,7 +176,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeLogSize(): self
+    protected
+    function analyzeLogSize(): self
     {
         try {
             $logSize = (float)$this->getAttribute(ServerStatTypes::LOGSIZE)->value;
@@ -184,7 +201,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeConfigChecksum(): self
+    protected
+    function analyzeConfigChecksum(): self
     {
         try {
             /** @var \App\Models\ServerStat $currentCheckSum */
@@ -219,7 +237,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeOperatorStatus(): self
+    protected
+    function analyzeOperatorStatus(): self
     {
         try {
             /** @var \App\Models\ServerStat $currentCheckSum */
@@ -258,7 +277,8 @@ class NodeInfoAnalyzer extends BaseAnalyzer
         return $this;
     }
 
-    protected function analyzeDefidVersion(): self
+    protected
+    function analyzeDefidVersion(): self
     {
         try {
             /** @var Serverstat $localVersion */
