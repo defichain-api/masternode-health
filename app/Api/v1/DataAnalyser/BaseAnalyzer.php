@@ -78,4 +78,11 @@ abstract class BaseAnalyzer
 
         return false;
     }
+
+    final public function resetRelevanceForApiKey(string $infoType): bool
+    {
+        $cacheKey = sprintf('%s_%s', $infoType, md5($this->getApiKey()));
+
+        return cache()->forget($cacheKey);
+    }
 }
