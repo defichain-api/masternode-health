@@ -84,7 +84,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
             return $this;
         }
 
-        if ($localBlockHash !== $mainnetBlockHash) {
+        if ($localBlockHash !== $mainnetBlockHash && $this->checkRelevanceForApiKey('block_hash', 2)) {
             $this->critical->add([
                 'type'      => 'block_hash',
                 'value'     => $localBlockHeight,
