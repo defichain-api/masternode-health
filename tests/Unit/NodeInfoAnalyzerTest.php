@@ -139,7 +139,7 @@ class NodeInfoAnalyzerTest extends TestCase
         $this->assertEquals(2, count($result['analysis_result']));
         $this->assertEquals(0, count($result['warnings']));
         $this->assertEquals(1, count($result['critical']));
-        $this->assertEquals(sprintf('Possible chainsplit: Node has different block hash for block %s.',
+        $this->assertEquals(sprintf('Possible chainsplit: Node has different block hash for block %s, occured multiple times.',
             $latestBlockHeight),
             $result['critical'][0]['explained']);
         $this->assertEquals('block_hash', $result['critical'][0]['type']);
