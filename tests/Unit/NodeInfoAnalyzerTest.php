@@ -129,7 +129,10 @@ class NodeInfoAnalyzerTest extends TestCase
             ->apiKey($this->apiKey->key())
             ->create();
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
-        $result = $this->nodeInfoAnalyzer->withCollection($resourceCollection)->analyze()->result();
+
+        $analyzer = $this->nodeInfoAnalyzer->withCollection($resourceCollection);
+        $analyzer->checkRelevanceForApiKey('block_hash', 2);
+        $result = $analyzer->analyze()->result();
 
         $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
         $this->assertFalse($this->nodeInfoAnalyzer->hasWarnings());
@@ -142,6 +145,19 @@ class NodeInfoAnalyzerTest extends TestCase
         $this->assertEquals('block_hash', $result['critical'][0]['type']);
         $this->assertEquals($latestBlockHeight, $result['critical'][0]['value']);
         $this->assertEquals($latestBlockHash, $result['critical'][0]['expected']);
+    }
+
+    public function test_check_relevance(): void
+    {
+        ServerStat::factory()
+            ->serverStat(ServerStatTypes::DEFID_RUNNING, 1)
+            ->apiKey($this->apiKey->key())
+            ->create();
+        $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
+        $this->nodeInfoAnalyzer->withCollection($resourceCollection);
+
+        $this->assertFalse($this->nodeInfoAnalyzer->checkRelevanceForApiKey('block_hash', 2));
+        $this->assertTrue($this->nodeInfoAnalyzer->checkRelevanceForApiKey('block_hash', 2));
     }
 
     public function test_defid_running_analyzer(): void
