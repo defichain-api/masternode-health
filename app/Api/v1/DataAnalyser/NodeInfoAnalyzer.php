@@ -99,6 +99,7 @@ class NodeInfoAnalyzer extends BaseAnalyzer
                 'expected' => $mainnetBlockHash,
             ]);
         } else {
+            $this->resetRelevanceForApiKey('block_hash');
             $this->result->add([
                 'type'     => 'block_hash',
                 'message'  => 'Block hashes of the node and the main net are equal',
