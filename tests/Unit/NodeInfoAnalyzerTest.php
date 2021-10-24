@@ -131,7 +131,8 @@ class NodeInfoAnalyzerTest extends TestCase
         $resourceCollection = app(ServerStatRepository::class)->getLatestNodeInfoForApiKey($this->apiKey);
 
         $analyzer = $this->nodeInfoAnalyzer->withCollection($resourceCollection);
-        $analyzer->checkRelevanceForApiKey('block_hash', 2);
+        $analyzer->checkRelevanceForApiKey('block_hash', 3);
+        $analyzer->checkRelevanceForApiKey('block_hash', 3);
         $result = $analyzer->analyze()->result();
 
         $this->assertTrue($this->nodeInfoAnalyzer->hasFatalErrors());
