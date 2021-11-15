@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\ApiKey;
+use App\Models\ServerStat;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -24,6 +25,8 @@ class PruneDataCommand extends Command
         $apiKeys = ApiKey::whereHas('data', function (Builder $query) use ($maxAge) {
             $query->where('created_at', '>=', now()->subDays($maxAge));
         }, '=', 0)->delete();
+
+		ServerStat::where('created_at', '<', now()->subDays($maxAge))->delete();
 
         $this->info(sprintf('found and deleted %s api keys not used in the last %s days.', $apiKeys, $maxAge));
 
