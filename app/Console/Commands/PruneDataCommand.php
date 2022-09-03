@@ -23,12 +23,6 @@ class PruneDataCommand extends Command
         }
 		ServerStat::where('created_at', '<', now()->subDays($maxAge))->delete();
 
-        $apiKeys = ApiKey::whereHas('data', function (Builder $query) use ($maxAge) {
-            $query->where('created_at', '>=', now()->subDays($maxAge));
-        }, '=', 0)->delete();
-
-        $this->info(sprintf('found and deleted %s api keys not used in the last %s days.', $apiKeys, $maxAge));
-
         return 1;
     }
 }
