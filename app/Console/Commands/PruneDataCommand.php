@@ -16,8 +16,8 @@ class PruneDataCommand extends Command
     {
         $maxAge = $this->option('maxAge');
 
-        if ($maxAge < 14) {
-            $this->error('can\'t delete data newer than 14 days.');
+        if ($maxAge < 7) {
+            $this->error('can\'t delete data newer than 7 days.');
 
             return 0;
         }
