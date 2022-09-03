@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PruneDataCommand extends Command
 {
-    protected $signature = 'prune:api-key {--maxAge=30}';
-    protected $description = 'Prune API keys not active for --maxAge=. min value 14 days. Default: 60';
+    protected $signature = 'prune:api-key {--maxAge=7}';
+    protected $description = 'Prune API keys not active for --maxAge=. min value 7 days. Default: 60';
 
     public function handle(): int
     {
